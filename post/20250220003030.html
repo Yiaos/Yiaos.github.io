@@ -168,9 +168,7 @@
     <i class="fa fa-search"></i>
   </span>
   <div class="search-input-container">
-    <input autocomplete="off" autocapitalize="off"
-           placeholder="Searching..." spellcheck="false"
-           type="search" class="search-input">
+    <input autocomplete="off" autocapitalize="off" placeholder="Searching..." spellcheck="false" type="search" class="search-input">
   </div>
   <span class="popup-btn-close">
     <i class="fa fa-times-circle"></i>
@@ -212,7 +210,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
       <meta itemprop="name" content="Yiaos">
-      <meta itemprop="description" content="">
+      <meta itemprop="description" content>
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -321,7 +319,7 @@
 <h1 id="eacalation"><a href="#eacalation" class="headerlink" title="eacalation"></a>eacalation</h1><p>官方walkthrough中，反弹shell之后得到的是local service的shell，offsec pg lab的有很多已经更新了，但是walkThrough没有更新，可以确认的是都变得更简单了。</p>
 <p>提权方法记录如下:</p>
 <ol>
-<li>查看权限，发现有些权限缺失了，通过<a target="_blank" rel="noopener" href="https://github.com/itm4n/FullPowers">文章</a> 发现 <code>local service or network service</code>被配置为受限的权限 <em><code>restricted set of privileges</code></em> *, *完整的权限可以通过 <code>scheduled task</code>获取</li>
+<li>查看权限，发现有些权限缺失了，通过<a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/itm4n/FullPowers">文章</a> 发现 <code>local service or network service</code>被配置为受限的权限 <em><code>restricted set of privileges</code></em> *, *完整的权限可以通过 <code>scheduled task</code>获取</li>
 </ol>
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">PS</span> C:\wamp\www&gt;whoami /priv</span><br><span class="line">whoami /priv</span><br><span class="line"></span><br><span class="line">PRIVILEGES INFORMATION</span><br><span class="line"><span class="literal">----------------------</span></span><br><span class="line"></span><br><span class="line">Privilege Name                Description                    State   </span><br><span class="line">============================= ============================== ========</span><br><span class="line">SeChangeNotifyPrivilege       Bypass traverse checking       Enabled </span><br><span class="line">SeCreateGlobalPrivilege       Create global objects          Enabled </span><br><span class="line">SeIncreaseWorkingSetPrivilege Increase a <span class="keyword">process</span> working <span class="built_in">set</span> Disabled</span><br></pre></td></tr></table></figure>
 
@@ -362,7 +360,7 @@
     <a href="https://thiiiiink.com/post/20250220003030.html" title="Proving Grounds Practice - Squid">https://thiiiiink.com/post/20250220003030.html</a>
   </li>
   <li class="post-copyright-license">
-    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
   </li>
 </ul>
 </div>
@@ -458,11 +456,11 @@
 </div>
   <div class="links-of-author motion-element">
       <span class="links-of-author-item">
-        <a href="https://github.com/yiaos" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;yiaos" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+        <a href="https://github.com/yiaos" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;yiaos" rel="external nofollow noopener noreferrer" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
       </span>
   </div>
   <div class="cc-license motion-element" itemprop="license">
-    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="external nofollow noopener noreferrer" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
   </div>
 
 

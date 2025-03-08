@@ -168,9 +168,7 @@
     <i class="fa fa-search"></i>
   </span>
   <div class="search-input-container">
-    <input autocomplete="off" autocapitalize="off"
-           placeholder="Searching..." spellcheck="false"
-           type="search" class="search-input">
+    <input autocomplete="off" autocapitalize="off" placeholder="Searching..." spellcheck="false" type="search" class="search-input">
   </div>
   <span class="popup-btn-close">
     <i class="fa fa-times-circle"></i>
@@ -212,7 +210,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
       <meta itemprop="name" content="Yiaos">
-      <meta itemprop="description" content="">
+      <meta itemprop="description" content>
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -332,13 +330,13 @@
 <p>如果一个账户拥有“ReadGMSAPassword”权限（通常表现为 RIGHT_DS_READ_PROPERTY 访问控制权限），它可以提取gMSA的当前密码。</p>
 </blockquote>
 <p>那么接下来就是获取svc_apache$的密码信息了</p>
-<p>测试bloodhound中给出的<a target="_blank" rel="noopener" href="https://github.com/micahvandeusen/gMSADumper">gMSADumper.py</a>, 执行后只是列出来who can read， 这些是我们已经知道的了。</p>
+<p>测试bloodhound中给出的<a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/micahvandeusen/gMSADumper">gMSADumper.py</a>, 执行后只是列出来who can read， 这些是我们已经知道的了。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">python gMSADumper.py -u enox -p california -d heist.offsec</span><br><span class="line">Unable to start a TLS connection. Is LDAPS enabled? Only ACLs will be listed and not ms-DS-ManagedPassword.</span><br><span class="line"></span><br><span class="line">Users or <span class="built_in">groups</span> <span class="built_in">who</span> can <span class="built_in">read</span> password <span class="keyword">for</span> svc_apache$:</span><br><span class="line"> &gt; DC01$</span><br><span class="line"> &gt; Web Admins</span><br><span class="line">               </span><br></pre></td></tr></table></figure>
 
 <p>搜索一下 <code>readgmsa password</code>找到下面的链接：</p>
 <p><code>https://www.thehacker.recipes/ad/movement/dacl/readgmsapassword</code></p>
 <blockquote>
-<p>bloodyAD： <a target="_blank" rel="noopener" href="https://github.com/CravateRouge/bloodyAD">https://github.com/CravateRouge/bloodyAD</a></p>
+<p>bloodyAD： <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/CravateRouge/bloodyAD">https://github.com/CravateRouge/bloodyAD</a></p>
 </blockquote>
 <p><img src="https://ve0zkk9dxj.feishu.cn/space/api/box/stream/download/asynccode/?code=ZjM5OGZlYTBlN2M1NTJhZWYzMWIzMjkzNzMzZjlmNzJfbk92NXBqbGNnaFVwZXBPQUhydFNqaHJxUFlaRHpzTGRfVG9rZW46SHY0MWJtOWhXb1VndjF4YkpGdGNXR1I3bjliXzE3NDEwMjAwMTI6MTc0MTAyMzYxMl9WNA"></p>
 <p>成功读取到ntlm hash:<code>0c43e5ad6bc9104cfb94d56f4aecb4ab</code></p>
@@ -393,7 +391,7 @@
     <a href="https://thiiiiink.com/post/20250304004106.html" title="Proving Grounds Practice - Heist">https://thiiiiink.com/post/20250304004106.html</a>
   </li>
   <li class="post-copyright-license">
-    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
   </li>
 </ul>
 </div>
@@ -489,11 +487,11 @@
 </div>
   <div class="links-of-author motion-element">
       <span class="links-of-author-item">
-        <a href="https://github.com/yiaos" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;yiaos" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+        <a href="https://github.com/yiaos" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;yiaos" rel="external nofollow noopener noreferrer" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
       </span>
   </div>
   <div class="cc-license motion-element" itemprop="license">
-    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="external nofollow noopener noreferrer" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
   </div>
 
 

