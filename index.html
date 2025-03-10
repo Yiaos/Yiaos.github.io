@@ -191,6 +191,90 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="https://www.thiiiiink.com/post/20250311021811.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yiaos">
+      <meta itemprop="description" content>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="临渊羡鱼">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/post/20250311021811.html" class="post-title-link" itemprop="url">PHP Wrapper 利用</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2025-03-11 02:18:11 / Modified: 02:20:55" itemprop="dateCreated datePublished" datetime="2025-03-11T02:18:11+08:00">2025-03-11</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/How-It-Works-%E4%B8%B4%E6%B8%8A%E7%BE%A1%E9%B1%BC/" itemprop="url" rel="index"><span itemprop="name">How It Works-临渊羡鱼</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/How-It-Works-%E4%B8%B4%E6%B8%8A%E7%BE%A1%E9%B1%BC/PHP/" itemprop="url" rel="index"><span itemprop="name">PHP</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="什么是php-wrapper"><a href="#什么是php-wrapper" class="headerlink" title="什么是php wrapper?"></a>什么是php wrapper?</h1><p>PHP wrapper基于流（stream）的概念，流是数据传输的抽象表示。wrapper定义了如何处理特定协议或资源（如文件、HTTP请求、内存流）的输入输出操作。每个wrapper通过PHP的流函数（如 <code>fopen()</code>、<code>file_get_contents</code>）与底层资源交互，提供统一的借口来操作不同类型的数据源。wrapper除了内置于PHP之外，也可以通过 <code>stream_wrapper_register()</code>自定义。</p>
+<p>如以下php代码</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$handle</span> = <span class="title function_ invoke__">fopen</span>(<span class="string">&quot;file://some.txt&quot;</span>,<span class="string">&quot;rb&quot;</span>);</span><br><span class="line"><span class="keyword">while</span>(<span class="title function_ invoke__">feof</span>(<span class="variable">$handle</span>)!==<span class="literal">true</span>) &#123;</span><br><span class="line"><span class="title function_ invoke__">echofgets</span>(<span class="variable">$handle</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>等同于</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="title function_ invoke__">print_r</span>(<span class="title function_ invoke__">file</span>(<span class="string">&quot;file://some.txt&quot;</span>));</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/post/20250311021811.html#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
     <link itemprop="mainEntityOfPage" href="https://www.thiiiiink.com/post/20250304004106.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -938,89 +1022,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="https://www.thiiiiink.com/post/20250216184512.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Yiaos">
-      <meta itemprop="description" content>
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="临渊羡鱼">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/post/20250216184512.html" class="post-title-link" itemprop="url">Proving Grounds Practice - Image</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2025-02-16 18:45:12 / Modified: 18:45:41" itemprop="dateCreated datePublished" datetime="2025-02-16T18:45:12+08:00">2025-02-16</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/What-We-Do-%E4%B8%89%E5%A4%A9%E6%89%93%E9%B1%BC/" itemprop="url" rel="index"><span itemprop="name">What We Do-三天打鱼</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/What-We-Do-%E4%B8%89%E5%A4%A9%E6%89%93%E9%B1%BC/oscp/" itemprop="url" rel="index"><span itemprop="name">oscp</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/What-We-Do-%E4%B8%89%E5%A4%A9%E6%89%93%E9%B1%BC/oscp/pg-lab/" itemprop="url" rel="index"><span itemprop="name">pg lab</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>Proving Grounds Practice Lab中Image打靶过程记录</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/post/20250216184512.html">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1090,12 +1091,12 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">17</span>
+          <span class="site-state-item-count">18</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-count">10</span>
         <span class="site-state-item-name">categories</span>
       </div>
   </nav>
