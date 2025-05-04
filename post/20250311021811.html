@@ -10,15 +10,16 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
   <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="FEUc84rh7dgaXl_JOY_Bq7sulvZljH">
 
 <link rel="stylesheet" href="/css/main.css">
 
-<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Monaco:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
 <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"www.thiiiiink.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":null,"activeClass":"gitalk"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"www.thiiiiink.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"default"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":null,"activeClass":"gitalk"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="什么是php wrapper?PHP wrapper基于流（stream）的概念，流是数据传输的抽象表示。wrapper定义了如何处理特定协议或资源（如文件、HTTP请求、内存流）的输入输出操作。每个wrapper通过PHP的流函数（如 fopen()、file_get_contents）与底层资源交互，提供统一的借口来操作不同类型的数据源。wrapper除了内置于PHP之外，也可以通过 stre">
@@ -48,13 +49,13 @@
 
   <title>PHP Wrapper 利用 | 临渊羡鱼</title>
   
-    <script async src="https://www.googletagmanager.com/gtag/js?id=GTM-KNBZS35F"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-J67WGCEZY5"></script>
     <script>
       if (CONFIG.hostname === location.hostname) {
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
-        gtag('config', 'GTM-KNBZS35F');
+        gtag('config', 'G-J67WGCEZY5');
       }
     </script>
 
@@ -111,7 +112,7 @@
     </div>
   </div>
 
-  <div class="site-meta">
+  <div class="site-meta custom-logo">
 
     <a href="/" class="brand" rel="start">
       <span class="logo-line-before"><i></i></span>
@@ -119,6 +120,9 @@
       <span class="logo-line-after"><i></i></span>
     </a>
       <p class="site-subtitle" itemprop="description">退而结网</p>
+      <a>
+        <img class="custom-logo-image" src="/images/avatar.gif" alt="临渊羡鱼">
+      </a>
   </div>
 
   <div class="site-nav-right">
@@ -183,10 +187,7 @@
     </header>
 
     
-  <div class="back-to-top">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
-  </div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
 
 
     <main class="main">
@@ -509,6 +510,16 @@
 
 
         
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/post/20250311023739.html" rel="prev" title="PHP LFI abuse">
+      <i class="fa fa-chevron-left"></i> PHP LFI abuse
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/post/20250304004106.html" rel="next" title="Proving Grounds Practice - Heist">
+      Proving Grounds Practice - Heist <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
       </footer>
     
   </article>
@@ -567,7 +578,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFphp-wrapper"><span class="nav-number">1.</span> <span class="nav-text">什么是php wrapper?</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#PHP%E5%86%85%E7%BD%AEWrapper%E5%88%97%E8%A1%A8"><span class="nav-number">1.1.</span> <span class="nav-text">PHP内置Wrapper列表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#php-%E5%AD%90%E5%8C%85%E8%A3%85%E5%99%A8%E8%AF%A6%E8%A7%A3"><span class="nav-number">1.2.</span> <span class="nav-text">php:&#x2F;&#x2F; 子包装器详解</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9C%A8%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E4%B8%AD%E7%9A%84%E5%88%A9%E7%94%A8"><span class="nav-number">2.</span> <span class="nav-text">在渗透测试中的利用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#file"><span class="nav-number">2.1.</span> <span class="nav-text">file:&#x2F;&#x2F;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#php-filter"><span class="nav-number">2.2.</span> <span class="nav-text">php:&#x2F;&#x2F;filter</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#data"><span class="nav-number">2.3.</span> <span class="nav-text">data:&#x2F;&#x2F;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#php-input"><span class="nav-number">2.4.</span> <span class="nav-text">php:&#x2F;&#x2F;input</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#expect"><span class="nav-number">2.5.</span> <span class="nav-text">expect:&#x2F;&#x2F;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#zip"><span class="nav-number">2.6.</span> <span class="nav-text">zip:&#x2F;&#x2F;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#phpar"><span class="nav-number">2.7.</span> <span class="nav-text">phpar:&#x2F;&#x2F;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#compress-zlib"><span class="nav-number">2.8.</span> <span class="nav-text">compress.zlib:&#x2F;&#x2F;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#compress-bzip2"><span class="nav-number">2.9.</span> <span class="nav-text">compress.bzip2:&#x2F;&#x2F;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ftp-ftps"><span class="nav-number">2.10.</span> <span class="nav-text">ftp:&#x2F;&#x2F; &#x2F; ftps:&#x2F;&#x2F;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#http-https"><span class="nav-number">2.11.</span> <span class="nav-text">http:&#x2F;&#x2F; &#x2F; https:&#x2F;&#x2F;</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%98%B2%E5%BE%A1%E6%89%8B%E6%AE%B5"><span class="nav-number">3.</span> <span class="nav-text">防御手段</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-number">4.</span> <span class="nav-text">参考</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFphp-wrapper"><span class="nav-text">什么是php wrapper?</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#PHP%E5%86%85%E7%BD%AEWrapper%E5%88%97%E8%A1%A8"><span class="nav-text">PHP内置Wrapper列表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#php-%E5%AD%90%E5%8C%85%E8%A3%85%E5%99%A8%E8%AF%A6%E8%A7%A3"><span class="nav-text">php:&#x2F;&#x2F; 子包装器详解</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9C%A8%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E4%B8%AD%E7%9A%84%E5%88%A9%E7%94%A8"><span class="nav-text">在渗透测试中的利用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#file"><span class="nav-text">file:&#x2F;&#x2F;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#php-filter"><span class="nav-text">php:&#x2F;&#x2F;filter</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#data"><span class="nav-text">data:&#x2F;&#x2F;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#php-input"><span class="nav-text">php:&#x2F;&#x2F;input</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#expect"><span class="nav-text">expect:&#x2F;&#x2F;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#zip"><span class="nav-text">zip:&#x2F;&#x2F;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#phpar"><span class="nav-text">phpar:&#x2F;&#x2F;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#compress-zlib"><span class="nav-text">compress.zlib:&#x2F;&#x2F;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#compress-bzip2"><span class="nav-text">compress.bzip2:&#x2F;&#x2F;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ftp-ftps"><span class="nav-text">ftp:&#x2F;&#x2F; &#x2F; ftps:&#x2F;&#x2F;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#http-https"><span class="nav-text">http:&#x2F;&#x2F; &#x2F; https:&#x2F;&#x2F;</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%98%B2%E5%BE%A1%E6%89%8B%E6%AE%B5"><span class="nav-text">防御手段</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-text">参考</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -605,6 +616,10 @@
 
 
       </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
 
     </div>
   </aside>
@@ -664,6 +679,9 @@
 
   
   <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/pangu@4/dist/browser/pangu.min.js"></script>
   <script src="/lib/velocity/velocity.min.js"></script>
   <script src="/lib/velocity/velocity.ui.min.js"></script>
 
@@ -676,6 +694,8 @@
 
 
 <script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
 
 
 
@@ -741,7 +761,7 @@ NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
       owner       : 'Yiaos',
       admin       : ['Yiaos'],
       id          : 'c4324c98d612b73086ae04e806b46703',
-        language: 'zh-CN',
+        language: 'en',
       distractionFreeMode: true
     });
     gitalk.render('gitalk-container');
