@@ -1,0 +1,93 @@
+/* 自定义样式，调整字体大小和行间距 */
+
+/* 全局字体设置 */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", "PingFang SC", "Microsoft YaHei", sans-serif;
+    font-size: 16px;
+    line-height: 1.8;
+    color: #333;
+}
+
+/* 文章内容样式 */
+.marked-body {
+    font-size: 16px;
+    line-height: 1.8;
+}
+
+/* 文章段落样式 */
+.marked-body p {
+    margin-bottom: 1.5em;
+    text-align: justify;
+}
+
+/* 文章列表样式 */
+.marked-body ul,
+.marked-body ol {
+    padding-left: 1.5em;
+    margin-bottom: 1.5em;
+    line-height: 1.8;
+}
+
+/* 标题样式 */
+.marked-body h1,
+.marked-body h2,
+.marked-body h3,
+.marked-body h4,
+.marked-body h5,
+.marked-body h6 {
+    margin: 1.2em 0 0.8em;
+    font-weight: bold;
+    line-height: 1.5;
+}
+
+.marked-body h1 {
+    font-size: 1.8em;
+}
+
+.marked-body h2 {
+    font-size: 1.6em;
+}
+
+.marked-body h3 {
+    font-size: 1.4em;
+}
+
+.marked-body h4 {
+    font-size: 1.2em;
+}
+
+.marked-body h5 {
+    font-size: 1.1em;
+}
+
+.marked-body h6 {
+    font-size: 1em;
+}
+
+/* 代码块样式 */
+.marked-body pre,
+.marked-body code {
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+    font-size: 0.9em;
+}
+
+.marked-body pre {
+    padding: 15px;
+    line-height: 1.5;
+    margin-bottom: 1.5em;
+}
+
+/* 引用块样式 */
+.marked-body blockquote {
+    padding: 0.5em 1em;
+    margin-bottom: 1.5em;
+    font-size: 1em;
+    line-height: 1.8;
+    color: #555;
+}
+
+/* 表格样式 */
+.marked-body table {
+    font-size: 0.95em;
+    line-height: 1.6;
+}
