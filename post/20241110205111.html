@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+<meta name="baidu-site-verification" content="codeva-l4PbCwKc7Z">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="FEUc84rh7dgaXl_JOY_Bq7sulvZljH">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Monaco:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.thiiiiink.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"default"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":null,"activeClass":"gitalk"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="简述： Microsoft Remote Registry Service是Windows操作系统中的一个服务，允许远程用户通过网络访问和修改计算机上的注册表。 由于Microsoft Remote Registry客户端在SMB传输不可用的情况下回退到RPC认证时，切换到较旧的协议并采用弱认证级别，该级别无法验证通信的完整性或来源，攻击者可利用该缺陷，通过拦截 NTLM 身份验证握手并将其中继到">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CVE-2024-43532-译">
+<meta property="og:url" content="https://www.thiiiiink.com/post/20241110205111.html">
+<meta property="og:site_name" content="临渊羡鱼">
+<meta property="og:description" content="简述： Microsoft Remote Registry Service是Windows操作系统中的一个服务，允许远程用户通过网络访问和修改计算机上的注册表。 由于Microsoft Remote Registry客户端在SMB传输不可用的情况下回退到RPC认证时，切换到较旧的协议并采用弱认证级别，该级别无法验证通信的完整性或来源，攻击者可利用该缺陷，通过拦截 NTLM 身份验证握手并将其中继到">
+<meta property="og:locale">
+<meta property="og:image" content="https://ve0zkk9dxj.feishu.cn/space/api/box/stream/download/asynccode/?code=OTQ5Yjc4YTQxYjI1NWMzODRkZWU1MGU2NjU4YjgyNjZfN1lMU3FvVXRteHBmWjAyOXBJWG1NN2ZXaXlsZlYxUFdfVG9rZW46WFY3NWJoV3hRb0ZIQ1F4QmJTdWNNMWhxbmhmXzE3MzEyNTUwNzM6MTczMTI1ODY3M19WNA">
+<meta property="og:image" content="https://ve0zkk9dxj.feishu.cn/space/api/box/stream/download/asynccode/?code=YmY4MWUxZjEyY2M3NmZkMjMyZGQ0YTZkNDQ2MDU5MjJfM1J6elJ3d1E5OUJRaFRETDlxa2dQV21hbWtLM2V6RnJfVG9rZW46UkhaeGI4UXplb0ZGWkd4YmZnVmNRZ2tJbllEXzE3MzEyNTUwNzM6MTczMTI1ODY3M19WNA">
+<meta property="og:image" content="https://ve0zkk9dxj.feishu.cn/space/api/box/stream/download/asynccode/?code=YmQwYTc5NGQzZWEyMTZlYWM4MWRlMzEyODNmMWVkY2VfbUhxVHJkMGFEb1ZEZWpITjNMSVVUOEMweEc2WFhqYlFfVG9rZW46QnhmN2JnYlk3b1VmY3R4NWd5Z2N4NnBhbnBmXzE3MzEyNTUwNzM6MTczMTI1ODY3M19WNA">
+<meta property="og:image" content="https://ve0zkk9dxj.feishu.cn/space/api/box/stream/download/asynccode/?code=NGYzZWU3NTQxMTU0NTNiYmEyNDMwMzE4MDk3MWE1ZjRfcjgwMFN5THBlbk1aOHlHckE0SDVkQjhETnBsSFRWaWxfVG9rZW46WDR5c2JZcE1xb1dsZ0F4a3BsMGNINmtrblllXzE3MzEyNTUwNzM6MTczMTI1ODY3M19WNA">
+<meta property="og:image" content="https://ve0zkk9dxj.feishu.cn/space/api/box/stream/download/asynccode/?code=NDBmZGI5N2ZlNTcwODY1ZjYyZGU0Zjc0ZmJhZjNkZWJfU2F4bEd6ZGNLUXZPSnM0c2dJZjR1SDgydDBIU0hsTFNfVG9rZW46SkY0VWJ1ZVhRb0NkeVp4dW5scWM1ZkM4bjNiXzE3MzEyNTUwNzM6MTczMTI1ODY3M19WNA">
+<meta property="og:image" content="https://ve0zkk9dxj.feishu.cn/space/api/box/stream/download/asynccode/?code=YmE0NGUwNDI1Njk1MTMzYmMwYzg0ZDZlNzBhNDBkNDBfZ0FJOFR2bWcxdXkzTUhUY01mTFZOM1JnT0NYZDJXY09fVG9rZW46WllKaGJwOWZ6b2JNcE94ZG1xa2NHUlJXbmtjXzE3MzEyNTUwNzM6MTczMTI1ODY3M19WNA">
+<meta property="og:image" content="https://ve0zkk9dxj.feishu.cn/space/api/box/stream/download/asynccode/?code=NzExNDYzYjljYmMzNTI2NWI1YjY1OWJkOTAwOWZjMmFfWDFpdlc5M3RMQ3p2UnNjRWE0d25KNTVPMHJzOFhHU0xfVG9rZW46SXRxT2JjRldKb2M2WGF4R1VXS2NWSngyblVjXzE3MzEyNTUwNzM6MTczMTI1ODY3M19WNA">
+<meta property="og:image" content="https://ve0zkk9dxj.feishu.cn/space/api/box/stream/download/asynccode/?code=NzEwMmI4YjA5ZWI0Zjc5OTFlODY0MWNjYzUxYjM5MjlfdE9HZ2tac3Z6bmRYNUJuaTQ4OGxUS1hZRTg4SmpGc0ZfVG9rZW46RTdWTmJKRm41b0pCRWp4WUtBWGNneXh5blRjXzE3MzEyNTUwNzM6MTczMTI1ODY3M19WNA">
+<meta property="og:image" content="https://ve0zkk9dxj.feishu.cn/space/api/box/stream/download/asynccode/?code=NDdmMzcwZTgxM2QxNDgwNzliOGZlN2Q0MDQwYTZjNjlfVFU0TndIYTlUalRHVXdCQjRwS2k3YmlYMGpMZUszb0dfVG9rZW46Um5JMGJtRXBob0g4NHZ4RENVNmNFMzQxbjNiXzE3MzEyNTUwNzM6MTczMTI1ODY3M19WNA">
+<meta property="og:image" content="https://ve0zkk9dxj.feishu.cn/space/api/box/stream/download/asynccode/?code=NWMxZjkzNDBkZGZmMjlmNDA4ZGEzN2U5ZjEzM2FmZTdfbENjcmNlRG5WT21uaG9WazhzeTVzWXhyVDN1dHZSSkVfVG9rZW46UzhTeWJjQ3o0b1UzZ0N4QWlBcWNsTFNpbjVjXzE3MzEyNTUwNzM6MTczMTI1ODY3M19WNA">
+<meta property="og:image" content="https://ve0zkk9dxj.feishu.cn/space/api/box/stream/download/asynccode/?code=OTIzNTA0MDIyNzc5OTUzOWFiNjA4ZWE4ZGNhMzQ2NmNfV1FhNWhRWTFWcmFpZVFHcEN4N1dnazlpS0s4N0NGdVRfVG9rZW46UjJuR2IxS3Zsb0FYWGJ4bWZoUGNxU3VFbnNjXzE3MzEyNTUwNzM6MTczMTI1ODY3M19WNA">
+<meta property="og:image" content="https://ve0zkk9dxj.feishu.cn/space/api/box/stream/download/asynccode/?code=ZGVhNzY2Mjc1OGI4ODdmMGY5Yjg0MWI5YTY4YjdlNzdfVWt6cGtZSDlUenJMVVF5Y2wyR3JjdmRnTVBFWUJYVGRfVG9rZW46WkhRMWJ4UTVGb3dCMUd4MGlSNGNzM1NHblliXzE3MzEyNTUwNzM6MTczMTI1ODY3M19WNA">
+<meta property="article:published_time" content="2024-11-10T12:51:11.000Z">
+<meta property="article:modified_time" content="2025-09-30T07:05:40.583Z">
+<meta property="article:author" content="Yiaos">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://ve0zkk9dxj.feishu.cn/space/api/box/stream/download/asynccode/?code=OTQ5Yjc4YTQxYjI1NWMzODRkZWU1MGU2NjU4YjgyNjZfN1lMU3FvVXRteHBmWjAyOXBJWG1NN2ZXaXlsZlYxUFdfVG9rZW46WFY3NWJoV3hRb0ZIQ1F4QmJTdWNNMWhxbmhmXzE3MzEyNTUwNzM6MTczMTI1ODY3M19WNA">
+
+<link rel="canonical" href="https://www.thiiiiink.com/post/20241110205111.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>CVE-2024-43532-译 | 临渊羡鱼</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-J67WGCEZY5"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-J67WGCEZY5');
+      }
+    </script>
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?257c5564d6a2b53ffc355cd89f5f2095";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta custom-logo">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">临渊羡鱼</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">退而结网</p>
+      <a>
+        <img class="custom-logo-image" src="/images/avatar.gif" alt="临渊羡鱼">
+      </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" placeholder="Searching..." spellcheck="false" type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="https://www.thiiiiink.com/post/20241110205111.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yiaos">
+      <meta itemprop="description" content>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="临渊羡鱼">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          CVE-2024-43532-译
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2024-11-10 20:51:11" itemprop="dateCreated datePublished" datetime="2024-11-10T20:51:11+08:00">2024-11-10</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2025-09-30 15:05:40" itemprop="dateModified" datetime="2025-09-30T15:05:40+08:00">2025-09-30</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/How-It-Works-%E4%B8%B4%E6%B8%8A%E7%BE%A1%E9%B1%BC/" itemprop="url" rel="index"><span itemprop="name">How It Works-临渊羡鱼</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/How-It-Works-%E4%B8%B4%E6%B8%8A%E7%BE%A1%E9%B1%BC/CVE/" itemprop="url" rel="index"><span itemprop="name">CVE</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/How-It-Works-%E4%B8%B4%E6%B8%8A%E7%BE%A1%E9%B1%BC/CVE/%E8%AF%91/" itemprop="url" rel="index"><span itemprop="name">译</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="简述："><a href="#简述：" class="headerlink" title="简述："></a>简述：</h1><ol>
+<li>Microsoft Remote Registry Service是Windows操作系统中的一个服务，允许远程用户通过网络访问和修改计算机上的注册表。</li>
+<li>由于Microsoft Remote Registry客户端在SMB传输不可用的情况下回退到RPC认证时，切换到较旧的协议并采用弱认证级别，该级别无法验证通信的完整性或来源，攻击者可利用该缺陷，通过拦截 NTLM 身份验证握手并将其中继到其他服务，实现NTLM中继攻击，进而可能创建域管理员账户或 <strong>接管整个域</strong> 。</li>
+</ol>
+<h1 id="影响范围："><a href="#影响范围：" class="headerlink" title="影响范围："></a>影响范围：</h1><p>所有运行Windows Server版本的操作系统，包括2008到2022版及Window 10&#x2F;11。</p>
+<span id="more"></span>
+
+<h1 id="POC"><a href="#POC" class="headerlink" title="POC:"></a>POC:</h1><blockquote>
+<p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/akamai/akamai-security-research/tree/main/PoCs/cve-2024-43532">https://github.com/akamai/akamai-security-research/tree/main/PoCs/cve-2024-43532</a></p>
+</blockquote>
+<h1 id="Call-and-Register-—-Relay-Attack-on-WinReg-RPC-Client"><a href="#Call-and-Register-—-Relay-Attack-on-WinReg-RPC-Client" class="headerlink" title="Call and Register — Relay Attack on WinReg RPC Client"></a>Call and Register — Relay Attack on WinReg RPC Client</h1><p>调用并注册——WinReg RPC 客户端的中继攻击</p>
+<blockquote>
+<p>原文：<a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.akamai.com/blog/security-research/winreg-relay-vulnerability">https://www.akamai.com/blog/security-research/winreg-relay-vulnerability</a></p>
+</blockquote>
+<h2 id="Executive-summary-执行摘要"><a href="#Executive-summary-执行摘要" class="headerlink" title="Executive summary 执行摘要"></a>Executive summary 执行摘要</h2><ul>
+<li>Akamai 研究员 Stiv Kupchik 在 Microsoft 远程注册表客户端中发现了一个新的特权提升 (EoP) 漏洞 CVE-2024-43532，CVSS 评分为 8.8。</li>
+<li>该漏洞滥用 WinReg 客户端实现中的后备机制，如果 SMB 传输不可用，该机制将不安全地使用过时的传输协议。</li>
+<li>通过利用此漏洞，攻击者可以将客户端的 NTLM 身份验证详细信息中继到 Active Directory 证书服务 (ADCS)，并请求用户证书以在域中进行进一步身份验证。我们在<a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/akamai/akamai-security-research/tree/main/PoCs/cve-2024-43532"> GitHub</a>存储库中提供了概念证明。</li>
+<li>该漏洞已于 2024 年 2 月负责任地向 Microsoft 安全资源中心披露，并作为 2024 年 10 月补丁星期二的一部分进行了修补。</li>
+<li>该漏洞影响所有未修补的 Windows 版本。</li>
+<li>我们的研究结果也在<a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.nohat.it/talks"> No Hat 计算机安全会议</a>上公布。</li>
+</ul>
+<h2 id="Introduction介绍"><a href="#Introduction介绍" class="headerlink" title="Introduction介绍"></a>Introduction介绍</h2><p>MS-RPC 是 Microsoft 对远程过程调用 (RPC) 协议和标准的实现。 RPC 是一种进程间通信机制，允许进程公开其他进程可以调用的功能。它是 Windows 操作系统的核心组件，多种服务都依赖于它 — 从服务管理器到<a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.akamai.com/blog/security-research/cant-wait-to-shut-you-down-msrpc-wininit"> wininit 中的关闭</a>。</p>
+<p>我们的团队对 MS-RPC 进行了大量研究，包括<a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.akamai.com/blog/security-research/cold-hard-cache-bypassing-rpc-with-cache-abuse">攻击性</a>研究（我们发现了缓存攻击形式的大型攻击向量）和<a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.akamai.com/blog/security/guide-rpc-filter">防御性</a>研究（我们分析了其安全机制）。</p>
+<p>这一次，我们想从不同的角度来看待 RPC。任何允许不同计算机之间进行通信和操作的协议都必须涉及用户身份验证，实际上 RPC 协议支持传递凭据和身份验证作为其绑定过程的一部分。然而，只要有身份验证，就有身份验证中继的潜力，因此我们开始寻找中继机会。</p>
+<h2 id="RPC-authentication-and-what’s-in-betweenRPC、身份验证以及介于两者之间的内容"><a href="#RPC-authentication-and-what’s-in-betweenRPC、身份验证以及介于两者之间的内容" class="headerlink" title="RPC, authentication, and what’s in betweenRPC、身份验证以及介于两者之间的内容"></a>RPC, authentication, and what’s in betweenRPC、身份验证以及介于两者之间的内容</h2><p>RPC sessions are handled by  <em>bindings</em> . A client application connects to a server application, binds to the required RPC interface, and requests to run a specific function (Figure 1).RPC 会话由绑定处理。客户端应用程序连接到服务器应用程序，绑定到所需的 RPC 接口，并请求运行特定功能（图 1）。</p>
+<p><img data-src="https://ve0zkk9dxj.feishu.cn/space/api/box/stream/download/asynccode/?code=OTQ5Yjc4YTQxYjI1NWMzODRkZWU1MGU2NjU4YjgyNjZfN1lMU3FvVXRteHBmWjAyOXBJWG1NN2ZXaXlsZlYxUFdfVG9rZW46WFY3NWJoV3hRb0ZIQ1F4QmJTdWNNMWhxbmhmXzE3MzEyNTUwNzM6MTczMTI1ODY3M19WNA"></p>
+<p>Fig. 1: The basic RPC call process 图1：基本的RPC调用流程</p>
+<p>The bind request and response can carry over multiple fields of data, as required for the connection. Normally, if there’s no authentication involved, the RPC binding is simply used to decide on the <a target="_blank" rel="external nofollow noopener noreferrer" href="https://learn.microsoft.com/en-us/windows/win32/rpc/transfer-syntax-and-ndr64">transfer syntax</a> that will be used to encapsulate function parameters on subsequent calls.绑定请求和响应可以根据连接的需要携带多个数据字段。通常，如果不涉及身份验证，则 RPC 绑定仅用于决定将用于封装后续调用中的函数参数的传输语法。</p>
+<p>What’s missing from this interaction? Authentication, of course! How can the server know the client’s identity and whether that client is allowed to perform the requested action? The answer is: It doesn’t, unless the client specifically added security context (authentication) to the binding. By default, all RPC connections are unauthenticated, and not all RPC servers actually require authentication.这种互动缺少什么？当然是认证啦！服务器如何知道客户端的身份以及是否允许该客户端执行请求的操作？答案是：不会，除非客户端专门向绑定添加了安全上下文（身份验证）。默认情况下，所有 RPC 连接都未经身份验证，并且并非所有 RPC 服务器实际上都需要身份验证。</p>
+<p>To authenticate (or, in RPC terms, “add security context”), the client has to add additional data to the binding request, negotiate authentication protocol (for example, NTLM or Kerberos), and insert additional metadata required by the authentication protocol (like username, domain, etc.; Figure 2).为了进行身份验证（或者用 RPC 术语来说，“添加安全上下文”），客户端必须向绑定请求添加其他数据、协商身份验证协议（例如 NTLM 或 Kerberos），并插入身份验证协议所需的其他元数据（如用户名、域等；图 2)。</p>
+<p><img data-src="https://ve0zkk9dxj.feishu.cn/space/api/box/stream/download/asynccode/?code=YmY4MWUxZjEyY2M3NmZkMjMyZGQ0YTZkNDQ2MDU5MjJfM1J6elJ3d1E5OUJRaFRETDlxa2dQV21hbWtLM2V6RnJfVG9rZW46UkhaeGI4UXplb0ZGWkd4YmZnVmNRZ2tJbllEXzE3MzEyNTUwNzM6MTczMTI1ODY3M19WNA"></p>
+<p>Fig 2: Authentication metadata added to RPC binding request图 2：添加到 RPC 绑定请求的身份验证元数据</p>
+<h2 id="Finding-research-targets寻找研究目标"><a href="#Finding-research-targets寻找研究目标" class="headerlink" title="Finding research targets寻找研究目标"></a>Finding research targets寻找研究目标</h2><p>The first order of business is understanding how authentication should look from an API standpoint. This is done by a call to one of the <a target="_blank" rel="external nofollow noopener noreferrer" href="https://learn.microsoft.com/en-us/windows/win32/api/rpcdce/nf-rpcdce-rpcbindingsetauthinfoa">RpcBindingSetAuthInfo*</a> functions from the client after creating a binding handle. If you look at the documentation of these functions, you’ll notice a field called <a target="_blank" rel="external nofollow noopener noreferrer" href="https://learn.microsoft.com/en-us/windows/win32/rpc/authentication-level-constants">AuthenticationLevel</a>; it indicates the level of security the authentication provides.第一个任务是从 API 的角度理解身份验证应该如何看待。这是通过在创建绑定句柄后从客户端调用 RpcBindingSetAuthInfo* 函数之一来完成的。如果您查看这些函数的文档，您会注意到一个名为 AuthenticationLevel 的字段；它指示身份验证提供的安全级别。</p>
+<p>Security with authentication is more than just verifying that the user exists and is authorized, it can also be used to prevent tampering. The authentication levels vary from simply verifying the connection succeeded (RPC_C_AUTHN_LEVEL_CONNECT) to fully encrypting and signing all the traffic to ensure nothing is tampered (RPC_C_AUTHN_LEVEL_PKT_PRIVACY). Of course, attackers would be interested in the former level, no defenses on the traffic, which means it’s tamperable.身份验证的安全性不仅仅是验证用户存在和授权，它还可以用于防止篡改。身份验证级别各不相同，从简单地验证连接是否成功 (RPC_C_AUTHN_LEVEL_CONNECT) 到完全加密和签署所有流量以确保任何内容不被篡改 (RPC_C_AUTHN_LEVEL_PKT_PRIVACY)。当然，攻击者会对前一个级别感兴趣，对流量没有防御，这意味着它是可篡改的。</p>
+<p>Yet the story isn’t so simple. RPC relay attacks are not a new concept, so a lot of the RPC clients and servers in Windows were already patched to use the highest level of authentication to ensure relay attacks can’t succeed. We’ll need to scour the operating system in hopes of finding some older nuggets of code that are still insecure for some reason (Figure 3).然而故事并不那么简单。 RPC 中继攻击并不是一个新概念，因此 Windows 中的许多 RPC 客户端和服务器已经打了补丁，以使用最高级别的身份验证来确保中继攻击不会成功。我们需要搜索操作系统，希望找到一些由于某种原因仍然不安全的旧代码块（图 3）。</p>
+<p><img data-src="https://ve0zkk9dxj.feishu.cn/space/api/box/stream/download/asynccode/?code=YmQwYTc5NGQzZWEyMTZlYWM4MWRlMzEyODNmMWVkY2VfbUhxVHJkMGFEb1ZEZWpITjNMSVVUOEMweEc2WFhqYlFfVG9rZW46QnhmN2JnYlk3b1VmY3R4NWd5Z2N4NnBhbnBmXzE3MzEyNTUwNzM6MTczMTI1ODY3M19WNA"></p>
+<p>Fig. 3: Running an IDAPython script on the system32 folder of a Windows server to find instances of RPC insecure authentication; the script can be found in our GitHub repository图 3：在 Windows 服务器的 system32 文件夹上运行 IDAPython 脚本以查找 RPC 不安全身份验证的实例；该脚本可以在我们的 GitHub 存储库中找到</p>
+<h2 id="WinReg-—-A-promising-candidateWinReg——一个有前途的候选者"><a href="#WinReg-—-A-promising-candidateWinReg——一个有前途的候选者" class="headerlink" title="WinReg — A promising candidateWinReg——一个有前途的候选者"></a>WinReg — A promising candidateWinReg——一个有前途的候选者</h2><p>As suspected, the list of potential targets that we found included less than 5% of the total RPC servers and clients; most simply do not use insecure authentication anymore. But we found a promising candidate in  <em>advapi32.dll</em> .正如所怀疑的，我们发现的潜在目标列表中不到 RPC 服务器和客户端总数的 5%；最简单的是不再使用不安全的身份验证。但我们在 advapi32.dll 中找到了一个有前途的候选者。</p>
+<p><em>advapi32.dll</em> is a core component of Windows API, and implements a lot of the “advanced” logic in Windows (as its name suggests). It exports more than 800 functions from various fields: event logging, encryption, WMI, and more.advapi32.dll是Windows API的核心组件，实现了Windows中的许多“高级”逻辑（顾名思义）。它导出来自各个领域的 800 多个功能：事件记录、加密、WMI 等。</p>
+<p>For our purposes, we’ve found that, on some occasions, the internal function <em>BaseBindToMachine</em> calls <em>RpcBindingSetAuthInfoA</em> with an authentication level of RPC_C_AUTHN_LEVEL_CONNECT, which is what we want. <em>BaseBindToMachine</em> is called by the exported (though undocumented) function <em>RegConnectRegistryExW</em> (Figure 4), if it receives a UNC path for a machine name.出于我们的目的，我们发现，在某些情况下，内部函数 BaseBindToMachine 会使用 RPC_C_AUTHN_LEVEL_CONNECT 的身份验证级别调用 RpcBindingSetAuthInfoA，这正是我们想要的。如果 BaseBindToMachine 收到计算机名称的 UNC 路径，则由导出的（尽管未记录的）函数 RegConnectRegistryExW（图 4）调用它。</p>
+<p><img data-src="https://ve0zkk9dxj.feishu.cn/space/api/box/stream/download/asynccode/?code=NGYzZWU3NTQxMTU0NTNiYmEyNDMwMzE4MDk3MWE1ZjRfcjgwMFN5THBlbk1aOHlHckE0SDVkQjhETnBsSFRWaWxfVG9rZW46WDR5c2JZcE1xb1dsZ0F4a3BsMGNINmtrblllXzE3MzEyNTUwNzM6MTczMTI1ODY3M19WNA"></p>
+<p>Fig. 4: The Rust documentation for RegConnectRegistryExW, as it is undocumented in MSDN图 4：RegConnectRegistryExW 的 Rust 文档，因为 MSDN 中没有记录它</p>
+<p>By looking at  <em>BaseBindToMachine</em> , we can see that it actually contains calls to both <em>RpcBindingSetAuthInfoW</em> and  <em>RpcBindingSetAuthInfoA</em> . The former is used securely, with authentication level RPC_C_AUTHN_LEVEL_PKT_PRIVACY, while the latter uses authentication level RPC_C_AUTHN_LEVEL_CONNECT, which can be relayed as it doesn’t verify authenticity or integrity of the connection (Figure 5).通过查看BaseBindToMachine，我们可以看到它实际上包含对RpcBindingSetAuthInfoW和RpcBindingSetAuthInfoA的调用。前者使用安全，身份验证级别为 RPC_C_AUTHN_LEVEL_PKT_PRIVACY，而后者使用身份验证级别 RPC_C_AUTHN_LEVEL_CONNECT，可以中继，因为它不验证连接的真实性或完整性（图 5）。</p>
+<p><img data-src="https://ve0zkk9dxj.feishu.cn/space/api/box/stream/download/asynccode/?code=NDBmZGI5N2ZlNTcwODY1ZjYyZGU0Zjc0ZmJhZjNkZWJfU2F4bEd6ZGNLUXZPSnM0c2dJZjR1SDgydDBIU0hsTFNfVG9rZW46SkY0VWJ1ZVhRb0NkeVp4dW5scWM1ZkM4bjNiXzE3MzEyNTUwNzM6MTczMTI1ODY3M19WNA"></p>
+<p>Fig. 5: The two calls to set authentication info图 5：设置身份验证信息的两次调用</p>
+<p>We just need to figure out why there are two conflicting calls. Looking at the function logic, we can see that it has a function pointer variable and an array of functions (Figure 6). Those functions set the RPC binding info to use a specific RPC transport; by default it attempts to use SMB and named pipes — but, if it fails, it attempts to bind over SPX, TCP&#x2F;IP, and others.我们只需要弄清楚为什么会有两个相互冲突的调用。查看函数逻辑，我们可以看到它有一个函数指针变量和一个函数数组（图6）。这些函数设置 RPC 绑定信息以使用特定的 RPC 传输；默认情况下，它会尝试使用 SMB 和命名管道，但如果失败，它会尝试通过 SPX、TCP&#x2F;IP 等进行绑定。</p>
+<p>For some reason, once it falls back to any other protocol besides SMB, it uses <em>RpcBindingSetAuthInfoA</em> to set the authentication level to Connect, which is insecure.由于某种原因，一旦它回退到 SMB 之外的任何其他协议，它就会使用 RpcBindingSetAuthInfoA 将身份验证级别设置为 Connect，这是不安全的。</p>
+<p><img data-src="https://ve0zkk9dxj.feishu.cn/space/api/box/stream/download/asynccode/?code=YmE0NGUwNDI1Njk1MTMzYmMwYzg0ZDZlNzBhNDBkNDBfZ0FJOFR2bWcxdXkzTUhUY01mTFZOM1JnT0NYZDJXY09fVG9rZW46WllKaGJwOWZ6b2JNcE94ZG1xa2NHUlJXbmtjXzE3MzEyNTUwNzM6MTczMTI1ODY3M19WNA"></p>
+<p><img data-src="https://ve0zkk9dxj.feishu.cn/space/api/box/stream/download/asynccode/?code=NzExNDYzYjljYmMzNTI2NWI1YjY1OWJkOTAwOWZjMmFfWDFpdlc5M3RMQ3p2UnNjRWE0d25KNTVPMHJzOFhHU0xfVG9rZW46SXRxT2JjRldKb2M2WGF4R1VXS2NWSngyblVjXzE3MzEyNTUwNzM6MTczMTI1ODY3M19WNA"></p>
+<p>Fig. 6: Function pointers and the function array inside BaseBindToMachine图 6：BaseBindToMachine 内的函数指针和函数数组</p>
+<p>The fallback to TCP&#x2F;IP is quite promising, as it means we can use the insecure authentication method to relay the traffic using a machine-in-the-middle attack without the client noticing. While it is possible with the other transport protocols as well, they are quite obsolete, so it might be unrealistic to find them in a modern network (and using them might trigger some alarm bells). TCP&#x2F;IP is a lot more common as an RPC transport, so it should be okay even in a red team setting.TCP&#x2F;IP 的回退是非常有前途的，因为这意味着我们可以使用不安全的身份验证方法，通过中间机器攻击来中继流量，而无需客户端注意。虽然其他传输协议也是可能的，但它们已经过时了，因此在现代网络中找到它们可能是不现实的（并且使用它们可能会触发一些警钟）。 TCP&#x2F;IP 作为 RPC 传输更为常见，因此即使在红队环境中也应该没问题。</p>
+<p>It is important to know that both <em>BaseBindToMachine</em> and *RegConnectRegistryExW *accept a flag as an argument that prevents the fallback behavior, but the basic function RegConnectRegistryW calls *RegConnectRegistryExW *without that flag present.重要的是要知道 BaseBindToMachine 和 RegConnectRegistryExW 都接受一个标志作为防止回退行为的参数，但基本函数 RegConnectRegistryW 在没有该标志的情况下调用 RegConnectRegistryExW。</p>
+<h2 id="The-relay-process中继过程"><a href="#The-relay-process中继过程" class="headerlink" title="The relay process中继过程"></a>The relay process中继过程</h2><p>Relaying is quite simple since NTLM relay is a common technique. Most of the logic we need is already implemented in <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/fortra/impacket/">Impacket</a>’s ntlmrelayx, which is what we’ll use the most.中继非常简单，因为 NTLM 中继是一种常用技术。我们需要的大部分逻辑已经在 Impacket 的 ntlmrelayx 中实现，这也是我们最常用的。</p>
+<h3 id="Building-the-RPC-relay-server构建RPC中继服务器"><a href="#Building-the-RPC-relay-server构建RPC中继服务器" class="headerlink" title="Building the RPC relay server构建RPC中继服务器"></a>Building the RPC relay server构建RPC中继服务器</h3><p>What ntlmrelayx lacks is a TCP&#x2F;IP RPC server, as it implemented only an SMB server. As such, we’ll need to build our own relay server, which rejects the winreg named pipe to trigger a fallback to the TCP&#x2F;IP binding function.ntlmrelayx 缺少的是 TCP&#x2F;IP RPC 服务器，因为它只实现了 SMB 服务器。因此，我们需要构建自己的中继服务器，该服务器拒绝 winreg 命名管道以触发 TCP&#x2F;IP 绑定功能的回退。</p>
+<p>There are three critical points we need to implement:我们需要实施三个关键点：</p>
+<ol>
+<li>The RPC endpoint mapperRPC端点映射器</li>
+<li>The RPC bind request with NTLM与 NTLM 的 RPC 绑定请求</li>
+<li>The NTLM challengeNTLM 挑战</li>
+</ol>
+<p>The RPC endpoint mapper is responsible for translating RPC interface UUIDs into their respective endpoints, which in the case of the TCP&#x2F;IP transport, would be a port number. Unlike SMB, where the endpoints are named pipes that are unique and can be known in advance, the TCP endpoints use ephemeral ports, so another layer of translation is necessary.RPC 端点映射器负责将 RPC 接口 UUID 转换为其各自的端点，在 TCP&#x2F;IP 传输的情况下，这将是端口号。与 SMB 不同，SMB 的端点是唯一且可以提前知道的命名管道，而 TCP 端点使用临时端口，因此需要另一层转换。</p>
+<p>The critical part is the NTLM-related issues. The way RPC binding works with NTLM is that an NTLM negotiation message is sent during the bind request, then an NTLM challenge is sent with the bind response. Finally, the client has to send another message, called AUTH3, with the challenge response (Figure 7).关键部分是NTLM相关问题。 RPC 绑定与 NTLM 结合使用的方式是，在绑定请求期间发送 NTLM 协商消息，然后随绑定响应一起发送 NTLM 质询。最后，客户端必须发送另一条名为 AUTH3 的消息以及质询响应（图 7）。</p>
+<p><img data-src="https://ve0zkk9dxj.feishu.cn/space/api/box/stream/download/asynccode/?code=NzEwMmI4YjA5ZWI0Zjc5OTFlODY0MWNjYzUxYjM5MjlfdE9HZ2tac3Z6bmRYNUJuaTQ4OGxUS1hZRTg4SmpGc0ZfVG9rZW46RTdWTmJKRm41b0pCRWp4WUtBWGNneXh5blRjXzE3MzEyNTUwNzM6MTczMTI1ODY3M19WNA"></p>
+<p><img data-src="https://ve0zkk9dxj.feishu.cn/space/api/box/stream/download/asynccode/?code=NDdmMzcwZTgxM2QxNDgwNzliOGZlN2Q0MDQwYTZjNjlfVFU0TndIYTlUalRHVXdCQjRwS2k3YmlYMGpMZUszb0dfVG9rZW46Um5JMGJtRXBob0g4NHZ4RENVNmNFMzQxbjNiXzE3MzEyNTUwNzM6MTczMTI1ODY3M19WNA"></p>
+<p>Fig. 7: NTLM authentication over RPC binding图 7：通过 RPC 绑定进行 NTLM 身份验证</p>
+<p>To relay, we just have to parse the corresponding messages in our RPC server. Once we see an NTLM negotiate message in a bind message, we open our own connection to our target authentication server and also request to authenticate via NTLM. Then, we just have to capture the challenge the server sends us, relay it back to the victim, and relay the response back to the server to get our own authenticated session.要进行中继，我们只需在 RPC 服务器中解析相应的消息即可。一旦我们在绑定消息中看到 NTLM 协商消息，我们就会打开与目标身份验证服务器的连接，并请求通过 NTLM 进行身份验证。然后，我们只需捕获服务器发送给我们的质询，将其转发回受害者，并将响应转发回服务器以获得我们自己的经过身份验证的会话。</p>
+<p>All we need to consider is which server we want to relay the authentication.我们需要考虑的是我们想要中继身份验证的服务器。</p>
+<h2 id="RPC-to-RPC-relayRPC-到-RPC-中继"><a href="#RPC-to-RPC-relayRPC-到-RPC-中继" class="headerlink" title="RPC to RPC relayRPC 到 RPC 中继"></a>RPC to RPC relayRPC 到 RPC 中继</h2><p>The immediate thought would be to relay to another RPC server on a different machine, like the service manager or the task scheduler, and achieve a remote code execution that way. The issue with this, however, is  that no one uses insecure authentication via RPC anymore, so we can’t relay to any high-profile RPC server. (This lack of insecure authentication via RPC is the same reason we had limited research targets.)最直接的想法是中继到不同机器上的另一个 RPC 服务器，例如服务管理器或任务调度程序，并以这种方式实现远程代码执行。然而，这样做的问题是，没有人再通过 RPC 使用不安全的身份验证，因此我们无法中继到任何高调的 RPC 服务器。 （缺乏通过 RPC 进行的不安全身份验证与我们研究目标有限的原因相同。）</p>
+<p>Both the service manager and the task scheduler RPC servers require RPC_C_AUTHN_LEVEL_PKT_PRIVACY, which encrypts the entirety of the traffic with the client’s NTLMv2 hash, which we don’t know even with the relay. Instead, we have to look at a different angle.服务管理器和任务调度程序 RPC 服务器都需要 RPC_C_AUTHN_LEVEL_PKT_PRIVACY，它使用客户端的 NTLMv2 哈希加密整个流量，即使使用中继，我们也不知道该哈希。相反，我们必须换个角度来看。</p>
+<h2 id="RPC-to-ADCSRPC-到-ADCS"><a href="#RPC-to-ADCSRPC-到-ADCS" class="headerlink" title="RPC to ADCSRPC 到 ADCS"></a>RPC to ADCSRPC 到 ADCS</h2><p>Luckily, the guys at SpecterOps have done a lot of work on <a target="_blank" rel="external nofollow noopener noreferrer" href="https://specterops.io/wp-content/uploads/sites/3/2022/06/Certified_Pre-Owned.pdf">ADCS</a>; specifically on NTLM relay to ADCS. This is also implemented in Impacket by default, so all we have to do is pass our authenticated session to Impacket’s <em>HTTPAttack</em> module and let the magic happen by itself.幸运的是，SpectreOps 的人员在 ADCS 方面做了很多工作；特别是关于 ADCS 的 NTLM 中继。默认情况下，这也在 Impacket 中实现，因此我们所要做的就是将经过身份验证的会话传递给 Impacket 的 HTTPAttack 模块，然后让魔法自行发生。</p>
+<p>ADCS’s HTTP web server doesn’t require any security and is vulnerable to relay attacks. By abusing that, once we authenticate to it, we can request a user certificate, which we can then use by itself to authenticate, without having to go through the trouble of relaying the authentication again (Figure 8).ADCS 的 HTTP Web 服务器不需要任何安全性，并且容易受到中继攻击。通过滥用这一点，一旦我们对其进行身份验证，我们就可以请求用户证书，然后我们可以使用该证书本身进行身份验证，而无需再次经历中继身份验证的麻烦（图 8）。</p>
+<p><img data-src="https://ve0zkk9dxj.feishu.cn/space/api/box/stream/download/asynccode/?code=NWMxZjkzNDBkZGZmMjlmNDA4ZGEzN2U5ZjEzM2FmZTdfbENjcmNlRG5WT21uaG9WazhzeTVzWXhyVDN1dHZSSkVfVG9rZW46UzhTeWJjQ3o0b1UzZ0N4QWlBcWNsTFNpbjVjXzE3MzEyNTUwNzM6MTczMTI1ODY3M19WNA"></p>
+<p>Fig 8: Requesting and receiving a certificate from ADCS following an NTLM relay attack图8：NTLM继电器攻击后请求并收到ADC的证书</p>
+<p>We used this certificate to authenticate to the LDAP service on the domain controller and create a persistent new domain admin in the compromised domain (Figure 9).我们使用此证书对域控制器上的 LDAP 服务进行身份验证，并在受感染的域中创建持久的新域管理员（图 9）。</p>
+<p><img data-src="https://ve0zkk9dxj.feishu.cn/space/api/box/stream/download/asynccode/?code=OTIzNTA0MDIyNzc5OTUzOWFiNjA4ZWE4ZGNhMzQ2NmNfV1FhNWhRWTFWcmFpZVFHcEN4N1dnazlpS0s4N0NGdVRfVG9rZW46UjJuR2IxS3Zsb0FYWGJ4bWZoUGNxU3VFbnNjXzE3MzEyNTUwNzM6MTczMTI1ODY3M19WNA"></p>
+<p>Fig 9: Creating a new domain admin using an LDAP shell图 9：使用 LDAP shell 创建新的域管理员</p>
+<h2 id="Potential-impact潜在影响"><a href="#Potential-impact潜在影响" class="headerlink" title="Potential impact潜在影响"></a>Potential impact潜在影响</h2><p>A function in advapi isn’t interesting by itself, it is only impactful if something else is using it. A quick lookup of imports of <em>RegConnectRegistryExW</em> or <em>RegConnectRegistryExA</em> doesn’t show anything on an up-to-date domain controller, but a search for <em>RegConnectRegistryW</em> uncovers a lot of potential candidates, like certutil and certsrv (AD CS), EFS, DFS, and more.advapi 中的函数本身并不有趣，只有当其他东西使用它时它才会产生影响。快速查找 RegConnectRegistryExW 或 RegConnectRegistryExA 的导入不会在最新的域控制器上显示任何内容，但搜索 RegConnectRegistryW 会发现许多潜在的候选者，例如 certutil 和 certsrv (AD CS)、EFS、DFS 和更多的。</p>
+<h2 id="Detection检测"><a href="#Detection检测" class="headerlink" title="Detection检测"></a>Detection检测</h2><p>The Remote Registry service isn’t enabled by default on all Windows machines. It is possible to detect it’s status using the following osquery:默认情况下，并非所有 Windows 计算机上都启用远程注册表服务。可以使用以下 osquery 检测其状态：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT display_name, status, start_type, pid FROM services WHERE name=<span class="string">&#x27;RemoteRegistry&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>This, however, doesn’t protect from <a target="_blank" rel="external nofollow noopener noreferrer" href="https://msrc.microsoft.com/update-guide/en-US/vulnerability/CVE-2024-43532">CVE-2024-43532</a>, as it is a client issue. The results of the query should raise actual use cases for the Remote Registry in the organization that you might need to account for when hardening your systems.然而，这并不能防止 CVE-2024-43532，因为这是一个客户端问题。查询结果应提出组织中远程注册表的实际用例，您在强化系统时可能需要考虑这些用例。</p>
+<p>To detect clients that use any of the vulnerable WinAPI, you can use the following YARA rule:要检测使用任何易受攻击的 WinAPI 的客户端，您可以使用以下 YARA 规则：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span><span class="string">&quot;pe&quot;</span></span><br><span class="line">rule winreg_client_import &#123;</span><br><span class="line">    meta:</span><br><span class="line">        description =  <span class="string">&quot;Detect binaries that rely on RegConnectRegistry&quot;</span></span><br><span class="line">        author = <span class="string">&quot;Stiv Kupchik with Akamai Technologies&quot;</span></span><br><span class="line">    condition:</span><br><span class="line">        pe.is_pe <span class="keyword">and</span> (</span><br><span class="line">            pe.imports(pe.IMPORT_ANY, <span class="string">&quot;advapi32.dll&quot;</span>, <span class="string">&quot;RegConnectRegistryA&quot;</span>)</span><br><span class="line"><span class="keyword">or</span> pe.imports(pe.IMPORT_ANY, <span class="string">&quot;advapi32.dll&quot;</span>, <span class="string">&quot;RegConnectRegistryW&quot;</span>)</span><br><span class="line"><span class="keyword">or</span> pe.imports(pe.IMPORT_ANY, <span class="string">&quot;advapi32.dll&quot;</span>, <span class="string">&quot;RegConnectRegistryExA&quot;</span>)</span><br><span class="line"><span class="keyword">or</span> pe.imports(pe.IMPORT_ANY, <span class="string">&quot;advapi32.dll&quot;</span>, <span class="string">&quot;RegConnectRegistryExW&quot;</span>)</span><br><span class="line">        )</span><br><span class="line">  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.akamai.com/products/akamai-guardicore-segmentation">Akamai Guardicore Segmentation</a> users can also create policy rules for traffic coming into the RemoteRegistry service (Figure 10).Akamai Guardicore Segmentation 用户还可以为进入 RemoteRegistry 服务的流量创建策略规则（图 10）。</p>
+<p><img data-src="https://ve0zkk9dxj.feishu.cn/space/api/box/stream/download/asynccode/?code=ZGVhNzY2Mjc1OGI4ODdmMGY5Yjg0MWI5YTY4YjdlNzdfVWt6cGtZSDlUenJMVVF5Y2wyR3JjdmRnTVBFWUJYVGRfVG9rZW46WkhRMWJ4UTVGb3dCMUd4MGlSNGNzM1NHblliXzE3MzEyNTUwNzM6MTczMTI1ODY3M19WNA"></p>
+<p>Fig. 10: Segmentation policy rule to alert on traffic to the RemoteRegistry service图 10：针对 RemoteRegistry 服务的流量发出警报的分段策略规则</p>
+<p>It is also possible to use Event Tracing for Windows (ETW) to monitor RPC traffic on both client and server sides of the communication. We’ve elaborated on this topic in our presentation at <a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.youtube.com/watch?v=iAsavoHcm2I">Black Hat 2023</a> and its <a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.akamai.com/blog/security-research/msrpc-defense-measures-in-windows-etw">accompanying blog post</a>. Users can use our <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/akamai/akamai-security-research/tree/main/rpc_toolkit/rpc_visibility">RPC visibility open-source tool</a> to track RPC calls and filter for the WinReg RPC interface UUID  <em>{338cd001-2244-31f1-aaaa-900038001003}</em> .还可以使用 Windows 事件跟踪 (ETW) 来监视通信客户端和服务器端的 RPC 流量。我们在 Black Hat 2023 的演讲及其随附的博客文章中详细阐述了这个主题。用户可以使用我们的 RPC 可见性开源工具来跟踪 RPC 调用并过滤 WinReg RPC 接口 UUID {338cd001-2244-31f1-aaaa-900038001003}。</p>
+<h2 id="Conclusion结论"><a href="#Conclusion结论" class="headerlink" title="Conclusion结论"></a>Conclusion结论</h2><p>Although the RPC protocol — and MS-RPC — were built with security in mind, we can clearly see the evolution of security principles over time by analyzing various RPC interface implementations. While most RPC servers and clients are secure nowadays, it is possible, from time to time, to uncover relics of insecure implementation to varying degrees.尽管 RPC 协议和 MS-RPC 在构建时就考虑到了安全性，但通过分析各种 RPC 接口实现，我们可以清楚地看到安全原则随时间的演变。虽然现在大多数 RPC 服务器和客户端都是安全的，但有时仍可能会不同程度地发现不安全实现的遗留问题。</p>
+<p>In this case, we managed to achieve NTLM relay, which is a class of attacks that better belongs to the past. This just proves that network defenses must be as thorough as possible because you never know which ancient interface is still exposed or running.在这种情况下，我们成功实现了 NTLM 中继，这是一类更好地属于过去的攻击。这恰恰证明网络防御必须尽可能彻底，因为你永远不知道哪个古老的接口仍然暴露或运行。</p>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>Yiaos
+  </li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
+    <a href="https://www.thiiiiink.com/post/20241110205111.html" title="CVE-2024-43532-译">https://www.thiiiiink.com/post/20241110205111.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/post/20250214231937.html" rel="prev" title="Proving Grounds Practice - Clue">
+      <i class="fa fa-chevron-left"></i> Proving Grounds Practice - Clue
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AE%80%E8%BF%B0%EF%BC%9A"><span class="nav-text">简述：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BD%B1%E5%93%8D%E8%8C%83%E5%9B%B4%EF%BC%9A"><span class="nav-text">影响范围：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#POC"><span class="nav-text">POC:</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Call-and-Register-%E2%80%94-Relay-Attack-on-WinReg-RPC-Client"><span class="nav-text">Call and Register — Relay Attack on WinReg RPC Client</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Executive-summary-%E6%89%A7%E8%A1%8C%E6%91%98%E8%A6%81"><span class="nav-text">Executive summary 执行摘要</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction%E4%BB%8B%E7%BB%8D"><span class="nav-text">Introduction介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RPC-authentication-and-what%E2%80%99s-in-betweenRPC%E3%80%81%E8%BA%AB%E4%BB%BD%E9%AA%8C%E8%AF%81%E4%BB%A5%E5%8F%8A%E4%BB%8B%E4%BA%8E%E4%B8%A4%E8%80%85%E4%B9%8B%E9%97%B4%E7%9A%84%E5%86%85%E5%AE%B9"><span class="nav-text">RPC, authentication, and what’s in betweenRPC、身份验证以及介于两者之间的内容</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Finding-research-targets%E5%AF%BB%E6%89%BE%E7%A0%94%E7%A9%B6%E7%9B%AE%E6%A0%87"><span class="nav-text">Finding research targets寻找研究目标</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#WinReg-%E2%80%94-A-promising-candidateWinReg%E2%80%94%E2%80%94%E4%B8%80%E4%B8%AA%E6%9C%89%E5%89%8D%E9%80%94%E7%9A%84%E5%80%99%E9%80%89%E8%80%85"><span class="nav-text">WinReg — A promising candidateWinReg——一个有前途的候选者</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#The-relay-process%E4%B8%AD%E7%BB%A7%E8%BF%87%E7%A8%8B"><span class="nav-text">The relay process中继过程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Building-the-RPC-relay-server%E6%9E%84%E5%BB%BARPC%E4%B8%AD%E7%BB%A7%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="nav-text">Building the RPC relay server构建RPC中继服务器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RPC-to-RPC-relayRPC-%E5%88%B0-RPC-%E4%B8%AD%E7%BB%A7"><span class="nav-text">RPC to RPC relayRPC 到 RPC 中继</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RPC-to-ADCSRPC-%E5%88%B0-ADCS"><span class="nav-text">RPC to ADCSRPC 到 ADCS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Potential-impact%E6%BD%9C%E5%9C%A8%E5%BD%B1%E5%93%8D"><span class="nav-text">Potential impact潜在影响</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Detection%E6%A3%80%E6%B5%8B"><span class="nav-text">Detection检测</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Conclusion%E7%BB%93%E8%AE%BA"><span class="nav-text">Conclusion结论</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Yiaos</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">38</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/yiaos" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;yiaos" rel="external nofollow noopener noreferrer" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="external nofollow noopener noreferrer" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yiaos</span>
+</div>
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/pangu@4/dist/browser/pangu.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+
+
+
+  
+  <script>
+    (function(){
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x=document.getElementsByTagName("link");
+		//Find the last canonical URL
+		if(x.length > 0){
+			for (i=0;i<x.length;i++){
+				if(x[i].rel.toLowerCase() == 'canonical' && x[i].href){
+					canonicalURL=x[i].href;
+				}
+			}
+		}
+    //Get protocol
+	    if (!canonicalURL){
+	    	curProtocol = window.location.protocol.split(':')[0];
+	    }
+	    else{
+	    	curProtocol = canonicalURL.split(':')[0];
+	    }
+      //Get current URL if the canonical URL does not exist
+	    if (!canonicalURL) canonicalURL = window.location.href;
+	    //Assign script content. Replace current URL with the canonical URL
+      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();
+  </script>
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : 'Ov23lioxBWzEMyWt1JhD',
+      clientSecret: '6d63e8f9065e954d63e6a90407d40a3ccee85f0e',
+      repo        : 'Yiaos.github.io',
+      owner       : 'Yiaos',
+      admin       : ['Yiaos'],
+      id          : 'eadd25d0ed00466476e852ff75c7cb03',
+        language: 'en',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+</body>
+</html>

