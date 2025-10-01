@@ -380,14 +380,14 @@
   </url>
   
   <url>
-    <loc>https://www.thiiiiink.com/categories/How-It-Works-%E4%B8%B4%E6%B8%8A%E7%BE%A1%E9%B1%BC/PHP/</loc>
+    <loc>https://www.thiiiiink.com/categories/What-We-Do-%E4%B8%89%E5%A4%A9%E6%89%93%E9%B1%BC/</loc>
     <lastmod>2025-10-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://www.thiiiiink.com/categories/What-We-Do-%E4%B8%89%E5%A4%A9%E6%89%93%E9%B1%BC/</loc>
+    <loc>https://www.thiiiiink.com/categories/How-It-Works-%E4%B8%B4%E6%B8%8A%E7%BE%A1%E9%B1%BC/PHP/</loc>
     <lastmod>2025-10-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -408,13 +408,6 @@
   </url>
   
   <url>
-    <loc>https://www.thiiiiink.com/categories/How-It-Works-%E4%B8%B4%E6%B8%8A%E7%BE%A1%E9%B1%BC/%E8%AF%91/</loc>
-    <lastmod>2025-10-01</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://www.thiiiiink.com/categories/What-We-Do-%E4%B8%89%E5%A4%A9%E6%89%93%E9%B1%BC/OSCP/</loc>
     <lastmod>2025-10-01</lastmod>
     <changefreq>weekly</changefreq>
@@ -429,14 +422,14 @@
   </url>
   
   <url>
-    <loc>https://www.thiiiiink.com/categories/What-We-Got-%E8%87%AD%E9%B1%BC%E7%83%82%E8%99%BE/OSCP/</loc>
+    <loc>https://www.thiiiiink.com/categories/How-It-Works-%E4%B8%B4%E6%B8%8A%E7%BE%A1%E9%B1%BC/linux%E6%8F%90%E6%9D%83/</loc>
     <lastmod>2025-10-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://www.thiiiiink.com/categories/How-It-Works-%E4%B8%B4%E6%B8%8A%E7%BE%A1%E9%B1%BC/%E8%AF%91/tricks/</loc>
+    <loc>https://www.thiiiiink.com/categories/What-We-Got-%E8%87%AD%E9%B1%BC%E7%83%82%E8%99%BE/OSCP/</loc>
     <lastmod>2025-10-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -450,7 +443,7 @@
   </url>
   
   <url>
-    <loc>https://www.thiiiiink.com/categories/How-It-Works-%E4%B8%B4%E6%B8%8A%E7%BE%A1%E9%B1%BC/linux%E6%8F%90%E6%9D%83/</loc>
+    <loc>https://www.thiiiiink.com/categories/How-It-Works-%E4%B8%B4%E6%B8%8A%E7%BE%A1%E9%B1%BC/%E8%AF%91/</loc>
     <lastmod>2025-10-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -458,6 +451,13 @@
   
   <url>
     <loc>https://www.thiiiiink.com/categories/What-We-Got-%E8%87%AD%E9%B1%BC%E7%83%82%E8%99%BE/OSCP/PG-Lab/</loc>
+    <lastmod>2025-10-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.thiiiiink.com/categories/How-It-Works-%E4%B8%B4%E6%B8%8A%E7%BE%A1%E9%B1%BC/%E8%AF%91/tricks/</loc>
     <lastmod>2025-10-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
