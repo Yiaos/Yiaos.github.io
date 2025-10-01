@@ -2495,7 +2495,7 @@
     <title>Wildcard Gone Wild：Unix 通配符攻击</title>
     <url>/post/20250930170102.html</url>
     <content><![CDATA[<blockquote>
-<p>原文：<a href="https://www.exploit-db.com/papers/33930">https://www.exploit-db.com/papers/33930</a><br>作者：- Leon Juranic <a href="mailto:&#x6c;&#101;&#x6f;&#x6e;&#x40;&#100;&#101;&#x66;&#x65;&#x6e;&#115;&#101;&#99;&#x6f;&#x64;&#101;&#x2e;&#x63;&#111;&#x6d;">&#x6c;&#101;&#x6f;&#x6e;&#x40;&#100;&#101;&#x66;&#x65;&#x6e;&#115;&#101;&#99;&#x6f;&#x64;&#101;&#x2e;&#x63;&#111;&#x6d;</a><br>创建日期：2013&#x2F;04&#x2F;20<br>发布日期：2014&#x2F;06&#x2F;25</p>
+<p>原文：<a href="https://www.exploit-db.com/papers/33930">https://www.exploit-db.com/papers/33930</a><br>作者：- Leon Juranic <a href="mailto:&#108;&#x65;&#111;&#x6e;&#64;&#100;&#x65;&#x66;&#101;&#x6e;&#115;&#101;&#99;&#x6f;&#100;&#101;&#46;&#x63;&#111;&#109;">&#108;&#x65;&#111;&#x6e;&#64;&#100;&#x65;&#x66;&#101;&#x6e;&#115;&#101;&#99;&#x6f;&#100;&#101;&#46;&#x63;&#111;&#109;</a><br>创建日期：2013&#x2F;04&#x2F;20<br>发布日期：2014&#x2F;06&#x2F;25</p>
 </blockquote>
 <h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>首先，这篇文章没有像ASLR绕过、POP利用、0day远程内核漏洞或者Chrome上那种需要”串14个不同的bug才能到达目标”的现代黑客技术。本文要介绍的是一种有趣的老派的Unix黑客技巧，直到2013年仍然有效。让我惊讶的是很多安全从业者都没有听说过这种技巧。可能是此前没人正式讨论过它。</p>
 <p>我决定写本文的原因很简单：就我个人而言，仅凭一些简单的Unix通配符投毒就能完成一些目的很有趣。因此，你也可以吧本文当作一组精巧的 <code>*nix</code>黑客技巧合集，据我所知，它们之前还没有被系统呈现过。</p>
@@ -2557,7 +2557,7 @@
 <p><code>--checkpoint=1</code> 与 <code>--checkpoint-action=exec=sh shell.sh</code> 被当作命令行<strong>选项</strong>传给 <code>tar</code>。它们让 <code>tar</code> 在达到检查点时<strong>执行</strong> <code>shell.sh</code>：</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@defensecode public]# <span class="built_in">cat</span> shell.sh</span><br><span class="line">/usr/bin/id</span><br></pre></td></tr></table></figure>
 <p>因此，通过这种 <code>tar</code> 参数污染，我们基本上可以以<strong>运行 <code>tar</code> 的用户</strong>的权限执行任意命令。</p>
-<h1 id="rsync任意命令执行"><a href="#rsync任意命令执行" class="headerlink" title="rsync任意命令执行"></a>rsync任意命令执行</h1><p><code>rsync</code> 是“一个快速、多功能的远程（也可本地）文件复制工具”，在 Unix 系统上非常常见。<br>看一下 <code>rsync</code> 的手册，我们同样能找到能被滥用来进行<strong>任意命令执行</strong>的选项。</p>
+<h2 id="rsync任意命令执行"><a href="#rsync任意命令执行" class="headerlink" title="rsync任意命令执行"></a>rsync任意命令执行</h2><p><code>rsync</code> 是“一个快速、多功能的远程（也可本地）文件复制工具”，在 Unix 系统上非常常见。<br>看一下 <code>rsync</code> 的手册，我们同样能找到能被滥用来进行<strong>任意命令执行</strong>的选项。</p>
 <p><code>rsync</code> 手册摘录：<br>“像使用 <code>rcp</code> 一样使用 <code>rsync</code>。你必须指定源和目标，其中一个可以是远端。”</p>
 <p>几个有意思的选项：</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-e, --rsh=COMMAND           指定要使用的远程 shell</span><br><span class="line">    --rsync-path=PROGRAM    指定在远端机器上运行的 rsync 程序</span><br></pre></td></tr></table></figure>
