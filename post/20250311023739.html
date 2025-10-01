@@ -19,7 +19,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"www.thiiiiink.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"default"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":null,"activeClass":"gitalk"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"www.thiiiiink.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"default"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":null,"activeClass":"gitalk"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="LFI（Local File Inclusion）是一个常见的文件包含漏洞，攻击者通过利用此漏洞，可以执行恶意代码。常见的LFI攻击方式包括上传恶意PHP文件并通过LFI包含执行、使用PHP提供的php:&#x2F;&#x2F;协议（如php:&#x2F;&#x2F;input、php:&#x2F;&#x2F;filter等）绕过限制、包含日志文件、读取系统环境变量（如proc&#x2F;self&#x2F;environ）、或通过会话文件注入代码。此外，LFI还可以通过临时">
@@ -147,11 +147,6 @@
     <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
 
   </li>
-        <li class="menu-item menu-item-categories">
-
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
-
-  </li>
         <li class="menu-item menu-item-archives">
 
     <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
@@ -192,11 +187,87 @@
     </header>
 
     
-  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
 
 
     <main class="main">
       <div class="main-inner">
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+      
+<div class="sidebar-site-brand motion-element">
+  <a class="sidebar-site-link" href="/" rel="start">
+      <img class="sidebar-site-logo" src="/images/avatar.gif" alt="临渊羡鱼">
+      <h2 class="sidebar-site-title">临渊羡鱼</h2>
+      <p class="sidebar-site-subtitle">退而结网</p>
+  </a>
+</div>
+<nav class="sidebar-site-menu motion-element" aria-label="Main navigation">
+  <ul>
+      <li>
+        <a href="/"><i class="fa fa-home fa-fw"></i>
+          Home
+        </a>
+      </li>
+      <li>
+        <a href="/archives/"><i class="fa fa-archive fa-fw"></i>
+          Archives
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#LFI%EF%BC%9A-Local-File-Inclusion-%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E"><span class="nav-text">LFI： Local File Inclusion 文件包含漏洞</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#LFI-%E5%B8%B8%E8%A7%81%E5%88%A9%E7%94%A8%E6%96%B9%E5%BC%8F"><span class="nav-text">LFI 常见利用方式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#LFI%E4%B8%B4%E6%97%B6%E6%96%87%E4%BB%B6"><span class="nav-text">LFI临时文件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#LFI2RCE-via-PHPinfo"><span class="nav-text">LFI2RCE via PHPinfo()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%A9%E7%94%A8%E5%89%8D%E6%8F%90"><span class="nav-text">利用前提</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%A9%E7%94%A8%E8%BF%87%E7%A8%8B%EF%BC%9A"><span class="nav-text">利用过程：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Windows-FindFirstFile"><span class="nav-text">Windows FindFirstFile</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PHPinfo"><span class="nav-text">PHPinfo()</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%8D%E7%8E%B0"><span class="nav-text">复现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA"><span class="nav-text">环境搭建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B0%8F%E6%8F%92%E6%9B%B2"><span class="nav-text">小插曲</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#lif-abuse-py"><span class="nav-text">lif_abuse.py</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E6%96%B9%E5%BC%8F"><span class="nav-text">使用方式</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-text">参考</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+        <div class="site-overview-wrap sidebar-panel">
+          
+  <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Yiaos</p>
+  <div class="site-description" itemprop="description">Beginner in Cybersecurity</div>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/yiaos" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;yiaos" rel="external nofollow noopener noreferrer" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="external nofollow noopener noreferrer" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+
+        </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
         <div class="content-wrap">
           
 
@@ -212,7 +283,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
       <meta itemprop="name" content="Yiaos">
-      <meta itemprop="description" content>
+      <meta itemprop="description" content="Beginner in Cybersecurity">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -393,8 +464,8 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/post/20250311024753.html" rel="prev" title="Proving Grounds Practice - Zipper">
-      <i class="fa fa-chevron-left"></i> Proving Grounds Practice - Zipper
+    <a href="/post/20250311024753.html" rel="prev" title="Proving Grounds Practice - Nara">
+      <i class="fa fa-chevron-left"></i> Proving Grounds Practice - Nara
     </a></div>
       <div class="post-nav-item">
     <a href="/post/20250311021811.html" rel="next" title="PHP Wrapper 利用">
@@ -437,75 +508,80 @@
 </script>
 
         </div>
-          
-  
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line toggle-line-first"></span>
-    <span class="toggle-line toggle-line-middle"></span>
-    <span class="toggle-line toggle-line-last"></span>
-  </div>
-
-  <aside class="sidebar">
-    <div class="sidebar-inner">
-
-      <ul class="sidebar-nav motion-element">
-        <li class="sidebar-nav-toc">
-          Table of Contents
-        </li>
-        <li class="sidebar-nav-overview">
-          Overview
-        </li>
-      </ul>
-
-      <!--noindex-->
-      <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#LFI%EF%BC%9A-Local-File-Inclusion-%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E"><span class="nav-text">LFI： Local File Inclusion 文件包含漏洞</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#LFI-%E5%B8%B8%E8%A7%81%E5%88%A9%E7%94%A8%E6%96%B9%E5%BC%8F"><span class="nav-text">LFI 常见利用方式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#LFI%E4%B8%B4%E6%97%B6%E6%96%87%E4%BB%B6"><span class="nav-text">LFI临时文件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#LFI2RCE-via-PHPinfo"><span class="nav-text">LFI2RCE via PHPinfo()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%A9%E7%94%A8%E5%89%8D%E6%8F%90"><span class="nav-text">利用前提</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%A9%E7%94%A8%E8%BF%87%E7%A8%8B%EF%BC%9A"><span class="nav-text">利用过程：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Windows-FindFirstFile"><span class="nav-text">Windows FindFirstFile</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PHPinfo"><span class="nav-text">PHPinfo()</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%8D%E7%8E%B0"><span class="nav-text">复现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA"><span class="nav-text">环境搭建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B0%8F%E6%8F%92%E6%9B%B2"><span class="nav-text">小插曲</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#lif-abuse-py"><span class="nav-text">lif_abuse.py</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E6%96%B9%E5%BC%8F"><span class="nav-text">使用方式</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-text">参考</span></a></li></ol></div>
-      </div>
-      <!--/noindex-->
-
-      <div class="site-overview-wrap sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-  <p class="site-author-name" itemprop="name">Yiaos</p>
-  <div class="site-description" itemprop="description"></div>
-</div>
-<div class="site-state-wrap motion-element">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-          <a href="/archives/">
         
-          <span class="site-state-item-count">39</span>
-          <span class="site-state-item-name">posts</span>
-        </a>
-      </div>
-      <div class="site-state-item site-state-categories">
-            <a href="/categories/">
-          
-        <span class="site-state-item-count">14</span>
-        <span class="site-state-item-name">categories</span></a>
-      </div>
-  </nav>
-</div>
-  <div class="links-of-author motion-element">
-      <span class="links-of-author-item">
-        <a href="https://github.com/yiaos" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;yiaos" rel="external nofollow noopener noreferrer" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
-      </span>
-  </div>
-  <div class="cc-license motion-element" itemprop="license">
-    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="external nofollow noopener noreferrer" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
-  </div>
+  <aside class="content-categories">
+    <div class="content-categories-panel">
 
-
-
-      </div>
-        <div class="back-to-top motion-element">
-          <i class="fa fa-arrow-up"></i>
-          <span>0%</span>
+      <div class="content-section content-section--meta">
+        <div class="content-section-grid">
+          <div class="meta-item">
+            <div class="meta-count">39</div>
+            <div class="meta-label">posts</div>
+          </div>
+          <div class="meta-item">
+            <div class="meta-count">11</div>
+            <div class="meta-label">categories</div>
+          </div>
         </div>
+      </div>
 
+      <div class="content-section">
+        <div class="content-section-title">Categories</div>
+        <div class="content-section-body">
+          <div class="content-categories-list">
+            <ul class="content-category-list"><li class="content-category-list-item"><a class="content-category-list-link" href="/categories/How-It-Works-%E4%B8%B4%E6%B8%8A%E7%BE%A1%E9%B1%BC/">How It Works-临渊羡鱼</a><span class="content-category-list-count">5</span><ul class="content-category-list-child"><li class="content-category-list-item"><a class="content-category-list-link" href="/categories/How-It-Works-%E4%B8%B4%E6%B8%8A%E7%BE%A1%E9%B1%BC/CVE/">CVE</a><span class="content-category-list-count">1</span></li><li class="content-category-list-item"><a class="content-category-list-link" href="/categories/How-It-Works-%E4%B8%B4%E6%B8%8A%E7%BE%A1%E9%B1%BC/PHP/">PHP</a><span class="content-category-list-count">2</span></li><li class="content-category-list-item"><a class="content-category-list-link" href="/categories/How-It-Works-%E4%B8%B4%E6%B8%8A%E7%BE%A1%E9%B1%BC/linux%E6%8F%90%E6%9D%83/">linux提权</a><span class="content-category-list-count">1</span></li><li class="content-category-list-item"><a class="content-category-list-link" href="/categories/How-It-Works-%E4%B8%B4%E6%B8%8A%E7%BE%A1%E9%B1%BC/tricks/">tricks</a><span class="content-category-list-count">1</span></li></ul></li><li class="content-category-list-item"><a class="content-category-list-link" href="/categories/What-We-Do-%E4%B8%89%E5%A4%A9%E6%89%93%E9%B1%BC/">What We Do-三天打鱼</a><span class="content-category-list-count">33</span><ul class="content-category-list-child"><li class="content-category-list-item"><a class="content-category-list-link" href="/categories/What-We-Do-%E4%B8%89%E5%A4%A9%E6%89%93%E9%B1%BC/OSCP/">OSCP</a><span class="content-category-list-count">33</span><ul class="content-category-list-child"><li class="content-category-list-item"><a class="content-category-list-link" href="/categories/What-We-Do-%E4%B8%89%E5%A4%A9%E6%89%93%E9%B1%BC/OSCP/PG-Lab/">PG Lab</a><span class="content-category-list-count">33</span><ul class="content-category-list-child"><li class="content-category-list-item"><a class="content-category-list-link" href="/categories/What-We-Do-%E4%B8%89%E5%A4%A9%E6%89%93%E9%B1%BC/OSCP/PG-Lab/Active-Directory/">Active Directory</a><span class="content-category-list-count">1</span></li></ul></li></ul></li></ul></li><li class="content-category-list-item"><a class="content-category-list-link" href="/categories/What-We-Got-%E8%87%AD%E9%B1%BC%E7%83%82%E8%99%BE/">What We Got-臭鱼烂虾</a><span class="content-category-list-count">1</span><ul class="content-category-list-child"><li class="content-category-list-item"><a class="content-category-list-link" href="/categories/What-We-Got-%E8%87%AD%E9%B1%BC%E7%83%82%E8%99%BE/OSCP/">OSCP</a><span class="content-category-list-count">1</span></li></ul></li></ul>
+          </div>
+        </div>
+      </div>
+        <div class="content-section">
+          <div class="content-section-title">Recent Posts</div>
+          <div class="content-section-body">
+            <ul class="content-recent-posts">
+                <li class="content-recent-post-item">
+                  <a class="content-recent-post-link" href="/post/20250930170102.html">
+                    Wildcard Gone Wild：Unix 通配符攻击-译
+                  </a>
+                  <time class="content-recent-post-date" datetime="2025-09-30T09:01:02.000Z">
+                    Sep 30
+                  </time>
+                </li>
+                <li class="content-recent-post-item">
+                  <a class="content-recent-post-link" href="/post/20250503151126.html">
+                    OSCP认证总结
+                  </a>
+                  <time class="content-recent-post-date" datetime="2025-05-03T07:11:26.000Z">
+                    May 03
+                  </time>
+                </li>
+                <li class="content-recent-post-item">
+                  <a class="content-recent-post-link" href="/post/20250311024935.html">
+                    Proving Grounds Practice - Slort
+                  </a>
+                  <time class="content-recent-post-date" datetime="2025-03-10T18:49:35.000Z">
+                    Mar 11
+                  </time>
+                </li>
+                <li class="content-recent-post-item">
+                  <a class="content-recent-post-link" href="/post/20250311024753.html">
+                    Proving Grounds Practice - Access
+                  </a>
+                  <time class="content-recent-post-date" datetime="2025-03-10T18:47:53.000Z">
+                    Mar 11
+                  </time>
+                </li>
+                <li class="content-recent-post-item">
+                  <a class="content-recent-post-link" href="/post/20250311024753.html">
+                    Proving Grounds Practice - Austronaut
+                  </a>
+                  <time class="content-recent-post-date" datetime="2025-03-10T18:47:53.000Z">
+                    Mar 11
+                  </time>
+                </li>
+            </ul>
+          </div>
+        </div>
     </div>
   </aside>
-  <div id="sidebar-dimmer"></div>
-
 
       </div>
     </main>
@@ -562,7 +638,6 @@
   <script src="/lib/anime.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/pangu@4/dist/browser/pangu.min.js"></script>
   <script src="/lib/velocity/velocity.min.js"></script>
   <script src="/lib/velocity/velocity.ui.min.js"></script>
 
@@ -575,8 +650,6 @@
 
 
 <script src="/js/next-boot.js"></script>
-
-<script src="/js/bookmark.js"></script>
 
 
 
